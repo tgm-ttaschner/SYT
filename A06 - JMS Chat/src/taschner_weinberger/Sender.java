@@ -44,7 +44,7 @@ public class Sender	implements Runnable	{
 				QueueConnection queueConn = connFactory.createQueueConnection();
 
 				// create a queue session
-				QueueSession queueSession = queueConn.createQueueSession(false,Session.DUPS_OK_ACKNOWLEDGE);
+				QueueSession queueSession = queueConn.createQueueSession(false,Session.AUTO_ACKNOWLEDGE);
 
 				// create a queue sender
 				QueueSender queueSender = queueSession.createSender(queue);
@@ -53,12 +53,12 @@ public class Sender	implements Runnable	{
 				BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 
 				// create a simple message to say "Hello"
-				TextMessage message = queueSession.createTextMessage(env.getProperty(Context.PROVIDER_URL) + ": " + r.readLine());
+				TextMessage message = queueSession.createTextMessage("<" + env.getProperty(Context.PROVIDER_URL) + "> " + r.readLine());
 
 				// send the message
 				queueSender.send(message);
 
-				System.out.println("sent: " + message.getText());
+				System.out.println("[sent] " + message.getText());
 
 				//queueConn.close();
 			}
