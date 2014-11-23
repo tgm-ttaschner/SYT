@@ -10,64 +10,75 @@ import javax.jms.MessageConsumer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
-public class JMSChatReceiver {
+public class JMSChatReceiver implements Runnable	{
 
 	private static String user = ActiveMQConnection.DEFAULT_USER;
 	private static String password = ActiveMQConnection.DEFAULT_PASSWORD;
 	private static String url = ActiveMQConnection.DEFAULT_BROKER_URL;
 	private static String subject = "VSDBChat";
 
-	public static void main(String[] args) {
-
-		// Create the connection.
-		Session session = null;
-		Connection connection = null;
-		MessageConsumer consumer = null;
-		Destination destination = null;
+	@Override
+	public void run() {
 
 		try {
+			while (true)	{
+				// Create the connection.
+				Session session = null;
+				Connection connection = null;
+				MessageConsumer consumer = null;
+				Destination destination = null;
 
-			ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(user, password, url);
-			connection = connectionFactory.createConnection();
-			connection.start();
+				try {
 
-			// Create the session
-			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-			destination = session.createTopic(subject);
+					ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(user, password, url);
+					connection = connectionFactory.createConnection();
+					connection.start();
 
-			// Create the consumer
-			consumer = session.createConsumer(destination);
+					// Create the session
+					session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+					destination = session.createTopic(subject);
 
-			// Start receiving
-			TextMessage message = (TextMessage) consumer.receive();
-			if ( message != null ) {
-				System.out.println("Message received: " + message.getText());
-				message.acknowledge();
+					// Create the consumer
+					consumer = session.createConsumer(destination);
+
+					// Start receiving
+					TextMessage message = (TextMessage) consumer.receive();
+					if ( message != null ) {
+						System.out.println("Message received: " + message.getText());
+						message.acknowledge();
+					}
+					connection.stop();
+
+				} catch (Exception e) {
+
+					System.out.println("[MessageConsumer] Caught: " + e);
+					e.printStackTrace();
+
+				} finally {
+
+					try {
+						consumer.close();
+					} catch (Exception e) {
+
+					}
+					try {
+						session.close();
+					} catch (Exception e) {
+
+					}
+					try {
+						connection.close();
+					} catch (Exception e) {
+
+					}
+				}
 			}
-			connection.stop();
-
-		} catch (Exception e) {
-
-			System.out.println("[MessageConsumer] Caught: " + e);
-			e.printStackTrace();
-
-		} finally {
-
-			try {
-				consumer.close();
-			} catch (Exception e) {
-
-			}
-			try {
-				session.close();
-			} catch (Exception e) {
-
-			}
-			try {
-				connection.close();
-			} catch (Exception e) {
-
-			}
+		} catch (Exception e)	{
+			e.getMessage();
 		}
+	}
+	
+	public static void main(String[] args) {
+		new JMSChatReceiver().run();
 	}
 }

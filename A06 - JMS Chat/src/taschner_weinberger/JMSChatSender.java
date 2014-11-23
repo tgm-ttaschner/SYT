@@ -1,5 +1,8 @@
 package taschner_weinberger;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
@@ -11,63 +14,76 @@ import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
-public class JMSChatSender {
+public class JMSChatSender implements Runnable	{
 
 	private static String user = ActiveMQConnection.DEFAULT_USER;
 	private static String password = ActiveMQConnection.DEFAULT_PASSWORD;
 	private static String url = ActiveMQConnection.DEFAULT_BROKER_URL;
 	private static String subject = "VSDBChat";
 
-	public static void main(String[] args) {
-
-		// Create the connection.
-		Session session = null;
-		Connection connection = null;
-		MessageProducer producer = null;
-		Destination destination = null;
+	@Override
+	public void run() {
 
 		try {
+			while (true)	{
+				// Create the connection.
+				Session session = null;
+				Connection connection = null;
+				MessageProducer producer = null;
+				Destination destination = null;
 
-			ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(user, password, url);
-			connection = connectionFactory.createConnection();
-			connection.start();
+				try {
 
-			// Create the session
-			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-			destination = session.createTopic(subject);
+					ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(user, password, url);
+					connection = connectionFactory.createConnection();
+					connection.start();
 
-			// Create the producer.
-			producer = session.createProducer(destination);
-			producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+					// Create the session
+					session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+					destination = session.createTopic(subject);
 
-			// Create the message
-			TextMessage message = session.createTextMessage("Max Mustermann [ xxx.xxx.xxx.xxx ]: This message was sent at (ms): " + System.currentTimeMillis());
-			producer.send(message);
-			System.out.println(message.getText());
-			connection.stop();
+					// Create the producer.
+					producer = session.createProducer(destination);
+					producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+					
+					BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+					
+					// Create the message
+					TextMessage message = session.createTextMessage(r.readLine());
+					producer.send(message);
+					System.out.println(message.getText());
+					connection.stop();
 
-		} catch (Exception e) {
+				} catch (Exception e) {
 
-			System.out.println("[MessageProducer] Caught: " + e);
-			e.printStackTrace();
+					System.out.println("[MessageProducer] Caught: " + e);
+					e.printStackTrace();
 
-		} finally {
+				} finally {
 
-			try {
-				producer.close();
-			} catch (Exception e) {
+					try {
+						producer.close();
+					} catch (Exception e) {
 
+					}
+					try {
+						session.close();
+					} catch (Exception e) {
+
+					}
+					try {
+						connection.close();
+					} catch (Exception e) {
+
+					}
+				}
 			}
-			try {
-				session.close();
-			} catch (Exception e) {
-
-			}
-			try {
-				connection.close();
-			} catch (Exception e) {
-
-			}
+		} catch (Exception e)	{
+			e.getMessage();
 		}
+	}
+	
+	public static void main(String[] args) {
+		new JMSChatSender().run();
 	}
 }
