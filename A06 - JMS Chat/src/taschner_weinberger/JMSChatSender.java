@@ -25,64 +25,73 @@ public class JMSChatSender implements Runnable	{
 	public void run() {
 
 		try {
-			while (true)	{
-				// Create the connection.
-				Session session = null;
-				Connection connection = null;
-				MessageProducer producer = null;
-				Destination destination = null;
 
-				try {
+			// Create the connection.
+			Session session = null;
+			Connection connection = null;
+			MessageProducer producer = null;
+			Destination destination = null;
 
-					ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(user, password, url);
-					connection = connectionFactory.createConnection();
-					connection.start();
+			String input = "";
 
-					// Create the session
-					session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-					destination = session.createTopic(subject);
+			try {
 
-					// Create the producer.
-					producer = session.createProducer(destination);
-					producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-					
+				ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(user, password, url);
+				connection = connectionFactory.createConnection();
+				connection.start();
+
+				// Create the session
+				session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+				destination = session.createTopic(subject);
+
+				// Create the producer.
+				producer = session.createProducer(destination);
+				producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+
+				while (!input.equals("EXIT"))	{
+
 					BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-					
+
+					input = r.readLine();
+
 					// Create the message
-					TextMessage message = session.createTextMessage(r.readLine());
+					TextMessage message = session.createTextMessage(input);
 					producer.send(message);
 					System.out.println(message.getText());
-					connection.stop();
 
+				}
+
+				connection.stop();
+
+			} catch (Exception e) {
+
+				System.out.println("[MessageProducer] Caught: " + e);
+				e.printStackTrace();
+
+			} finally {
+
+				try {
+					producer.close();
 				} catch (Exception e) {
 
-					System.out.println("[MessageProducer] Caught: " + e);
-					e.printStackTrace();
+				}
+				try {
+					session.close();
+				} catch (Exception e) {
 
-				} finally {
+				}
+				try {
+					connection.close();
+				} catch (Exception e) {
 
-					try {
-						producer.close();
-					} catch (Exception e) {
-
-					}
-					try {
-						session.close();
-					} catch (Exception e) {
-
-					}
-					try {
-						connection.close();
-					} catch (Exception e) {
-
-					}
 				}
 			}
+
 		} catch (Exception e)	{
 			e.getMessage();
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		new JMSChatSender().run();
 	}

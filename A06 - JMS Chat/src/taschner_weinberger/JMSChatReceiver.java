@@ -21,25 +21,27 @@ public class JMSChatReceiver implements Runnable	{
 	public void run() {
 
 		try {
-			while (true)	{
-				// Create the connection.
-				Session session = null;
-				Connection connection = null;
-				MessageConsumer consumer = null;
-				Destination destination = null;
 
-				try {
+			// Create the connection.
+			Session session = null;
+			Connection connection = null;
+			MessageConsumer consumer = null;
+			Destination destination = null;
 
-					ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(user, password, url);
-					connection = connectionFactory.createConnection();
-					connection.start();
+			try {
 
-					// Create the session
-					session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-					destination = session.createTopic(subject);
+				ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(user, password, url);
+				connection = connectionFactory.createConnection();
+				connection.start();
 
-					// Create the consumer
-					consumer = session.createConsumer(destination);
+				// Create the session
+				session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+				destination = session.createTopic(subject);
+
+				// Create the consumer
+				consumer = session.createConsumer(destination);
+
+				while (true)	{
 
 					// Start receiving
 					TextMessage message = (TextMessage) consumer.receive();
@@ -47,37 +49,40 @@ public class JMSChatReceiver implements Runnable	{
 						System.out.println("Message received: " + message.getText());
 						message.acknowledge();
 					}
-					connection.stop();
 
+				}
+
+				//connection.stop();
+
+			} catch (Exception e) {
+
+				System.out.println("[MessageConsumer] Caught: " + e);
+				e.printStackTrace();
+
+			} finally {
+
+				try {
+					consumer.close();
 				} catch (Exception e) {
 
-					System.out.println("[MessageConsumer] Caught: " + e);
-					e.printStackTrace();
+				}
+				try {
+					session.close();
+				} catch (Exception e) {
 
-				} finally {
+				}
+				try {
+					connection.close();
+				} catch (Exception e) {
 
-					try {
-						consumer.close();
-					} catch (Exception e) {
-
-					}
-					try {
-						session.close();
-					} catch (Exception e) {
-
-					}
-					try {
-						connection.close();
-					} catch (Exception e) {
-
-					}
 				}
 			}
+
 		} catch (Exception e)	{
 			e.getMessage();
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		new JMSChatReceiver().run();
 	}
