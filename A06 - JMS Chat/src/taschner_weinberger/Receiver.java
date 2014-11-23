@@ -21,7 +21,7 @@ public class Receiver implements Runnable	{
 	@Override
 	public void run() {
 		try {
-			while (true)	{
+			
 				Properties env = new Properties();
 				env.put(Context.INITIAL_CONTEXT_FACTORY, "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
 				env.put(Context.PROVIDER_URL, "tcp://localhost:61616");
@@ -39,14 +39,16 @@ public class Receiver implements Runnable	{
 				QueueConnection queueConn = connFactory.createQueueConnection();
 
 				// create a queue session
-				QueueSession queueSession = queueConn.createQueueSession(false,Session.AUTO_ACKNOWLEDGE);
+				QueueSession queueSession = queueConn.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
 
 				// create a queue receiver
 				QueueReceiver queueReceiver = queueSession.createReceiver(queue);
 
 				// start the connection
 				queueConn.start();
-
+				
+				while (true)	{
+				
 				// receive a message
 				TextMessage message = (TextMessage) queueReceiver.receive();
 
