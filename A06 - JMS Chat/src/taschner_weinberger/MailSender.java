@@ -90,7 +90,7 @@ public class MailSender	implements Runnable	{
 			queueSender.setDeliveryMode(DeliveryMode.PERSISTENT);
 
 			// create a simple message to say "Hello"
-			TextMessage message = queueSession.createTextMessage("MAIL FROM " + username + "[" + ip + "]" + textmessage);
+			TextMessage message = queueSession.createTextMessage("MAIL FROM " + "[" + ip + "]" + textmessage);
 
 			// send the message
 			queueSender.send(message);
