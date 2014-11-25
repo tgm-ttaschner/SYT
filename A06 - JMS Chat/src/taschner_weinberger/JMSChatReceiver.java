@@ -33,106 +33,54 @@ public class JMSChatReceiver implements Runnable	{
 		url = "failover://tcp://" + ip + ":" + port;
 		
 	}
-	
-	
-	
-	
 
 	public String getUser() {
 		return user;
 	}
 
-
-
-
-
 	public void setUser(String user) {
 		this.user = user;
 	}
-
-
-
-
 
 	public String getPassword() {
 		return password;
 	}
 
-
-
-
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-
-
-
 
 	public String getSubject() {
 		return subject;
 	}
 
-
-
-
-
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-
-
-
-
 
 	public String getIp() {
 		return ip;
 	}
 
-
-
-
-
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-
-
-
-
 
 	public int getPort() {
 		return port;
 	}
 
-
-
-
-
 	public void setPort(int port) {
 		this.port = port;
 	}
-
-
-
-
 
 	public String getUrl() {
 		return url;
 	}
 
-
-
-
-
 	public void setUrl(String url) {
 		this.url = url;
 	}
-
-
-
-
 
 	@Override
 	public void run() {
