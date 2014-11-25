@@ -84,6 +84,7 @@ public class JMSChatReceiver implements Runnable	{
 	}
 
 	public static void main(String[] args) {
-		new JMSChatReceiver().run();
+		Thread t = new Thread(new JMSChatReceiver());
+		t.start();
 	}
 }

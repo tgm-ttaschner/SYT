@@ -49,7 +49,7 @@ public class JMSChatSender implements Runnable	{
 				producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
 				while (!input.equals("EXIT"))	{
-
+					
 					BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 
 					input = r.readLine();
@@ -93,6 +93,7 @@ public class JMSChatSender implements Runnable	{
 	}
 
 	public static void main(String[] args) {
-		new JMSChatSender().run();
+		Thread t = new Thread(new JMSChatSender());
+		t.start();
 	}
 }
