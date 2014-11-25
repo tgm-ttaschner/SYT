@@ -19,7 +19,7 @@ public class JMSChatReceiver implements Runnable	{
 
 	@Override
 	public void run() {
-
+		
 		try {
 
 			// Create the connection.
