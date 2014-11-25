@@ -11,16 +11,26 @@ import javax.jms.TextMessage;
 
 public class JMSChatReceiver implements Runnable	{
 
-	private static String user = "url";
-	private static String password = "";
+	private String user;
+	
+	private String password;
 
-	private static String subject = "VSDBChat";
+	private String subject;
 
-	private static String ip = "10.0.0.3";
+	private String ip;
 
-	private static int port;
+	private int port;
 
-	private static String url = "failover://tcp://" + ip + ":" + port;
+	private String url = "failover://tcp://" + ip + ":" + port;
+
+	public JMSChatReceiver(String ip, int port, String user, String subject, String password) {
+		this.ip = ip;
+		this.port = port;
+		this.user = user;
+		this.subject = subject;
+		this.password = password;
+		
+	}
 
 	@Override
 	public void run() {
