@@ -35,7 +35,7 @@ public class JMSChatSender implements Runnable	{
 			String input = "";
 
 			try {
-
+				
 				ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(user, password, url);
 				connection = connectionFactory.createConnection();
 				connection.start();
