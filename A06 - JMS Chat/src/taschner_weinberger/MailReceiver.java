@@ -47,8 +47,6 @@ public class MailReceiver implements Runnable	{
 				// start the connection
 				queueConn.start();
 				
-				while (true)	{
-				
 				// receive a message
 				TextMessage message = (TextMessage) queueReceiver.receive();
 
@@ -57,7 +55,7 @@ public class MailReceiver implements Runnable	{
 
 				// close the queue connection
 				//queueConn.close();
-			}
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
