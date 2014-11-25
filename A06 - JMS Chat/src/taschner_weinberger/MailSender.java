@@ -31,6 +31,38 @@ public class MailSender	implements Runnable	{
 		this.port = port;
 	}
 
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getTextmessage() {
+		return textmessage;
+	}
+
+	public void setTextmessage(String textmessage) {
+		this.textmessage = textmessage;
+	}
+
+	public int getPort() {
+		return port;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
+	}
+
 	@Override
 	public void run() {
 
