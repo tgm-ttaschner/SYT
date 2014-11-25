@@ -26,14 +26,18 @@ public class JMSChatSender implements Runnable	{
 
 	private int port;
 
-	private String url = "failover://tcp://" + ip + ":" + port;
+	private String url;
 
 	public JMSChatSender(String ip, String user, String subject, int port) {
 		this.ip = ip;
 		this.user = user;
 		this.subject = subject;
 		this.port = port;
+		
+		url = "failover://tcp://" + ip + ":" + port;
 	}
+	
+	
 
 	@Override
 	public void run() {
