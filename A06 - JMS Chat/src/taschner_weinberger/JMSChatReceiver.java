@@ -23,12 +23,12 @@ public class JMSChatReceiver implements Runnable	{
 
 	private String url = "failover://tcp://" + ip + ":" + port;
 
-	public JMSChatReceiver(String ip, int port, String user, String subject, String password) {
+	public JMSChatReceiver(String ip, String user, String subject, String password, int port) {
 		this.ip = ip;
-		this.port = port;
 		this.user = user;
 		this.subject = subject;
 		this.password = password;
+		this.port = port;
 		
 	}
 
