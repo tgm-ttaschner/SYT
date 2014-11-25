@@ -161,7 +161,7 @@ public class JMSChatReceiver implements Runnable	{
 
 					// Start receiving
 					TextMessage message = (TextMessage) consumer.receive();
-					if ( message != null ) {
+					if (message != null && !message.getText().endsWith(" ")) {
 						System.out.println(message.getText());
 						message.acknowledge();
 					}
