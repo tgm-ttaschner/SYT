@@ -1,6 +1,5 @@
 package taschner_weinberger;
 
-import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.Connection;
@@ -12,14 +11,14 @@ import javax.jms.TextMessage;
 
 public class JMSChatReceiver implements Runnable	{
 
-	private static String user = ActiveMQConnection.DEFAULT_USER;
-	private static String password = ActiveMQConnection.DEFAULT_PASSWORD;
+	private static String user = "url";
+	private static String password = "";
 	
 	private static String subject = "VSDBChat";
 	
 	private static String ip = "10.0.0.3";
 	
-	private static int port = 61616;
+	private static int port;
 	
 	private static String url = "failover://tcp://" + ip + ":" + port;
 
@@ -36,7 +35,7 @@ public class JMSChatReceiver implements Runnable	{
 
 			try {
 
-				ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(user, password, url);
+				ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(user, url, password);
 				connection = connectionFactory.createConnection();
 				connection.start();
 
@@ -52,7 +51,7 @@ public class JMSChatReceiver implements Runnable	{
 					// Start receiving
 					TextMessage message = (TextMessage) consumer.receive();
 					if ( message != null ) {
-						System.out.println("<" + ip + "> " + message.getText());
+						System.out.println(user + "[" + ip + "] " + message.getText());
 						message.acknowledge();
 					}
 
