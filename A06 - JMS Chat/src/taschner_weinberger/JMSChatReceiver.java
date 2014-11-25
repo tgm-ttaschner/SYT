@@ -1,7 +1,6 @@
 package taschner_weinberger;
 
-import org.apache.activemq.ActiveMQConnection;
-import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.*;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;

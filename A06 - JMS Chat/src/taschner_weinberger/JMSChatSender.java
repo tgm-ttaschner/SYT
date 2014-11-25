@@ -1,10 +1,8 @@
 package taschner_weinberger;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 
-import org.apache.activemq.ActiveMQConnection;
-import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.*;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;

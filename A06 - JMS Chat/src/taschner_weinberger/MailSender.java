@@ -1,7 +1,5 @@
 package taschner_weinberger;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Properties;
 
 import javax.naming.Context;
