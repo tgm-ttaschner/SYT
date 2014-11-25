@@ -14,13 +14,19 @@ public class JMSChatCLI {
 	}
 	
 	public static void main(String[] args) {
-		if (args.length != 3) {
-			System.exit(1);
+		Thread empfangen = null;
+		Thread senden = null;
+		
+		if (args.length == 3 ^ args.length == 5) {
+			if (args.length == 5) {
+				int temp = Integer.parseInt(args[4]);
+				empfangen = new Thread(new JMSChatReceiver(args[0], args[1], args[2], args[3], temp));
+				senden = new Thread(new JMSChatSender(args[0], args[1], args[2], args[3], temp));
+			} else {
+				empfangen = new Thread(new JMSChatReceiver(args[0], args[1], args[2], "-1", -1));
+				senden = new Thread(new JMSChatSender(args[0], args[1], args[2], "-1", -1));
+			}
 		}
-		
-		Thread empfangen = new Thread(new JMSChatReceiver(args[0], args[1], args[2])));
-		
-		Thread senden = new Thread(new JMSChatSender(new JMSChatReceiver(args[0], args[1], args[2])));
 		
 		empfangen.start();
 		senden.start();
