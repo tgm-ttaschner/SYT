@@ -13,18 +13,18 @@ public class JMSChatReceiver implements Runnable	{
 
 	private static String user = "url";
 	private static String password = "";
-	
+
 	private static String subject = "VSDBChat";
-	
+
 	private static String ip = "10.0.0.3";
-	
+
 	private static int port;
-	
+
 	private static String url = "failover://tcp://" + ip + ":" + port;
 
 	@Override
 	public void run() {
-		
+
 		try {
 
 			// Create the connection.
