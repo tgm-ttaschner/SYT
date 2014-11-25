@@ -140,21 +140,23 @@ public class JMSChatSender implements Runnable	{
 
 					BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 
-					String text = r.readLine();
+					String text = r.readLine().trim();
 
 					String[] words = text.split(" ");
 
-					if (text.trim() != "")	{
+					if (text != "")	{
 
-						if (words[0].equals("MAIL"))	{
-							new Thread(new MailSender(words[1], port, text)).start();
+						if (words.length == 3)	{
+							if (words[0].equals("MAIL") && words[1] != null)	{
+								new Thread(new MailSender(words[1], port, text)).start();
+							}
 						}
 
-						if (text.trim().equals("MAILBOX"))	{
+						if (text.equals("MAILBOX"))	{
 							new Thread(new MailReceiver(ip, port)).start();
 						}
 
-						if (text.trim().equals("EXIT"))	{
+						if (text.equals("EXIT"))	{
 							System.exit(0);
 						}
 
@@ -164,7 +166,7 @@ public class JMSChatSender implements Runnable	{
 						TextMessage message = session.createTextMessage(input);
 						producer.send(message);
 					} else	{
-						
+
 					}
 
 				}
