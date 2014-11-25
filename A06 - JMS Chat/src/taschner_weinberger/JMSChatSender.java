@@ -16,10 +16,26 @@ import javax.jms.TextMessage;
 
 public class JMSChatSender implements Runnable	{
 
-	private static String user = ActiveMQConnection.DEFAULT_USER;
-	private static String password = ActiveMQConnection.DEFAULT_PASSWORD;
-	private static String url = ActiveMQConnection.DEFAULT_BROKER_URL;
-	private static String subject = "VSDBChat";
+private String user;
+	
+	private String password;
+
+	private String subject;
+
+	private String ip;
+
+	private int port;
+
+	private String url = "failover://tcp://" + ip + ":" + port;
+
+	public JMSChatSender(String ip, int port, String user, String subject, String password) {
+		this.ip = ip;
+		this.port = port;
+		this.user = user;
+		this.subject = subject;
+		this.password = password;
+		
+	}
 
 	@Override
 	public void run() {
