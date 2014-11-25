@@ -57,7 +57,7 @@ public class JMSChatSender implements Runnable	{
 					// Create the message
 					TextMessage message = session.createTextMessage(input);
 					producer.send(message);
-					System.out.println(message.getText());
+					System.out.println("Me: " +message.getText());
 
 				}
 
