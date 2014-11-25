@@ -75,7 +75,7 @@ public class MailReceiver implements Runnable	{
 			System.out.println(message.getText());
 
 			// close the queue connection
-			//queueConn.close();
+			queueConn.close();
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
