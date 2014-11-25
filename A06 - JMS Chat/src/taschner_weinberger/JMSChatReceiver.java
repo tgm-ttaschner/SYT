@@ -51,8 +51,7 @@ public class JMSChatReceiver implements Runnable	{
 			Destination destination = null;
 
 			try {
-
-				ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(user, url, password);
+				ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(user, password, url);
 				connection = connectionFactory.createConnection();
 				connection.start();
 

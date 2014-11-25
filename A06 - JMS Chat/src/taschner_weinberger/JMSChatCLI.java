@@ -1,7 +1,5 @@
 package taschner_weinberger;
 
-import org.apache.activemq.ActiveMQConnection;
-
 /**
  * 
  * @author Michael/Thomas
