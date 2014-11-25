@@ -144,30 +144,26 @@ public class JMSChatSender implements Runnable	{
 
 					String[] words = text.split(" ");
 
-					if (text != "")	{
+					input = user + " [" + ip + "]: " + text;
 
-						if (words.length == 3)	{
-							if (words[0].equals("MAIL") && words[1] != null)	{
-								new Thread(new MailSender(words[1], port, text)).start();
-							}
-						}
-
-						if (text.equals("MAILBOX"))	{
-							new Thread(new MailReceiver(ip, port)).start();
-						}
-
-						if (text.equals("EXIT"))	{
-							System.exit(0);
-						}
-
-						input = user + " [" + ip + "]: " + text;
-
-						// Create the message
-						TextMessage message = session.createTextMessage(input);
-						producer.send(message);
+					if (words[0].equals("MAIL") && words.length >= 3)	{
+						input = "";
+						new Thread(new MailSender(words[1], port, text)).start();
 					} else	{
 
 					}
+
+					if (text.equals("MAILBOX"))	{
+						new Thread(new MailReceiver(ip, port)).start();
+					}
+
+					if (text.equals("EXIT"))	{
+						System.exit(0);
+					}
+
+					// Create the message
+					TextMessage message = session.createTextMessage(input);
+					producer.send(message);
 
 				}
 
