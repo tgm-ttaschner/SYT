@@ -17,8 +17,16 @@ import javax.jms.QueueConnectionFactory;
 
 public class MailSender	implements Runnable	{
 
-	public static void main(String[] args) throws Exception {
-		new MailSender().run();
+	private String ip;
+	
+	private String username;
+
+	private int port;
+
+	public MailSender(String ip, String username, int port) {
+		this.ip = ip;
+		this.username = username;
+		this.port = port;
 	}
 
 	@Override
@@ -26,42 +34,40 @@ public class MailSender	implements Runnable	{
 
 
 		try {
-			while (true)	{
 
-				Properties env = new Properties();
-				env.put(Context.INITIAL_CONTEXT_FACTORY, "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
-				env.put(Context.PROVIDER_URL, "tcp://localhost:61616");
-				env.put("queue.queueSampleQueue", "MyNewQueue");
+			Properties env = new Properties();
+			env.put(Context.INITIAL_CONTEXT_FACTORY, "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
+			env.put(Context.PROVIDER_URL, "tcp://"+ ip +":" + port);
+			env.put("queue.queueSampleQueue", ip);
 
-				// get the initial context
-				InitialContext ctx = new InitialContext(env);
+			// get the initial context
+			InitialContext ctx = new InitialContext(env);
 
-				// lookup the queue object
-				Queue queue = (Queue) ctx.lookup("queueSampleQueue");
-				// lookup the queue connection factory
-				QueueConnectionFactory connFactory = (QueueConnectionFactory) ctx.lookup("QueueConnectionFactory");
-				// create a queue connection
-				QueueConnection queueConn = connFactory.createQueueConnection();
+			// lookup the queue object
+			Queue queue = (Queue) ctx.lookup("queueSampleQueue");
+			// lookup the queue connection factory
+			QueueConnectionFactory connFactory = (QueueConnectionFactory) ctx.lookup("QueueConnectionFactory");
+			// create a queue connection
+			QueueConnection queueConn = connFactory.createQueueConnection();
 
-				// create a queue session
-				QueueSession queueSession = queueConn.createQueueSession(false,Session.AUTO_ACKNOWLEDGE);
+			// create a queue session
+			QueueSession queueSession = queueConn.createQueueSession(false,Session.AUTO_ACKNOWLEDGE);
 
-				// create a queue sender
-				QueueSender queueSender = queueSession.createSender(queue);
-				queueSender.setDeliveryMode(DeliveryMode.PERSISTENT);
+			// create a queue sender
+			QueueSender queueSender = queueSession.createSender(queue);
+			queueSender.setDeliveryMode(DeliveryMode.PERSISTENT);
 
-				BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+			BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 
-				// create a simple message to say "Hello"
-				TextMessage message = queueSession.createTextMessage("<" + env.getProperty(Context.PROVIDER_URL) + "> " + r.readLine());
+			// create a simple message to say "Hello"
+			TextMessage message = queueSession.createTextMessage("MAIL FROM " + username + "[" + ip + "]" + r.readLine());
 
-				// send the message
-				queueSender.send(message);
+			// send the message
+			queueSender.send(message);
 
-				System.out.println("[sent] " + message.getText());
+			System.out.println("[sent] " + message.getText());
 
-				//queueConn.close();
-			}
+			//queueConn.close();
 
 		} catch (Exception e)	{
 			e.getMessage();
