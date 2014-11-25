@@ -154,6 +154,7 @@ public class JMSChatSender implements Runnable	{
 					}
 
 					if (text.equals("MAILBOX"))	{
+						input = "";
 						new Thread(new MailReceiver(ip, port)).start();
 					}
 
