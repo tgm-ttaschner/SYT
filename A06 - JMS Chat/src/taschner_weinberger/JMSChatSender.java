@@ -16,8 +16,8 @@ import javax.jms.TextMessage;
 
 public class JMSChatSender implements Runnable	{
 
-private String user;
-	
+	private String user;
+
 	private String password;
 
 	private String subject;
@@ -34,7 +34,7 @@ private String user;
 		this.user = user;
 		this.subject = subject;
 		this.password = password;
-		
+
 	}
 
 	@Override
@@ -51,7 +51,7 @@ private String user;
 			String input = "";
 
 			try {
-				
+
 				ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(user, password, url);
 				connection = connectionFactory.createConnection();
 				connection.start();
@@ -65,7 +65,7 @@ private String user;
 				producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
 				while (!input.equals("EXIT"))	{
-					
+
 					BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 
 					input = r.readLine();
