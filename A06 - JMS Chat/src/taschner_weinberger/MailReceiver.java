@@ -14,51 +14,55 @@ import javax.jms.QueueConnectionFactory;
 
 public class MailReceiver implements Runnable	{
 
-	public static void main(String args[]) throws Exception {
-		new MailReceiver().run();
+	private String ip;
+
+	private int port;
+
+	public MailReceiver(String ip, int port) {
+		this.ip = ip;
+		this.port = port;
 	}
 
 	@Override
 	public void run() {
 		try {
-			
-				Properties env = new Properties();
-				env.put(Context.INITIAL_CONTEXT_FACTORY, "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
-				env.put(Context.PROVIDER_URL, "tcp://localhost:61616");
-				env.put("queue.queueSampleQueue","MyNewQueue");
-				// get the initial context
-				InitialContext ctx = new InitialContext(env);
 
-				// lookup the queue object
-				Queue queue = (Queue) ctx.lookup("queueSampleQueue");
+			Properties env = new Properties();
+			env.put(Context.INITIAL_CONTEXT_FACTORY, "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
+			env.put(Context.PROVIDER_URL, "tcp://"+ ip +":" + port);
+			env.put("queue.queueSampleQueue", ip);
+			// get the initial context
+			InitialContext ctx = new InitialContext(env);
 
-				// lookup the queue connection factory
-				QueueConnectionFactory connFactory = (QueueConnectionFactory) ctx.lookup("QueueConnectionFactory");
+			// lookup the queue object
+			Queue queue = (Queue) ctx.lookup("queueSampleQueue");
 
-				// create a queue connection
-				QueueConnection queueConn = connFactory.createQueueConnection();
+			// lookup the queue connection factory
+			QueueConnectionFactory connFactory = (QueueConnectionFactory) ctx.lookup("QueueConnectionFactory");
 
-				// create a queue session
-				QueueSession queueSession = queueConn.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
+			// create a queue connection
+			QueueConnection queueConn = connFactory.createQueueConnection();
 
-				// create a queue receiver
-				QueueReceiver queueReceiver = queueSession.createReceiver(queue);
+			// create a queue session
+			QueueSession queueSession = queueConn.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
 
-				// start the connection
-				queueConn.start();
-				
-				// receive a message
-				TextMessage message = (TextMessage) queueReceiver.receive();
+			// create a queue receiver
+			QueueReceiver queueReceiver = queueSession.createReceiver(queue);
 
-				// print the message
-				System.out.println("received: " + message.getText());
+			// start the connection
+			queueConn.start();
 
-				// close the queue connection
-				//queueConn.close();
-			
+			// receive a message
+			TextMessage message = (TextMessage) queueReceiver.receive();
+
+			// print the message
+			System.out.println(message.getText());
+
+			// close the queue connection
+			//queueConn.close();
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-
 	}
 }
