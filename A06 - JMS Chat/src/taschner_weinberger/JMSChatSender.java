@@ -18,7 +18,7 @@ public class JMSChatSender implements Runnable	{
 
 	private String user;
 
-	private String password;
+	private String password = ActiveMQConnection.DEFAULT_PASSWORD;
 
 	private String subject;
 
@@ -28,11 +28,10 @@ public class JMSChatSender implements Runnable	{
 
 	private String url = "failover://tcp://" + ip + ":" + port;
 
-	public JMSChatSender(String ip, String user, String subject, String password, int port) {
+	public JMSChatSender(String ip, String user, String subject, int port) {
 		this.ip = ip;
 		this.user = user;
 		this.subject = subject;
-		this.password = password;
 		this.port = port;
 	}
 
