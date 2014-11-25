@@ -79,8 +79,8 @@ public class JMSChatSender implements Runnable	{
 						new Thread(new MailSender(words[1], port, text)).start();
 					}
 
-					if (text.startsWith("MAILBOX"))	{
-						new Thread(new MailReceiver(ip, port)).start();
+					if (words[0].equals("MAILBOX"))	{
+						new Thread(new MailReceiver("localhost", port)).start();
 					}
 
 					if (text.equals("EXIT"))	{
