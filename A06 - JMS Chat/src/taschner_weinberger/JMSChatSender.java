@@ -91,9 +91,4 @@ public class JMSChatSender implements Runnable	{
 			e.getMessage();
 		}
 	}
-
-	public static void main(String[] args) {
-		Thread t = new Thread(new JMSChatSender());
-		t.start();
-	}
 }
