@@ -14,8 +14,14 @@ public class JMSChatReceiver implements Runnable	{
 
 	private static String user = ActiveMQConnection.DEFAULT_USER;
 	private static String password = ActiveMQConnection.DEFAULT_PASSWORD;
-	private static String url = ActiveMQConnection.DEFAULT_BROKER_URL;
+	
 	private static String subject = "VSDBChat";
+	
+	private static String ip = "10.0.0.3";
+	
+	private static int port = 61616;
+	
+	private static String url = "failover://tcp://" + ip + ":" + port;
 
 	@Override
 	public void run() {
@@ -46,7 +52,7 @@ public class JMSChatReceiver implements Runnable	{
 					// Start receiving
 					TextMessage message = (TextMessage) consumer.receive();
 					if ( message != null ) {
-						System.out.println("Message received: " + message.getText());
+						System.out.println("<" + ip + "> " + message.getText());
 						message.acknowledge();
 					}
 
