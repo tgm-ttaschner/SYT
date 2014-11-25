@@ -7,10 +7,6 @@ package taschner_weinberger;
  */
 public class JMSChatCLI {
 	
-	public void getProperties() {
-
-	}
-	
 	public static void main(String[] args) {
 		Thread empfangen = null;
 		Thread senden = null;
