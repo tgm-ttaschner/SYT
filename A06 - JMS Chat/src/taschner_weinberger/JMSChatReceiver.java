@@ -67,7 +67,7 @@ public class JMSChatReceiver implements Runnable	{
 					// Start receiving
 					TextMessage message = (TextMessage) consumer.receive();
 					if ( message != null ) {
-						System.out.println(user + "[" + ip + "] " + message.getText());
+						System.out.println(message.getText());
 						message.acknowledge();
 					}
 
