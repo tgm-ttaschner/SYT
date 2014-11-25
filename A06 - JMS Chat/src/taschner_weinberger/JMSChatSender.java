@@ -33,11 +33,11 @@ public class JMSChatSender implements Runnable	{
 		this.user = user;
 		this.subject = subject;
 		this.port = port;
-		
+
 		url = "failover://tcp://" + ip + ":" + port;
 	}
-	
-	
+
+
 
 	@Override
 	public void run() {
@@ -66,20 +66,25 @@ public class JMSChatSender implements Runnable	{
 				producer = session.createProducer(destination);
 				producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
-				while (!input.equals("EXIT"))	{
+				while (true)	{
 
 					BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+					
+					String text = r.readLine();
+					
+					if (text.equals("EXIT"))	{
+						System.exit(0);
+					}
 
-					input = user + " [" + ip + "]: " + r.readLine();
+					input = user + " [" + ip + "]: " + text;
 
 					// Create the message
 					TextMessage message = session.createTextMessage(input);
 					producer.send(message);
-					//System.out.println("Me: " +message.getText());
 
 				}
 
-				connection.stop();
+				//connection.stop();
 
 			} catch (Exception e) {
 
