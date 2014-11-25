@@ -1,6 +1,6 @@
 package taschner_weinberger;
 
-import java.io.*;
+import org.apache.activemq.ActiveMQConnection;
 
 /**
  * 
@@ -23,10 +23,11 @@ public class JMSChatCLI {
 				empfangen = new Thread(new JMSChatReceiver(args[0], args[1], args[2], args[3], temp));
 				senden = new Thread(new JMSChatSender(args[0], args[1], args[2], args[3], temp));
 			} else {
-				empfangen = new Thread(new JMSChatReceiver(args[0], args[1], args[2], "-1", 61616));
-				senden = new Thread(new JMSChatSender(args[0], args[1], args[2], "-1", 61616));
+				empfangen = new Thread(new JMSChatReceiver(args[0], args[1], args[2], null, 61616));
+				senden = new Thread(new JMSChatSender(args[0], args[1], args[2], ActiveMQConnection.DEFAULT_PASSWORD, 61616));
 			}
 		} else {
+			System.err.println("Fehlerhafte Parameter!");
 			System.exit(1);
 		}
 		
