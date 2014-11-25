@@ -20,12 +20,14 @@ public class MailSender	implements Runnable	{
 	private String ip;
 	
 	private String username;
+	
+	private String textmessage;
 
 	private int port;
 
-	public MailSender(String ip, String username, int port) {
+	public MailSender(String ip, int port, String message) {
 		this.ip = ip;
-		this.username = username;
+		this.textmessage = message;
 		this.port = port;
 	}
 
@@ -57,10 +59,8 @@ public class MailSender	implements Runnable	{
 			QueueSender queueSender = queueSession.createSender(queue);
 			queueSender.setDeliveryMode(DeliveryMode.PERSISTENT);
 
-			BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-
 			// create a simple message to say "Hello"
-			TextMessage message = queueSession.createTextMessage("MAIL FROM " + username + "[" + ip + "]" + r.readLine());
+			TextMessage message = queueSession.createTextMessage("MAIL FROM " + username + "[" + ip + "]" + textmessage);
 
 			// send the message
 			queueSender.send(message);
