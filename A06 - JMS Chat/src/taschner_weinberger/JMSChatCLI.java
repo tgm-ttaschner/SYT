@@ -23,8 +23,8 @@ public class JMSChatCLI {
 				empfangen = new Thread(new JMSChatReceiver(args[0], args[1], args[2], args[3], temp));
 				senden = new Thread(new JMSChatSender(args[0], args[1], args[2], args[3], temp));
 			} else {
-				empfangen = new Thread(new JMSChatReceiver(args[0], args[1], args[2], "-1", -1));
-				senden = new Thread(new JMSChatSender(args[0], args[1], args[2], "-1", -1));
+				empfangen = new Thread(new JMSChatReceiver(args[0], args[1], args[2], "-1", 61616));
+				senden = new Thread(new JMSChatSender(args[0], args[1], args[2], "-1", 61616));
 			}
 		} else {
 			System.exit(1);
