@@ -14,6 +14,6 @@ public class Test {
 		empfangen.start();
 		
 		Thread senden = new Thread(new JMSChatSender());
-		empfangen.start();
+		senden.start();
 	}
 }
