@@ -12,10 +12,10 @@ import javax.jms.QueueReceiver;
 import javax.jms.QueueConnection;
 import javax.jms.QueueConnectionFactory;
 
-public class Receiver implements Runnable	{
+public class MailReceiver implements Runnable	{
 
 	public static void main(String args[]) throws Exception {
-		new Receiver().run();
+		new MailReceiver().run();
 	}
 
 	@Override
