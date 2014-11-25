@@ -70,12 +70,12 @@ public class JMSChatSender implements Runnable	{
 
 					BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 
-					input = r.readLine();
+					input = user + " [" + ip + "]: " + r.readLine();
 
 					// Create the message
 					TextMessage message = session.createTextMessage(input);
 					producer.send(message);
-					System.out.println("Me: " +message.getText());
+					//System.out.println("Me: " +message.getText());
 
 				}
 
