@@ -15,10 +15,10 @@ import javax.jms.QueueSession;
 import javax.jms.QueueConnection;
 import javax.jms.QueueConnectionFactory;
 
-public class Sender	implements Runnable	{
+public class MailSender	implements Runnable	{
 
 	public static void main(String[] args) throws Exception {
-		new Sender().run();
+		new MailSender().run();
 	}
 
 	@Override
