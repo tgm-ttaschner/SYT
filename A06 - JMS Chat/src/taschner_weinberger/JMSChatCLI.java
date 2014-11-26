@@ -13,29 +13,29 @@ package taschner_weinberger;
  *
  */
 public class JMSChatCLI {
-	
+
 	public static void main(String[] args) {
 		Thread empfangen = null;
 		Thread senden = null;
-		
+
 		try {
-		if (args.length == 3 ^ args.length == 4) {
-			if (args.length == 4) {
-				int temp = Integer.parseInt(args[3]);
-				empfangen = new Thread(new JMSChatReceiver(args[0], args[1], args[2], temp));
-				senden = new Thread(new JMSChatSender(args[0], args[1], args[2], temp));
+			if (args.length == 3 ^ args.length == 4) {
+				if (args.length == 4) {
+					int temp = Integer.parseInt(args[3]);
+					empfangen = new Thread(new JMSChatReceiver(args[0], args[1], args[2], temp));
+					senden = new Thread(new JMSChatSender(args[0], args[1], args[2], temp));
+				} else {
+					empfangen = new Thread(new JMSChatReceiver(args[0], args[1], args[2], 61616));
+					senden = new Thread(new JMSChatSender(args[0], args[1], args[2], 61616));
+				}
+
+				empfangen.start();
+				senden.start();
 			} else {
-				empfangen = new Thread(new JMSChatReceiver(args[0], args[1], args[2], 61616));
-				senden = new Thread(new JMSChatSender(args[0], args[1], args[2], 61616));
+				System.err.print("Fehlerhafte Parameter!");
 			}
-			
-			empfangen.start();
-			senden.start();
-		} else {
-			System.err.print("Fehlerhafte Parameter!");
-		}
 		} catch (NullPointerException e)	{
-			System.err.println("Null Parameter!");
+			System.err.print("Null Parameter!");
 		}
 	}
 }
