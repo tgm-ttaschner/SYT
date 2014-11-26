@@ -9,6 +9,14 @@ import javax.jms.MessageConsumer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
+/**
+ * 
+ * 
+ * 
+ * @author Thomas Taschner/Michael Weinberger 4AHITT
+ * @version 20141126
+ *
+ */
 public class JMSChatReceiver implements Runnable	{
 
 	private String user;
@@ -23,7 +31,15 @@ public class JMSChatReceiver implements Runnable	{
 
 	private String url;
 	
-
+	/**
+	 * 
+	 * Erstellt ein neues JMSChatReceiver-Objekt.
+	 * 
+	 * @param ip Die IP-Adresse
+	 * @param user Der Benutzername
+	 * @param subject Der Chatraum
+	 * @param port Die Portnummer
+	 */
 	public JMSChatReceiver(String ip, String user, String subject, int port) {
 		this.ip = ip;
 		this.user = user;
@@ -34,54 +50,105 @@ public class JMSChatReceiver implements Runnable	{
 		
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getUser() {
 		return user;
 	}
 
+	/**
+	 * 
+	 * @param user
+	 */
 	public void setUser(String user) {
 		this.user = user;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getPassword() {
 		return password;
 	}
 
+	/**
+	 * 
+	 * @param password
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getSubject() {
 		return subject;
 	}
 
+	/**
+	 * 
+	 * @param subject
+	 */
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getIp() {
 		return ip;
 	}
-
+	
+	/**
+	 * 
+	 * @param ip
+	 */
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getPort() {
 		return port;
 	}
 
+	/**
+	 * 
+	 * @param port
+	 */
 	public void setPort(int port) {
 		this.port = port;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getUrl() {
 		return url;
 	}
 
+	/**
+	 * 
+	 * @param url
+	 */
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void run() {
 

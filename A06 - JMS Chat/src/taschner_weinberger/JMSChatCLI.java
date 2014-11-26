@@ -2,7 +2,14 @@ package taschner_weinberger;
 
 /**
  * 
- * @author Michael/Thomas
+ * In dieser Klasse werden die Konsolenparameter ausgelesen und die jeweilige Thread-Instanz gestartet.
+ * Gibt es 3 Eingabeparameter, so werden die Threads mit dem Standardport gestartet, was bei einer vierstelligen Eingabe
+ * selbst festgelegt werden kann.
+ * 
+ * Sollte es mehr oder weniger Parameter geben, so wird das Programm mit einer Fehlermeldung auf der Konsole abgebrochen.
+ * 
+ * @author Thomas Taschner/Michael Weinberger 4AHITT
+ * @version 20141126
  *
  */
 public class JMSChatCLI {
