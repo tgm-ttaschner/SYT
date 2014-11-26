@@ -11,7 +11,9 @@ import javax.jms.TextMessage;
 
 /**
  * 
+ * Der Receiver wartet darauf, dass der Sender Nachrichten im bestimmten Chatraum uebermittelt, gibt diese aus und sendet dem Sender eine Bestaetigung.
  * 
+ * Aenderung: Leere Nachrichten ("" oder null) werden nicht mehr ausgegeben.
  * 
  * @author Thomas Taschner/Michael Weinberger 4AHITT
  * @version 20141126
@@ -52,7 +54,10 @@ public class JMSChatReceiver implements Runnable	{
 
 	/**
 	 * 
-	 * @return
+	 * Liefert den Usernamen zurueck.
+	 * 
+	 * @return user Der Username, der zurueckgeliefert wird.
+	 * 
 	 */
 	public String getUser() {
 		return user;
@@ -60,7 +65,10 @@ public class JMSChatReceiver implements Runnable	{
 
 	/**
 	 * 
-	 * @param user
+	 * Setzt den Usernamen auf den eingegebenen Wert.
+	 * 
+	 * @param user Der gewuenschte Username.
+	 * 
 	 */
 	public void setUser(String user) {
 		this.user = user;
@@ -68,7 +76,10 @@ public class JMSChatReceiver implements Runnable	{
 
 	/**
 	 * 
-	 * @return
+	 * Liefert das Passwort zurueck.
+	 * 
+	 * @return user Das Passwort, das zurueckgeliefert wird.
+	 * 
 	 */
 	public String getPassword() {
 		return password;
@@ -76,7 +87,10 @@ public class JMSChatReceiver implements Runnable	{
 
 	/**
 	 * 
-	 * @param password
+	 * Setzt das Passwort auf den eingegebenen Wert.
+	 * 
+	 * @param user Das gewuenschte Passwort.
+	 * 
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -84,7 +98,10 @@ public class JMSChatReceiver implements Runnable	{
 
 	/**
 	 * 
-	 * @return
+	 * Liefert den Namen des Chatraums zurueck.
+	 * 
+	 * @return user Der Name des Chatraums, der zurueckgeliefert wird.
+	 * 
 	 */
 	public String getSubject() {
 		return subject;
@@ -92,7 +109,10 @@ public class JMSChatReceiver implements Runnable	{
 
 	/**
 	 * 
-	 * @param subject
+	 * Setzt den Namen des Chatraums auf den eingegebenen Wert.
+	 * 
+	 * @param user Der gewuenschte Name des Chatraums.
+	 * 
 	 */
 	public void setSubject(String subject) {
 		this.subject = subject;
@@ -100,7 +120,10 @@ public class JMSChatReceiver implements Runnable	{
 
 	/**
 	 * 
-	 * @return
+	 * Liefert die IP-Adresse zurueck.
+	 * 
+	 * @return user Die IP-Adresse, der zurueckgeliefert wird.
+	 * 
 	 */
 	public String getIp() {
 		return ip;
@@ -108,7 +131,10 @@ public class JMSChatReceiver implements Runnable	{
 	
 	/**
 	 * 
-	 * @param ip
+	 * Setzt die IP-Adresse auf den eingegebenen Wert.
+	 * 
+	 * @param user Die gewuenschte IP-Adresse.
+	 * 
 	 */
 	public void setIp(String ip) {
 		this.ip = ip;
@@ -116,7 +142,10 @@ public class JMSChatReceiver implements Runnable	{
 
 	/**
 	 * 
-	 * @return
+	 * Liefert den Port zurueck.
+	 * 
+	 * @return user Der Port, der zurueckgeliefert wird.
+	 * 
 	 */
 	public int getPort() {
 		return port;
@@ -124,7 +153,10 @@ public class JMSChatReceiver implements Runnable	{
 
 	/**
 	 * 
-	 * @param port
+	 * Setzt den Port auf den eingegebenen Wert.
+	 * 
+	 * @param user Der gewuenschte Port.
+	 * 
 	 */
 	public void setPort(int port) {
 		this.port = port;
@@ -132,7 +164,10 @@ public class JMSChatReceiver implements Runnable	{
 
 	/**
 	 * 
-	 * @return
+	 * Liefert die URL zurueck.
+	 * 
+	 * @return user Die URL, die zurueckgeliefert wird.
+	 * 
 	 */
 	public String getUrl() {
 		return url;
@@ -140,13 +175,18 @@ public class JMSChatReceiver implements Runnable	{
 
 	/**
 	 * 
-	 * @param url
+	 * Setzt die URL auf den eingegebenen Wert.
+	 * 
+	 * @param user Die gewuenschte URL.
+	 * 
 	 */
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
 	/**
+	 * 
+	 * Der Thread, in dem das Empfangen bei Aufruf abgearbeitet wird.
 	 * 
 	 */
 	@Override
