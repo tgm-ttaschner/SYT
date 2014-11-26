@@ -13,7 +13,7 @@ public class JMSChatCLI {
 		
 		if (args.length == 3 ^ args.length == 4) {
 			if (args.length == 4) {
-				int temp = Integer.parseInt(args[4]);
+				int temp = Integer.parseInt(args[3]);
 				empfangen = new Thread(new JMSChatReceiver(args[0], args[1], args[2], temp));
 				senden = new Thread(new JMSChatSender(args[0], args[1], args[2], temp));
 			} else {
