@@ -31,7 +31,7 @@ public class JMSChatCLI {
 			empfangen.start();
 			senden.start();
 		} else {
-			System.err.println("Fehlerhafte Parameter!");
+			System.err.print("Fehlerhafte Parameter!");
 		}
 	}
 }
