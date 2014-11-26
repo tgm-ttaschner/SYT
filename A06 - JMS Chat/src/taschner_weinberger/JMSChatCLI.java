@@ -18,6 +18,7 @@ public class JMSChatCLI {
 		Thread empfangen = null;
 		Thread senden = null;
 		
+		try {
 		if (args.length == 3 ^ args.length == 4) {
 			if (args.length == 4) {
 				int temp = Integer.parseInt(args[3]);
@@ -32,6 +33,9 @@ public class JMSChatCLI {
 			senden.start();
 		} else {
 			System.err.print("Fehlerhafte Parameter!");
+		}
+		} catch (NullPointerException e)	{
+			System.err.println("Null Parameter!");
 		}
 	}
 }
