@@ -12,6 +12,16 @@ import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
+/**
+ * 
+ * Bei Aufruf des Threads wird der Inhalt der Konsoleneingabe genommen und an einen Receiver mit spezifischen Chatraum weitergeleitet. (natuerlich beachte man, dass der aktive Prozess beim Broker stattfindet)
+ * 
+ * Des Weiteren wird ueberprueft, ob als erstes Wort 'MAIL' zum Verschicken oder 'MAILBOX' zum Empfangen von Privatnachrichten steht. Ist dies der Fall, so wird entsprechender Thread aufgerufen.
+ * 
+ * @author Thomas Taschner/Michael Weinberger 4AHITT
+ * @version 20141127
+ *
+ */
 public class JMSChatSender implements Runnable	{
 
 	private String user;
@@ -25,7 +35,16 @@ public class JMSChatSender implements Runnable	{
 	private int port;
 
 	private String url;
-
+	
+	/**
+	 * 
+	 * Erstellt ein neues JMSChatSender-Objekt mit den eingegebenen Parametern.
+	 * 
+	 * @param ip Die eingegebene IP-Adresse.
+	 * @param user Der eingegebene Username.
+	 * @param subject Der eingegebene Name des Chatraums.
+	 * @param port Die eingegebene Portnummer. (Sollte wenn moeglich nur verwendet werden, wenn Standard-Port besetzt ist)
+	 */
 	public JMSChatSender(String ip, String user, String subject, int port) {
 		this.ip = ip;
 		this.user = user;
@@ -37,78 +56,152 @@ public class JMSChatSender implements Runnable	{
 
 
 
+	/**
+	 * 
+	 * Liefert den Usernamen zurueck.
+	 * 
+	 * @return user Der Username, der zurueckgeliefert wird.
+	 * 
+	 */
 	public String getUser() {
 		return user;
 	}
 
 
-
+	/**
+	 * 
+	 * Setzt den Usernamen auf den eingegebenen Wert.
+	 * 
+	 * @param user Der gewuenschte Username.
+	 * 
+	 */
 	public void setUser(String user) {
 		this.user = user;
 	}
 
 
-
+	/**
+	 * 
+	 * Liefert das Passwort zurueck.
+	 * 
+	 * @return password Das Passwort, das zurueckgeliefert wird.
+	 * 
+	 */
 	public String getPassword() {
 		return password;
 	}
 
 
-
+	/**
+	 * 
+	 * Setzt das Passwort auf den eingegebenen Wert.
+	 * 
+	 * @param password Das gewuenschte Passwort.
+	 * 
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
 
-
+	/**
+	 * 
+	 * Liefert den Namen des Chatraums zurueck.
+	 * 
+	 * @return subject Der Name des Chatraums, der zurueckgeliefert wird.
+	 * 
+	 */
 	public String getSubject() {
 		return subject;
 	}
 
-
-
+	/**
+	 * 
+	 * Setzt den Namen des Chatraums auf den eingegebenen Wert.
+	 * 
+	 * @param subject Der gewuenschte Name des Chatraums.
+	 * 
+	 */
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
 
 
-
+	/**
+	 * 
+	 * Liefert die IP-Adresse zurueck.
+	 * 
+	 * @return ip Die IP-Adresse, der zurueckgeliefert wird.
+	 * 
+	 */
 	public String getIp() {
 		return ip;
 	}
 
 
-
+	/**
+	 * 
+	 * Setzt die IP-Adresse auf den eingegebenen Wert.
+	 * 
+	 * @param ip Die gewuenschte IP-Adresse.
+	 * 
+	 */
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
 
 
-
+	/**
+	 * 
+	 * Liefert den Port zurueck.
+	 * 
+	 * @return port Der Port, der zurueckgeliefert wird.
+	 * 
+	 */
 	public int getPort() {
 		return port;
 	}
 
-
-
+	/**
+	 * 
+	 * Setzt den Port auf den eingegebenen Wert.
+	 * 
+	 * @param port Der gewuenschte Port.
+	 * 
+	 */
 	public void setPort(int port) {
 		this.port = port;
 	}
 
-
-
+	/**
+	 * 
+	 * Liefert die URL zurueck.
+	 * 
+	 * @return url Die URL, die zurueckgeliefert wird.
+	 * 
+	 */
 	public String getUrl() {
 		return url;
 	}
 
 
-
+	/**
+	 * 
+	 * Setzt die URL auf den eingegebenen Wert.
+	 * 
+	 * @param url Die gewuenschte URL.
+	 * 
+	 */
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
 
-
+	/**
+	 * 
+	 * Der Thread, in dem das Versenden bei Aufruf abgearbeitet wird.
+	 * 
+	 */
 	@Override
 	public void run() {
 

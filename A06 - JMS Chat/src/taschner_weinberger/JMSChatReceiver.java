@@ -35,7 +35,7 @@ public class JMSChatReceiver implements Runnable	{
 	
 	/**
 	 * 
-	 * Erstellt ein neues JMSChatReceiver-Objekt.
+	 * Erstellt ein neues JMSChatReceiver-Objekt mit den mitgegebenen Parametern.
 	 * 
 	 * @param ip Die IP-Adresse
 	 * @param user Der Benutzername
