@@ -27,12 +27,11 @@ public class JMSChatCLI {
 				empfangen = new Thread(new JMSChatReceiver(args[0], args[1], args[2], 61616));
 				senden = new Thread(new JMSChatSender(args[0], args[1], args[2], 61616));
 			}
+			
+			empfangen.start();
+			senden.start();
 		} else {
 			System.err.println("Fehlerhafte Parameter!");
-			System.exit(1);
 		}
-		
-		empfangen.start();
-		senden.start();
 	}
 }
