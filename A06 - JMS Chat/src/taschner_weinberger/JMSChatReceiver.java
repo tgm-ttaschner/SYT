@@ -15,6 +15,8 @@ import javax.jms.TextMessage;
  * 
  * Aenderung: Leere Nachrichten ("" oder null) werden nicht mehr ausgegeben.
  * 
+ * Hier wird JMS Topic verwendet.
+ * 
  * @author Thomas Taschner/Michael Weinberger 4AHITT
  * @version 20141126
  *

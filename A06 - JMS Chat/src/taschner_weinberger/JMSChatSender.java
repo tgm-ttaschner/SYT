@@ -18,6 +18,8 @@ import javax.jms.TextMessage;
  * 
  * Des Weiteren wird ueberprueft, ob als erstes Wort 'MAIL' zum Verschicken oder 'MAILBOX' zum Empfangen von Privatnachrichten steht. Ist dies der Fall, so wird entsprechender Thread aufgerufen.
  * 
+ * Hier wird JMS Topic verwendet.
+ * 
  * @author Thomas Taschner/Michael Weinberger 4AHITT
  * @version 20141127
  *
