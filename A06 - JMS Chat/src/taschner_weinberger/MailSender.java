@@ -62,7 +62,7 @@ public class MailSender	implements Runnable	{
 	 * 
 	 * Setzt die IP-Adresse auf den gewuenschten Wert.
 	 * 
-	 * @return ip Die mitgegebene IP-Adresse.
+	 * @param ip Die mitgegebene IP-Adresse.
 	 */
 	public void setIp(String ip) {
 		this.ip = ip;
@@ -72,7 +72,7 @@ public class MailSender	implements Runnable	{
 	 * 
 	 * Liefert den Usernamen zurueck.
 	 * 
-	 * @return user Der angeforderte Username.
+	 * @return username Der angeforderte Username.
 	 */
 	public String getUsername() {
 		return username;
@@ -82,7 +82,7 @@ public class MailSender	implements Runnable	{
 	 * 
 	 * Setzt den Usernamen auf den gewuenschten Wert.
 	 * 
-	 * @return user Der mitgegebene Username.
+	 * @param username Der mitgegebene Username.
 	 */
 	public void setUsername(String username) {
 		this.username = username;
@@ -122,7 +122,7 @@ public class MailSender	implements Runnable	{
 	 * 
 	 * Setzt die Portnummer auf den gewuenschten Wert.
 	 * 
-	 * @return port Die mitgegebene Portnummer.
+	 * @param port Die mitgegebene Portnummer.
 	 */
 	public void setPort(int port) {
 		this.port = port;

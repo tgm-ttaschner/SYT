@@ -57,7 +57,7 @@ public class MailReceiver implements Runnable	{
 	 * 
 	 * Setzt die IP-Adresse auf den gewuenschten Wert.
 	 * 
-	 * @return ip Die mitgegebene IP-Adresse.
+	 * @param ip Die mitgegebene IP-Adresse.
 	 */
 	public void setIp(String ip) {
 		this.ip = ip;
@@ -77,7 +77,7 @@ public class MailReceiver implements Runnable	{
 	 * 
 	 * Setzt die Portnummer auf den gewuenschten Wert.
 	 * 
-	 * @return port Die mitgegebene Portnummer.
+	 * @param port Die mitgegebene Portnummer.
 	 */
 	public void setPort(int port) {
 		this.port = port;

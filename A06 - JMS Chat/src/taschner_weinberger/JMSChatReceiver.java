@@ -80,7 +80,7 @@ public class JMSChatReceiver implements Runnable	{
 	 * 
 	 * Liefert das Passwort zurueck.
 	 * 
-	 * @return user Das Passwort, das zurueckgeliefert wird.
+	 * @return password Das Passwort, das zurueckgeliefert wird.
 	 * 
 	 */
 	public String getPassword() {
@@ -91,7 +91,7 @@ public class JMSChatReceiver implements Runnable	{
 	 * 
 	 * Setzt das Passwort auf den eingegebenen Wert.
 	 * 
-	 * @param user Das gewuenschte Passwort.
+	 * @param password Das gewuenschte Passwort.
 	 * 
 	 */
 	public void setPassword(String password) {
@@ -102,7 +102,7 @@ public class JMSChatReceiver implements Runnable	{
 	 * 
 	 * Liefert den Namen des Chatraums zurueck.
 	 * 
-	 * @return user Der Name des Chatraums, der zurueckgeliefert wird.
+	 * @return subject Der Name des Chatraums, der zurueckgeliefert wird.
 	 * 
 	 */
 	public String getSubject() {
@@ -113,7 +113,7 @@ public class JMSChatReceiver implements Runnable	{
 	 * 
 	 * Setzt den Namen des Chatraums auf den eingegebenen Wert.
 	 * 
-	 * @param user Der gewuenschte Name des Chatraums.
+	 * @param subject Der gewuenschte Name des Chatraums.
 	 * 
 	 */
 	public void setSubject(String subject) {
@@ -124,7 +124,7 @@ public class JMSChatReceiver implements Runnable	{
 	 * 
 	 * Liefert die IP-Adresse zurueck.
 	 * 
-	 * @return user Die IP-Adresse, der zurueckgeliefert wird.
+	 * @return ip Die IP-Adresse, der zurueckgeliefert wird.
 	 * 
 	 */
 	public String getIp() {
@@ -135,7 +135,7 @@ public class JMSChatReceiver implements Runnable	{
 	 * 
 	 * Setzt die IP-Adresse auf den eingegebenen Wert.
 	 * 
-	 * @param user Die gewuenschte IP-Adresse.
+	 * @param ip Die gewuenschte IP-Adresse.
 	 * 
 	 */
 	public void setIp(String ip) {
@@ -146,7 +146,7 @@ public class JMSChatReceiver implements Runnable	{
 	 * 
 	 * Liefert den Port zurueck.
 	 * 
-	 * @return user Der Port, der zurueckgeliefert wird.
+	 * @return port Der Port, der zurueckgeliefert wird.
 	 * 
 	 */
 	public int getPort() {
@@ -157,7 +157,7 @@ public class JMSChatReceiver implements Runnable	{
 	 * 
 	 * Setzt den Port auf den eingegebenen Wert.
 	 * 
-	 * @param user Der gewuenschte Port.
+	 * @param port Der gewuenschte Port.
 	 * 
 	 */
 	public void setPort(int port) {
@@ -168,7 +168,7 @@ public class JMSChatReceiver implements Runnable	{
 	 * 
 	 * Liefert die URL zurueck.
 	 * 
-	 * @return user Die URL, die zurueckgeliefert wird.
+	 * @return url Die URL, die zurueckgeliefert wird.
 	 * 
 	 */
 	public String getUrl() {
@@ -179,7 +179,7 @@ public class JMSChatReceiver implements Runnable	{
 	 * 
 	 * Setzt die URL auf den eingegebenen Wert.
 	 * 
-	 * @param user Die gewuenschte URL.
+	 * @param url Die gewuenschte URL.
 	 * 
 	 */
 	public void setUrl(String url) {
