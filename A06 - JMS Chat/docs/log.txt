@@ -1,0 +1,1135 @@
+[33mcommit cf68e1dff7df627e910e1f701d3e4e4ce414e0c0[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Thu Nov 27 20:56:56 2014 +0100
+
+    Protokoll finalisiert.
+
+ ...otokoll_A06-JMS Chat_Taschner_Weinb_4AHITT.docx | Bin [31m166142[m -> [32m170339[m bytes
+ ...rotokoll_A06-JMS Chat_Taschner_Weinb_4AHITT.pdf | Bin [31m330474[m -> [32m864077[m bytes
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+[33mcommit e6b0dd8e6a89c90998e7db45785c871d840fd99b[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Thu Nov 27 20:38:07 2014 +0100
+
+    Added UML
+
+ A06 - JMS Chat/docs/JMS Chat.asta | Bin [31m0[m -> [32m28800[m bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[33mcommit d59ae1001bc476c7ed5edc7e912f9ce03f65d1a4[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Thu Nov 27 20:37:45 2014 +0100
+
+    Updated protocol
+
+ ...otokoll_A06-JMS Chat_Taschner_Weinb_4AHITT.docx | Bin [31m48458[m -> [32m166142[m bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[33mcommit 67bf74a77d108332de713382ebf037dc4ea5c5b3[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Thu Nov 27 20:07:19 2014 +0100
+
+    Added Javadoc in doc
+
+ A06 - JMS Chat/doc/allclasses-frame.html           |  24 [32m+[m
+ A06 - JMS Chat/doc/allclasses-noframe.html         |  24 [32m+[m
+ A06 - JMS Chat/doc/constant-values.html            | 124 [32m+++++[m
+ A06 - JMS Chat/doc/deprecated-list.html            | 124 [32m+++++[m
+ A06 - JMS Chat/doc/help-doc.html                   | 229 [32m++++++++[m
+ A06 - JMS Chat/doc/index-files/index-1.html        | 199 [32m+++++++[m
+ A06 - JMS Chat/doc/index-files/index-2.html        | 149 [32m+++++[m
+ A06 - JMS Chat/doc/index-files/index-3.html        | 145 [32m+++++[m
+ A06 - JMS Chat/doc/index-files/index-4.html        | 143 [32m+++++[m
+ A06 - JMS Chat/doc/index-files/index-5.html        | 199 [32m+++++++[m
+ A06 - JMS Chat/doc/index-files/index-6.html        | 187 [32m+++++++[m
+ A06 - JMS Chat/doc/index.html                      |  74 [32m+++[m
+ A06 - JMS Chat/doc/overview-frame.html             |  22 [32m+[m
+ A06 - JMS Chat/doc/overview-summary.html           | 139 [32m+++++[m
+ A06 - JMS Chat/doc/overview-tree.html              | 143 [32m+++++[m
+ A06 - JMS Chat/doc/package-list                    |   2 [32m+[m
+ A06 - JMS Chat/doc/script.js                       |  30 [32m+[m
+ A06 - JMS Chat/doc/stylesheet.css                  | 574 [32m++++++++++++++++++++[m
+ .../doc/taschner_weinberger/JMSChatCLI.html        | 282 [32m++++++++++[m
+ .../doc/taschner_weinberger/JMSChatReceiver.html   | 550 [32m+++++++++++++++++++[m
+ .../doc/taschner_weinberger/JMSChatSender.html     | 550 [32m+++++++++++++++++++[m
+ .../doc/taschner_weinberger/MailReceiver.html      | 384 [32m+++++++++++++[m
+ .../doc/taschner_weinberger/MailSender.html        | 465 [32m++++++++++++++++[m
+ .../taschner_weinberger/class-use/JMSChatCLI.html  | 124 [32m+++++[m
+ .../class-use/JMSChatReceiver.html                 | 124 [32m+++++[m
+ .../class-use/JMSChatSender.html                   | 124 [32m+++++[m
+ .../class-use/MailReceiver.html                    | 124 [32m+++++[m
+ .../taschner_weinberger/class-use/MailSender.html  | 124 [32m+++++[m
+ .../doc/taschner_weinberger/package-frame.html     |  24 [32m+[m
+ .../doc/taschner_weinberger/package-summary.html   | 168 [32m++++++[m
+ .../doc/taschner_weinberger/package-tree.html      | 141 [32m+++++[m
+ .../doc/taschner_weinberger/package-use.html       | 124 [32m+++++[m
+ .../taschner_weinberger/testing/TestJMSChat.html   | 604 [32m+++++++++++++++++++++[m
+ .../testing/class-use/TestJMSChat.html             | 124 [32m+++++[m
+ .../taschner_weinberger/testing/package-frame.html |  20 [32m+[m
+ .../testing/package-summary.html                   | 142 [32m+++++[m
+ .../taschner_weinberger/testing/package-tree.html  | 137 [32m+++++[m
+ .../taschner_weinberger/testing/package-use.html   | 124 [32m+++++[m
+ 38 files changed, 6990 insertions(+)
+
+[33mcommit 6824c022c0b961b598979c0ae61e5770a7131ed2[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Thu Nov 27 20:06:58 2014 +0100
+
+    JMSChatReceiver, MailReceiver and MailSender:
+    
+    Fixed doc for Javadoc
+
+ .../src/taschner_weinberger/JMSChatReceiver.java     | 20 [32m++++++++++[m[31m----------[m
+ .../src/taschner_weinberger/MailReceiver.java        |  4 [32m++[m[31m--[m
+ .../src/taschner_weinberger/MailSender.java          |  8 [32m++++[m[31m----[m
+ 3 files changed, 16 insertions(+), 16 deletions(-)
+
+[33mcommit 1609ebc667f3c9f1d7466a0b339f2e8a11cb59d3[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Thu Nov 27 19:57:58 2014 +0100
+
+    TestJMSChat:
+    
+    Added some more test cases, reaching 61.4% now
+
+ .../taschner_weinberger/testing/TestJMSChat.java   | 113 [32m++++++++++++++++++++[m[31m-[m
+ 1 file changed, 108 insertions(+), 5 deletions(-)
+
+[33mcommit 79ae2d7ebb5da9293fc0431b10dcc6a8a44d13bc[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Thu Nov 27 00:25:42 2014 +0100
+
+    Sourcecode-Dokumentation updated
+
+ .../src/taschner_weinberger/JMSChatReceiver.java   |  2 [32m+[m
+ .../src/taschner_weinberger/JMSChatSender.java     |  2 [32m+[m
+ .../src/taschner_weinberger/MailReceiver.java      | 51 [32m++++++++++++++[m[31m-[m
+ .../src/taschner_weinberger/MailSender.java        | 72 [32m++++++++++++++++++++++[m
+ 4 files changed, 126 insertions(+), 1 deletion(-)
+
+[33mcommit a2f5861b53fc9d1269c10acf27a596e11755f1cf[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Thu Nov 27 00:11:42 2014 +0100
+
+    ~
+
+ .../src/taschner_weinberger/JMSChatReceiver.java   |   2 [32m+[m[31m-[m
+ .../src/taschner_weinberger/JMSChatSender.java     | 125 [32m++++++++++++++++++[m[31m---[m
+ 2 files changed, 110 insertions(+), 17 deletions(-)
+
+[33mcommit 3e5f1dc64dbf0bbb414ea6bb48979321b41b2c88[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Thu Nov 27 00:01:18 2014 +0100
+
+    ~
+
+ .../src/taschner_weinberger/JMSChatReceiver.java   | 64 [32m++++++++++++++++++[m[31m----[m
+ 1 file changed, 52 insertions(+), 12 deletions(-)
+
+[33mcommit 382d562bab8bd88ef774947eaa4a3f60dbc23c21[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Wed Nov 26 21:06:05 2014 +0100
+
+    TestJMSChat:
+    
+    Added some more test cases, first test problems with the run() methods
+    arrive
+
+ .../taschner_weinberger/testing/TestJMSChat.java   | 117 [32m++++++++++++++++++++[m[31m-[m
+ 1 file changed, 114 insertions(+), 3 deletions(-)
+
+[33mcommit 067a6295b43f0a4f2b6f59c95e5720122e1e5bcd[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Wed Nov 26 19:39:27 2014 +0100
+
+    JMSChatCLI:
+    
+    Proper code alignment
+    
+    Changed System.err.println to System.err.print
+
+ .../src/taschner_weinberger/JMSChatCLI.java        | 32 [32m+++++++++++[m[31m-----------[m
+ 1 file changed, 16 insertions(+), 16 deletions(-)
+
+[33mcommit f9b9b5dc98644952b103c34e676b8a7ab82941d2[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Wed Nov 26 19:37:50 2014 +0100
+
+    JMSChatCLI:
+    
+    NullPointer is now being caught
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatCLI.java | 4 [32m++++[m
+ 1 file changed, 4 insertions(+)
+
+[33mcommit 4c731ac366aaf1c9ddf7f74ef6cbd85bb2b08c4d[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Wed Nov 26 19:21:38 2014 +0100
+
+    JMSChatCLI:
+    
+    Changed System.err.println to System.err.print
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatCLI.java | 2 [32m+[m[31m-[m
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+[33mcommit a0555ccb1cc00ce6228f71f942fa4f97a7a2c2c8[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Wed Nov 26 19:18:44 2014 +0100
+
+    JMSChatCLI:
+    
+    Chat now really only starts if the right arguments are set
+    
+    Removed System.exit()
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatCLI.java | 9 [32m++++[m[31m-----[m
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+
+[33mcommit 716b41ed7ba61bee14998dc9bbee37a3815afe29[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Wed Nov 26 18:54:01 2014 +0100
+
+    TestJMSChat:
+    
+    Added some test cases
+
+ .../src/taschner_weinberger/testing/TestJMSChat.java  | 19 [32m+++++++++++++++++[m[31m--[m
+ 1 file changed, 17 insertions(+), 2 deletions(-)
+
+[33mcommit f2c82921ad737b636a969f9d6dcb65a9c3b8f900[m
+Merge: 58ded52 7468fad
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Wed Nov 26 18:53:25 2014 +0100
+
+    Merge branch 'A06' of https://github.com/tgm-ttaschner/SYT.git into A06
+
+[33mcommit 58ded52943b96b2fb459cb783dffc087d630c398[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Wed Nov 26 18:53:14 2014 +0100
+
+    JMSChatCLI:
+    
+    Fixed an out of bounds array access which would cause an
+    ArrayOutOfBoundsException to be thrown
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatCLI.java | 2 [32m+[m[31m-[m
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+[33mcommit 7468fadd1e8dd47fea281a8ab929daa001e23ea9[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Wed Nov 26 17:10:02 2014 +0100
+
+    ~
+
+ .../src/taschner_weinberger/JMSChatReceiver.java   | 71 [32m+++++++++++++++++++++[m[31m-[m
+ 1 file changed, 69 insertions(+), 2 deletions(-)
+
+[33mcommit 75960df85efed8df5bb9851749864fd406b8a733[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Wed Nov 26 17:05:23 2014 +0100
+
+    Src-Code Dokumentation hinzugefügt
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatCLI.java | 9 [32m++++++++[m[31m-[m
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+[33mcommit 0b908b213e068945c461dfec42986fe4db5a25fc[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Wed Nov 26 07:46:13 2014 +0100
+
+    Moved protocol to docs folder
+
+ .../Protokoll_A06-JMS Chat_Taschner_Weinb_4AHITT.docx  | Bin [31m0[m -> [32m48458[m bytes
+ .../Protokoll_A06-JMS Chat_Taschner_Weinb_4AHITT.pdf   | Bin [31m0[m -> [32m330474[m bytes
+ .../Protokoll_A06-JMS Chat_Taschner_Weinb_4AHITT.docx  | Bin [31m48458[m -> [32m0[m bytes
+ .../Protokoll_A06-JMS Chat_Taschner_Weinb_4AHITT.pdf   | Bin [31m330474[m -> [32m0[m bytes
+ 4 files changed, 0 insertions(+), 0 deletions(-)
+
+[33mcommit 2b085b760d96a8f48b3e533265576b4c306c4a29[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Wed Nov 26 01:00:20 2014 +0100
+
+    Aktuelles Protokoll, fast fertig
+
+ ...rotokoll_A06-JMS Chat_Taschner_Weinb_4AHITT.docx | Bin [31m39575[m -> [32m48458[m bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[33mcommit 8fa1ff31c2b06c59fbc2960e7ec6c30895524283[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Wed Nov 26 00:58:34 2014 +0100
+
+    JMSChatReceiver:
+    
+    Huge whitespace removal
+
+ .../src/taschner_weinberger/JMSChatReceiver.java   | 54 [32m+[m[31m---------------------[m
+ 1 file changed, 1 insertion(+), 53 deletions(-)
+
+[33mcommit d5f15c676b71a56076c48ab6402a9c0d7ff887b2[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Wed Nov 26 00:56:37 2014 +0100
+
+    JMSChatSender:
+    
+    No more console output when keyword MAILBOX is entered
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatSender.java | 1 [32m+[m
+ 1 file changed, 1 insertion(+)
+
+[33mcommit c659a9790d2c75abeef464e1fafb4e9b20bed379[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Wed Nov 26 00:51:29 2014 +0100
+
+    MailSender:
+    
+    Fixed console output
+
+ A06 - JMS Chat/src/taschner_weinberger/MailSender.java | 7 [32m++++++[m[31m-[m
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+[33mcommit 2682eac1c9d60668d81ac74d28d21d94700576bd[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Wed Nov 26 00:50:33 2014 +0100
+
+    JMSChatSender:
+    
+    Reworked keyword detection and handling
+
+ .../src/taschner_weinberger/JMSChatSender.java     | 36 [32m++++++++++[m[31m------------[m
+ 1 file changed, 16 insertions(+), 20 deletions(-)
+
+[33mcommit 4bef6e7723b1e4cbf989b007b899ace7f55af166[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Wed Nov 26 00:41:43 2014 +0100
+
+    MailReceiver:
+    
+    Fixed bug where receiving more than one message per session would be
+    impossible
+
+ A06 - JMS Chat/src/taschner_weinberger/MailReceiver.java | 2 [32m+[m[31m-[m
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+[33mcommit b06f4eaec13a7dc70ec778524b91132476dbc4d3[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 23:51:26 2014 +0100
+
+    Aktuelle Version Protokoll
+
+ ...rotokoll_A06-JMS Chat_Taschner_Weinb_4AHITT.docx | Bin [31m38851[m -> [32m39575[m bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[33mcommit 36b158676b1b39bbe4821758f412620e12a0b84a[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 23:48:02 2014 +0100
+
+    MailSender
+    
+    Fixed console output
+
+ A06 - JMS Chat/src/taschner_weinberger/MailSender.java | 2 [32m+[m[31m-[m
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+[33mcommit 821d220e4d8b2a51ad2ea4f349b8047480291c63[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 23:40:44 2014 +0100
+
+    JMSChatReceiver:
+    
+    Message now only gets displayed if it contains at least a single
+    non-whitespace character
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatReceiver.java | 2 [32m+[m[31m-[m
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+[33mcommit cd1c961a70d9825a6ba213ea0c7a52d975984c39[m
+Merge: 33b0f48 771c89d
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 23:39:03 2014 +0100
+
+    Merge branch 'A06' of https://github.com/tgm-ttaschner/SYT.git into A06
+
+[33mcommit 33b0f48d9a60f1bbae7f51a279ef274bf9206b3a[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 23:38:53 2014 +0100
+
+    Added check if words was long enough before trying to send an e-mail
+
+ .../src/taschner_weinberger/JMSChatSender.java           | 16 [32m+++++++++[m[31m-------[m
+ 1 file changed, 9 insertions(+), 7 deletions(-)
+
+[33mcommit 771c89dc21690a85b90900e06fff4f1cb984c6a1[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 23:36:37 2014 +0100
+
+    derzeitiger Stand des Protokolls
+
+ ...rotokoll_A06-JMS Chat_Taschner_Weinb_4AHITT.docx | Bin [31m28960[m -> [32m38851[m bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[33mcommit a9d760f72972da4eefcd03c5a3dee48dbe035c19[m
+Merge: fb8876d c61cf41
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 23:36:18 2014 +0100
+
+    Merge branch 'A06' of https://github.com/tgm-ttaschner/SYT.git into A06
+
+[33mcommit c61cf415d56abde55f13f3a154d99472cd13bc56[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 23:23:48 2014 +0100
+
+    MailSender:
+    
+    Organized imports
+
+ A06 - JMS Chat/src/taschner_weinberger/MailSender.java | 2 [31m--[m
+ 1 file changed, 2 deletions(-)
+
+[33mcommit 9db74a82764a46bf3597c10562dceb9cf6b66532[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 23:23:11 2014 +0100
+
+    JMSChatSender:
+    
+    Organized imports
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatSender.java | 6 [32m++[m[31m----[m
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+[33mcommit 4be5be229240d02076aa971206b8f598032f2926[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 23:22:37 2014 +0100
+
+    JMSChatReceiver:
+    
+    Organized imports
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatReceiver.java | 3 [32m+[m[31m--[m
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+[33mcommit fb8876d8afa165fa91209f86d12f178ed243e634[m
+Merge: 5e9f632 78745e7
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 23:22:06 2014 +0100
+
+    Merge branch 'A06' of https://github.com/tgm-ttaschner/SYT.git into A06
+
+[33mcommit 78745e77ec97eab3960985b933a946a1a62a913f[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 23:21:49 2014 +0100
+
+    JMSChatCLI:
+    
+    Removed getProperties
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatCLI.java | 4 [31m----[m
+ 1 file changed, 4 deletions(-)
+
+[33mcommit 032f01b3c10e13a5f0288e2ef1643f91a7368800[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 23:21:05 2014 +0100
+
+    MailSender:
+    
+    Added getters and setters
+
+ .../src/taschner_weinberger/MailSender.java        | 32 [32m++++++++++++++++++++++[m
+ 1 file changed, 32 insertions(+)
+
+[33mcommit d1d3d78b815c340a422299e8ec55a512c4d72b38[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 23:20:11 2014 +0100
+
+    MailReceiver:
+    
+    Added getters and setters
+
+ A06 - JMS Chat/src/taschner_weinberger/MailReceiver.java | 16 [32m++++++++++++++++[m
+ 1 file changed, 16 insertions(+)
+
+[33mcommit 5e9f632c2d316de969f866719e06ff54f2858359[m
+Merge: 3da3bd5 53c53b6
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 23:19:23 2014 +0100
+
+    Merge branch 'A06' of https://github.com/tgm-ttaschner/SYT.git into A06
+
+[33mcommit 53c53b6b2a66e2bc7daff2b560879329f9e3a72e[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 23:19:11 2014 +0100
+
+    JMSChatSender:
+    
+    Added getters and setters
+
+ .../src/taschner_weinberger/JMSChatSender.java     | 72 [32m++++++++++++++++++++++[m
+ 1 file changed, 72 insertions(+)
+
+[33mcommit b84101ee8f021e107f5e575c3dc3f00e1ec5415c[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 23:18:55 2014 +0100
+
+    JMSChatReceiver:
+    
+    Added getter and setter for the password attribute
+
+ .../src/taschner_weinberger/JMSChatReceiver.java         | 16 [32m++++++++++++++++[m
+ 1 file changed, 16 insertions(+)
+
+[33mcommit fe7cc8df5a6c46ec59bc7dac757cc38988ff844a[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 23:17:11 2014 +0100
+
+    JMSChatReceiver:
+    
+    Added getters and setters
+
+ .../src/taschner_weinberger/JMSChatReceiver.java   | 80 [32m++++++++++++++++++++++[m
+ 1 file changed, 80 insertions(+)
+
+[33mcommit 3da3bd5a6db78288b9b7e79b967941625d421f67[m
+Merge: 14eadc3 28de521
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 23:14:07 2014 +0100
+
+    Merge branch 'A06' of https://github.com/tgm-ttaschner/SYT.git into A06
+
+[33mcommit 28de521ece9fdec4b703b92b048c9b7164c0dbb0[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 23:13:53 2014 +0100
+
+    Added taschner_weinberger.testing
+    
+    Added TestJMSChat for JUnit testing purposes
+
+ A06 - JMS Chat/.classpath                                  |  1 [32m+[m
+ .../src/taschner_weinberger/testing/TestJMSChat.java       | 14 [32m++++++++++++++[m
+ 2 files changed, 15 insertions(+)
+
+[33mcommit 14eadc3a0951f66d7a3aaa879180bd9aea6a3de1[m
+Merge: da17228 a16b133
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 23:12:46 2014 +0100
+
+    Merge branch 'A06' of https://github.com/tgm-ttaschner/SYT.git into A06
+
+[33mcommit da17228329bb363d9152745c138de9534e240bda[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 23:08:11 2014 +0100
+
+    ~
+
+ ...rotokoll_A06-JMS Chat_Taschner_Weinb_4AHITT.docx | Bin [31m35878[m -> [32m28960[m bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[33mcommit a16b133cdfbbca8c0006d432908e69faf312ecf4[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 23:07:27 2014 +0100
+
+    JMSChatSender:
+    
+    Reverted back to the own ip instead of using localhost
+    
+    Optimized detection of keywords
+
+ .../src/taschner_weinberger/JMSChatSender.java     | 40 [32m++++++++++++[m[31m----------[m
+ 1 file changed, 22 insertions(+), 18 deletions(-)
+
+[33mcommit 0da354b5a22e03925912bd7820b8a59a30037f89[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 22:59:24 2014 +0100
+
+    Protokoll hinzugefügt
+
+ .../Protokoll_A06-JMS Chat_Taschner_Weinb_4AHITT.docx  | Bin [31m0[m -> [32m35878[m bytes
+ .../Protokoll_A06-JMS Chat_Taschner_Weinb_4AHITT.pdf   | Bin [31m0[m -> [32m330474[m bytes
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+[33mcommit 3eacae0162e85234b0469654d3554db8a5b643e6[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 22:54:08 2014 +0100
+
+    ~
+
+ A06 - JMS Chat/src/testing/.gitignore           |  1 [31m-[m
+ A06 - JMS Chat/src/testing/MailTest.java        | 11 [31m-----------[m
+ A06 - JMS Chat/src/testing/MailTestReceive.java | 11 [31m-----------[m
+ 3 files changed, 23 deletions(-)
+
+[33mcommit ec54613baf3624ef2cd7e94cfb919caf2ad4ca53[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 22:51:31 2014 +0100
+
+    JMSChatSender:
+    
+    Accessing via MAILBOX the mailbox of localhost
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatSender.java | 4 [32m++[m[31m--[m
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+[33mcommit 750a9470df5d2d2a297a13191ed91b02bd38efed[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 22:31:48 2014 +0100
+
+    Better detection of keywords
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatSender.java | 13 [32m++++++++++++[m[31m-[m
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+[33mcommit e001597361d8b93aa5bbf117b1c975eb9cdd6b92[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 22:31:21 2014 +0100
+
+    MailSender:
+    
+    Changed constructor a bit (won't be needing a username)
+    
+    Removed BufferedReader and replaced it with the previously entered text
+    message
+
+ A06 - JMS Chat/src/taschner_weinberger/MailSender.java | 10 [32m+++++[m[31m-----[m
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+[33mcommit 0236445a4c915fadc2de5a65ec647b4018272f5b[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 22:15:36 2014 +0100
+
+    MailSender:
+    
+    Added constructor
+    
+    Added message decoration
+    
+    Dynamic context config through constructor
+    
+    Removed unneccessary main method
+
+ .../src/taschner_weinberger/MailSender.java        | 62 [32m++++++++++++[m[31m----------[m
+ 1 file changed, 34 insertions(+), 28 deletions(-)
+
+[33mcommit 89bfb6ef0ef26b9160d491fc1e2508f0dd775750[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 22:15:14 2014 +0100
+
+    MailReceiver:
+    
+    Added constructor
+    
+    Dynamic context config through constructor
+    
+    Removed unneccessary main method
+
+ .../src/taschner_weinberger/MailReceiver.java      | 64 [32m++++++++++++[m[31m----------[m
+ 1 file changed, 34 insertions(+), 30 deletions(-)
+
+[33mcommit 1dc71e964ab79341b675b5b3ec5fab2107f76b01[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 21:44:25 2014 +0100
+
+    Test für Mail
+
+ A06 - JMS Chat/src/taschner_weinberger/MailReceiver.java |  4 [32m+[m[31m---[m
+ A06 - JMS Chat/src/testing/MailTest.java                 | 11 [32m+++++++++++[m
+ A06 - JMS Chat/src/testing/MailTestReceive.java          | 11 [32m+++++++++++[m
+ 3 files changed, 23 insertions(+), 3 deletions(-)
+
+[33mcommit c2ec71f11bf7686fbc3bb6b0bd693788a4242f59[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 21:37:10 2014 +0100
+
+    Renamed Sender to MailSender
+
+ .../src/taschner_weinberger/MailSender.java        | 71 [32m++++++++++++++++++++++[m
+ A06 - JMS Chat/src/taschner_weinberger/Sender.java | 71 [31m----------------------[m
+ 2 files changed, 71 insertions(+), 71 deletions(-)
+
+[33mcommit 913ef1622336c5a301046e83a5d36e7c4715ba96[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 21:36:51 2014 +0100
+
+    Renamed Receiver to MailReceiver
+
+ .../src/taschner_weinberger/MailReceiver.java      | 66 [32m++++++++++++++++++++++[m
+ .../src/taschner_weinberger/Receiver.java          | 66 [31m----------------------[m
+ 2 files changed, 66 insertions(+), 66 deletions(-)
+
+[33mcommit 9d04cdb7c4a3228b86ebeb72f52d1e8769a812c4[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 20:23:11 2014 +0100
+
+    JMSChatSender:
+    
+    Changed while to while (true)
+    
+    Added functioning check if EXIT was entered
+
+ .../src/taschner_weinberger/JMSChatSender.java        | 19 [32m++++++++++++[m[31m-------[m
+ 1 file changed, 12 insertions(+), 7 deletions(-)
+
+[33mcommit 616a12984e1120878eafb0321413ccfe3e371e42[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 19:25:59 2014 +0100
+
+    JMSChatSender:
+    
+    Messages are being decorated here now <username> [<ip>]: <message>
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatSender.java | 4 [32m++[m[31m--[m
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+[33mcommit f22b341101f841b5f734116b6d6ab2f742e66841[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 19:24:56 2014 +0100
+
+    JMSChatReceiver:
+    
+    Moved decoration of the message to JMSChatSender
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatReceiver.java | 2 [32m+[m[31m-[m
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+[33mcommit cef6397ccfb2ab3018d9c6f6c160f662bdd6e10c[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 19:14:44 2014 +0100
+
+    Removed Chat from testing
+
+ A06 - JMS Chat/src/testing/Chat.java | 115 [31m-----------------------------------[m
+ 1 file changed, 115 deletions(-)
+
+[33mcommit 403edeb82b1af580d99fd683d021117f81e806bb[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 19:13:56 2014 +0100
+
+    Test gelöscht
+
+ A06 - JMS Chat/src/testing/Test.java | 19 [31m-------------------[m
+ 1 file changed, 19 deletions(-)
+
+[33mcommit fefd4c53aaa492870f60a281729dd323b137a08a[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 19:05:06 2014 +0100
+
+    ~
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatCLI.java      | 2 [31m--[m
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatReceiver.java | 3 [32m+[m[31m--[m
+ 2 files changed, 1 insertion(+), 4 deletions(-)
+
+[33mcommit 3d7f1fb347fc8e367a37b8ac5584b3e46a0bc08c[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 19:01:02 2014 +0100
+
+    JMSChatSender and JMSChatReceiver:
+    
+    Changed url initialization
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatReceiver.java | 9 [32m++++++++[m[31m-[m
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatSender.java   | 6 [32m+++++[m[31m-[m
+ 2 files changed, 13 insertions(+), 2 deletions(-)
+
+[33mcommit 66c87d340a45beb2a6176e3b09b6fffa70f68d8b[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 18:51:37 2014 +0100
+
+    JMSChatSender and JMSChatReceiver:
+    
+    Removed password from constructor, set password to default
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatSender.java | 5 [32m++[m[31m---[m
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+[33mcommit af306a6dfc764e51c80a4a4fbe066142ef253b1d[m
+Merge: d33ce6c 46e210e
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 18:50:57 2014 +0100
+
+    Merge branch 'A06' of https://github.com/tgm-ttaschner/SYT.git into A06
+
+[33mcommit d33ce6c56020c091da007d4eada96967d84f33f0[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 18:50:47 2014 +0100
+
+    JMSChatReceiver:
+    
+    Removed password from constructor, set password to default
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatReceiver.java | 6 [32m+++[m[31m---[m
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+[33mcommit 46e210e42a78288e56c0d60e2281423cb64af08f[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 18:50:17 2014 +0100
+
+    Parameter auf 4 gesetzt, Passwort rausgehaut, macht Abstürze und ist
+    nicht gefordert ;)
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatCLI.java | 12 [32m++++++[m[31m------[m
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+[33mcommit c2096222cf94530c93f3d360f7422a93fb01beac[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 18:46:53 2014 +0100
+
+    Konstante statt null verwendet
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatCLI.java | 7 [32m++++[m[31m---[m
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+[33mcommit f189b8958188176095d5a9c0cded653daf2e88a6[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 18:42:50 2014 +0100
+
+    Std-Pwd geändert
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatCLI.java | 4 [32m++[m[31m--[m
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+[33mcommit 72a0c6d677881bc9e2602f92533546855b253364[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 18:37:03 2014 +0100
+
+    ~
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatCLI.java | 2 [32m++[m
+ 1 file changed, 2 insertions(+)
+
+[33mcommit 729631bb64fd6221c3ebe11ea9f2022fcea50c3c[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 18:34:26 2014 +0100
+
+    CLI-Eingabe über Konsolenparameter
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatCLI.java | 18 [32m++++++++++++[m[31m------[m
+ 1 file changed, 12 insertions(+), 6 deletions(-)
+
+[33mcommit 5aeae812321cc7adaf080df044d1f35cde52b663[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 18:17:37 2014 +0100
+
+    JMSChatSender:
+    
+    Changed the order of the constructor's parameters
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatSender.java | 5 [32m++[m[31m---[m
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+[33mcommit 5477c3b17916ccbbad1b544e285857ad42fc02d0[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 18:17:18 2014 +0100
+
+    JMSChatReceiver:
+    
+    Changed the order of the constructor's parameters
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatReceiver.java | 4 [32m++[m[31m--[m
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+[33mcommit 72c718a45ee6fa6a6f78a12f6fa97e30a3df39a7[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 17:17:03 2014 +0100
+
+    JMSChatSender:
+    
+    Proper code alignment
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatSender.java | 10 [32m+++++[m[31m-----[m
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+[33mcommit b8356d9b8d9a80c47db895a6de10247ed18b7ca0[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 17:03:51 2014 +0100
+
+    JMSChatSender:
+    
+    Added constructor which takes an IP-address, a port (optional), an
+    username, a subject (the chatroom) and a password (optional) as an input
+    parameter
+
+ .../src/taschner_weinberger/JMSChatSender.java     | 24 [32m++++++++++++++++++[m[31m----[m
+ 1 file changed, 20 insertions(+), 4 deletions(-)
+
+[33mcommit f079cf3be8df065853714eb965ec01aa7e67c286[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 17:03:34 2014 +0100
+
+    JMSChatReceiver:
+    
+    Added constructor which takes an IP-address, a port (optional), an
+    username, a subject (the chatroom) and a password (optional) as an input
+    parameter
+
+ .../src/taschner_weinberger/JMSChatReceiver.java   | 22 [32m++++++++++++++++[m[31m------[m
+ 1 file changed, 16 insertions(+), 6 deletions(-)
+
+[33mcommit edd6ffc2363a58122309d1ea62c8521411dfb810[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 16:47:04 2014 +0100
+
+    JMSChatReceiver:
+    
+    Improved code alignment
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatReceiver.java | 10 [32m+++++[m[31m-----[m
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+[33mcommit 763144624c7ceb9583667c7002f31ed4858a0816[m
+Merge: ceb0bb2 bc5e9a8
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 16:45:34 2014 +0100
+
+    Merge branch 'A06' of https://github.com/tgm-ttaschner/SYT.git into A06
+
+[33mcommit ceb0bb2ca3dd66bcf730c6cf2c7e36ef4ec6aa0f[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 16:45:13 2014 +0100
+
+    JMSChatReceiver:
+    
+    Improved message output
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatReceiver.java | 11 [32m+++++[m[31m------[m
+ 1 file changed, 5 insertions(+), 6 deletions(-)
+
+[33mcommit bc5e9a8b6b49c595c24cccda33fdb44c514e3d4e[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 16:31:28 2014 +0100
+
+    ~
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatCLI.java   | 16 [32m+++++++++++++++[m[31m-[m
+ .../src/taschner_weinberger/JMSChatReceiver.java         |  2 [32m+[m[31m-[m
+ .../src/taschner_weinberger/JMSChatSender.java           |  2 [32m+[m[31m-[m
+ 3 files changed, 17 insertions(+), 3 deletions(-)
+
+[33mcommit 636f88ff9db6328e31fc94395c9f2c8c748c9609[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 16:06:46 2014 +0100
+
+    JMSChatReceiver:
+    Added custom address and port to the url
+    Can connect to other JMS brokers (non localhost) now
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatReceiver.java | 10 [32m++++++++[m[31m--[m
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+[33mcommit 34c7d283789f67511f989cf8cbf700089f96d858[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 15:11:18 2014 +0100
+
+    Removed main from JMSChatSender
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatSender.java | 5 [31m-----[m
+ 1 file changed, 5 deletions(-)
+
+[33mcommit 5589e9ec0f382708864e76d0fe1b4c034652ac8a[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 15:11:04 2014 +0100
+
+    Removed main from JMSChatReceiver
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatReceiver.java | 5 [31m-----[m
+ 1 file changed, 5 deletions(-)
+
+[33mcommit 4fd5c4cfe6d33895d666a8574b92eeb4cdd910de[m
+Merge: a701cea f9d1c92
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Nov 25 15:08:45 2014 +0100
+
+    Merge branch 'A06' of https://github.com/tgm-ttaschner/SYT.git into A06
+
+[33mcommit f9d1c926e611417724d5cb57b275032796fea534[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 15:07:47 2014 +0100
+
+    ~
+
+ A06 - JMS Chat/src/testing/.gitignore | 1 [32m+[m
+ 1 file changed, 1 insertion(+)
+
+[33mcommit 4a31954eb6f285f8a7790c64b76946f61c495951[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 15:02:47 2014 +0100
+
+    ~ Benennung des Kommunikationsweges
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatSender.java | 2 [32m+[m[31m-[m
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+[33mcommit 47e55b59435550064d8050e0e419a3a26e0a472b[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 14:59:38 2014 +0100
+
+    Aufgeteilt int Threads, Funktion eines einfachen Chats nach derzeitigem
+    Stand erfüllt, wenn auch nur mit Localhost
+
+ A06 - JMS Chat/src/testing/Test.java | 2 [32m+[m[31m-[m
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+[33mcommit a701cea1625f2cf40a18bd867fad67b66f4598ac[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 14:59:38 2014 +0100
+
+    sorry
+
+ A06 - JMS Chat/src/testing/Test.java | 2 [32m+[m[31m-[m
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+[33mcommit 28dab54e10d0519c64727c0ff4523436945e1488[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 14:58:19 2014 +0100
+
+    ~
+
+ .../src/taschner_weinberger/JMSChatReceiver.java      |  3 [32m++[m[31m-[m
+ .../src/taschner_weinberger/JMSChatSender.java        |  5 [32m+++[m[31m--[m
+ A06 - JMS Chat/src/testing/Test.java                  | 19 [32m+++++++++++++++++++[m
+ 3 files changed, 24 insertions(+), 3 deletions(-)
+
+[33mcommit f168dedcbe1df5c741beaf6cd2b21e6edc0bb5d3[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Nov 25 14:38:42 2014 +0100
+
+    ~
+
+ A06 - JMS Chat/src/taschner_weinberger/JMSChatCLI.java | 14 [32m++++++++++++++[m
+ 1 file changed, 14 insertions(+)
+
+[33mcommit f07187ddfeeb932cb7a5ca41a85ed068c476a7d5[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Sun Nov 23 22:29:03 2014 +0100
+
+    Updated while, no reconnects between sending messages anymore
+
+ .../src/taschner_weinberger/JMSChatReceiver.java   | 75 [32m++++++++++[m[31m---------[m
+ .../src/taschner_weinberger/JMSChatSender.java     | 87 [32m++++++++++++[m[31m----------[m
+ 2 files changed, 88 insertions(+), 74 deletions(-)
+
+[33mcommit 2c591841a0b10434c806ffffce176be79d5a0820[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Sun Nov 23 19:05:33 2014 +0100
+
+    Added threading to JMSChatSender and JMSChatReceiver
+
+ .../src/taschner_weinberger/JMSChatReceiver.java   | 101 [32m++++++++++++[m[31m---------[m
+ .../src/taschner_weinberger/JMSChatSender.java     |  94 [32m+++++++++++[m[31m--------[m
+ 2 files changed, 111 insertions(+), 84 deletions(-)
+
+[33mcommit 7a75675b3c4c0e92d4bc768728074643a325097a[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Sun Nov 23 18:40:56 2014 +0100
+
+    Eclipse preferences file is suddenly gone
+
+ A06 - JMS Chat/.settings/org.eclipse.core.resources.prefs | 2 [31m--[m
+ 1 file changed, 2 deletions(-)
+
+[33mcommit 2ed800eeef8c86209f83e2e8495174a64439f1c0[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Sun Nov 23 18:40:06 2014 +0100
+
+    Added JMSChatSender and JMSChatReceiver back again
+
+ .../src/taschner_weinberger/JMSChatReceiver.java   | 73 [32m++++++++++++++++++++++[m
+ .../src/taschner_weinberger/JMSChatSender.java     | 73 [32m++++++++++++++++++++++[m
+ 2 files changed, 146 insertions(+)
+
+[33mcommit 5bc40e2b69704d586ba547ab806ef213c0f9c246[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Sun Nov 23 18:09:01 2014 +0100
+
+    An eclipse preferences file got added automagically...
+
+ A06 - JMS Chat/.settings/org.eclipse.core.resources.prefs | 2 [32m++[m
+ 1 file changed, 2 insertions(+)
+
+[33mcommit 5095f8162faa624fd74ec7eaae6c744fb1379b10[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Sun Nov 23 18:08:12 2014 +0100
+
+    Message formatting for testing purposes
+
+ A06 - JMS Chat/src/taschner_weinberger/Sender.java | 6 [32m+++[m[31m---[m
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+[33mcommit deba37518dbd668dd5cc5738474e4e06418ea85b[m
+Merge: 03b626d 69d419f
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Sun Nov 23 18:03:21 2014 +0100
+
+    Merge branch 'A06' of https://github.com/tgm-ttaschner/SYT.git into A06
+
+[33mcommit 03b626dd66d15e9c46c5d3605ac66981e0d3f2f9[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Sun Nov 23 18:03:11 2014 +0100
+
+    Reciever now recieves more than one message from the queue
+
+ A06 - JMS Chat/src/taschner_weinberger/Receiver.java | 8 [32m+++++[m[31m---[m
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+[33mcommit 69d419f90e0e3104751239b8c8dacb8e3b9676d4[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Sun Nov 23 17:39:54 2014 +0100
+
+    ~
+
+ A06 - JMS Chat/src/testing/Chat.java | 115 [32m+++++++++++++++++++++++++++++++++++[m
+ A06 - JMS Chat/src/testing/Test.java | 112 [31m----------------------------------[m
+ 2 files changed, 115 insertions(+), 112 deletions(-)
+
+[33mcommit f6fba4f966b36181983f63d51478772c86081854[m
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Sun Nov 23 17:12:58 2014 +0100
+
+    Möglicher Lösungsansatz
+
+ A06 - JMS Chat/src/testing/Test.java | 112 [32m+++++++++++++++++++++++++++++++++++[m
+ 1 file changed, 112 insertions(+)
+
+[33mcommit a47b26d04b674b51a8ae113dec659893b75c5f40[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Sun Nov 23 16:36:07 2014 +0100
+
+    Added Sender and Reciever instead, now using Threads
+
+ .../src/taschner_weinberger/Receiver.java          | 64 [32m+++++++++++++++++++[m
+ A06 - JMS Chat/src/taschner_weinberger/Sender.java | 71 [32m++++++++++++++++++++++[m
+ 2 files changed, 135 insertions(+)
+
+[33mcommit 63f44555ecde289fe558a9cc2504478b832499f3[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Sun Nov 23 16:35:52 2014 +0100
+
+    Removed JMSChatSender and JMSChatReciever
+
+ .../src/taschner_weinberger/JMSChatReceiver.java   | 83 [31m----------------------[m
+ .../src/taschner_weinberger/JMSChatSender.java     | 69 [31m------------------[m
+ 2 files changed, 152 deletions(-)
+
+[33mcommit d9d0613a535fd0ffb7f392a703a7dfb3b10f90ef[m
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Sun Nov 23 15:16:15 2014 +0100
+
+    Added initial project setup
+
+ A06 - JMS Chat/.classpath                          |   7 [32m++[m
+ A06 - JMS Chat/.gitignore                          |   1 [32m+[m
+ A06 - JMS Chat/.project                            |  17 [32m+++++[m
+ A06 - JMS Chat/build.xml                           |  53 [32m+++++++++++++[m
+ A06 - JMS Chat/lib/activemq-all-5.8.0.jar          | Bin [31m0[m -> [32m5830599[m bytes
+ A06 - JMS Chat/src/log4j.properties                |  28 [32m+++++++[m
+ .../src/taschner_weinberger/JMSChatReceiver.java   |  83 [32m+++++++++++++++++++++[m
+ .../src/taschner_weinberger/JMSChatSender.java     |  69 [32m+++++++++++++++++[m
+ 8 files changed, 258 insertions(+)
+
+[33mcommit d8cb332e14c6f3ce23bb572ec94193c3ec306e40[m
+Author: tgm-ttaschner <tgm-ttaschner@users.noreply.github.com>
+Date:   Fri Oct 17 12:53:39 2014 +0200
+
+    Initial commit
+
+ README.md | 4 [32m++++[m
+ 1 file changed, 4 insertions(+)
