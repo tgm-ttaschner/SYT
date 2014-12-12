@@ -1,4 +1,4 @@
-package server;
+package at.tm.rmi.server;
 
 import java.math.BigDecimal;
 
