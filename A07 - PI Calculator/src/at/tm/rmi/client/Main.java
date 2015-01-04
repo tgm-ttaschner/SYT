@@ -14,5 +14,8 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		Client c = new Client("localhost", 5052, 5);
+		c.connect();
 	}
 }
