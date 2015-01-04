@@ -3,19 +3,15 @@ package at.tm.rmi.client;
 import java.net.URI;
 import java.util.concurrent.*;
 
-import at.tm.rmi.server.CalculatorBalancer;
-import at.tm.rmi.server.CalculatorImpl;
-import at.tm.rmi.server.Server;
+import at.tm.rmi.server.*;
 
-public class ThreadPoolTest 	{
+public class Run  {
 	
 	public static void main(String[] args) {
-		
 		
 		Server s1 = null;
 		Server s2 = null;
 		Server s3 = null;
-		
 		
 		if (System.getSecurityManager() == null) {
         	try{
@@ -25,10 +21,9 @@ public class ThreadPoolTest 	{
         	}
             System.setSecurityManager(new SecurityManager());
         }
-		
-		CalculatorBalancer bal = new CalculatorBalancer(5052);
 			
 		try {
+			
 			s1 = new Server(5053, "Server 1");
 			s2 = new Server(5054, "Server 2");
 			s3 = new Server(5055, "Server 3");
@@ -39,25 +34,22 @@ public class ThreadPoolTest 	{
 			
 			Thread.sleep(1000);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Couldn't start the servers");
 		}
-		
 
 		int numWorkers = 3;
 		int threadPoolSize = 3;
 
 		ExecutorService tpes = Executors.newFixedThreadPool(threadPoolSize);
 
-		Main[] workers = new Main[numWorkers];
+		ConcurrentClientConnection[] workers = new ConcurrentClientConnection[numWorkers];
 		
 		for (int i = 0; i < numWorkers; i++) {
-			workers[i] = new Main();
+			workers[i] = new ConcurrentClientConnection();
 			tpes.execute(workers[i]);
 		}
 		
 		tpes.shutdown();
-		
 		
 		s1.disconnect();
 		s2.disconnect();
