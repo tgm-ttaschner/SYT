@@ -14,7 +14,7 @@ public class Client {
 
 //        String host = (args.length < 1) ? null : args[0];
         try {
-            Registry registry = LocateRegistry.getRegistry(5052);
+            Registry registry = LocateRegistry.getRegistry("192.168.0.22",5052);
             HelloInterface stub = (HelloInterface) registry.lookup("Hello");
             String response = stub.sayHello();
             System.out.println("response: " + response);
