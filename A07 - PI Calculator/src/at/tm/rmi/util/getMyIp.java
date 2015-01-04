@@ -1,11 +1,16 @@
 package at.tm.rmi.util;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.InetAddress;
-import java.net.URL;
+import java.io.*;
+import java.net.*;
 
+/**
+ * @author René Hollander
+ * @version 04.01.2015
+ * 
+ * This program returns the external ip of your internet connection by asking an external server for it.
+ * The server's response is read and returned.
+ *
+ */
 public class getMyIp {
 
 	/**
@@ -14,9 +19,7 @@ public class getMyIp {
 	 * 
 	 * @return WAN IP
 	 * @throws IOException
-	 *             Throws an IOException if there was an error getting the ip
-	 *             
-	 * 
+	 * Throws an IOException if there was an error getting the ip
 	 */
 	public static InetAddress getIp() throws IOException {
 		URL whatismyip = new URL("http://checkip.amazonaws.com");
