@@ -20,6 +20,8 @@ public class Server {
 		Registry registry = LocateRegistry.getRegistry(balancer.getHost(), balancer.getPort());
 		CalculatorBalancer bal = (CalculatorBalancer) registry.lookup("Balancer");
 		bal.addImplementation(calcimpl);
+		registry.rebind("Balancer", bal);
+		registry.rebind("Calculator", bal);
 	}
 
 	// public void bindToRegistry(Calculator calcimpl) throws RemoteException {

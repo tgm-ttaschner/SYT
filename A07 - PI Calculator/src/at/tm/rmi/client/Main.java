@@ -12,6 +12,15 @@ import at.tm.rmi.server.Server;
 public class Main {
 	public static void main(String[] args) {
 		
+		if (System.getSecurityManager() == null) {
+        	try{
+        	System.setProperty("java.security.policy", System.class.getResource("/java.policy").toString());
+        	}catch(Exception e){
+        		System.err.println("policy file: java.policy was not found or could not be set as property");
+        	}
+            System.setSecurityManager(new SecurityManager());
+        }
+		
 		CalculatorBalancer bal = new CalculatorBalancer(5052);
 			
 		try {
@@ -26,9 +35,9 @@ public class Main {
 		}
 		
 		
-		Client c = new Client("192.168.0.22", 5052, 5);
-		Client c2 = new Client("192.168.0.22", 5052, 6);
-		Client c3 = new Client("192.168.0.22", 5052, 7);
+		Client c = new Client("192.168.0.22", 5052, 0);
+		Client c2 = new Client("192.168.0.22", 5052, 5000);
+		Client c3 = new Client("192.168.0.22", 5052, -2);
 		c.connect();
 		c2.connect();
 		c3.connect();

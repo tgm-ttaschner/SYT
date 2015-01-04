@@ -8,7 +8,7 @@ import java.math.RoundingMode;
  * 
  * Geklaut von http://stackoverflow.com/questions/8370290/generating-pi-to-nth-digit-java
  */
-public class CalculatorImpl implements Calculator, Serializable{
+public class CalculatorImpl implements Calculator,Serializable{
 
 	private static final BigDecimal TWO = new BigDecimal("2");
 	private static final BigDecimal FOUR = new BigDecimal("4");
