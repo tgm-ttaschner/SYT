@@ -5,8 +5,18 @@ import java.util.concurrent.*;
 
 import at.tm.rmi.server.*;
 
+/**
+ * @author Patrick Malik
+ * @author Thomas Taschner
+ * @version 05.01.2015
+ * 
+ * Sets the security manager, starts (and connects) 3 servers, runs 3 concurrent clients (for testing purposes) and closes the server connections
+ */
 public class Run  {
 	
+	/**
+	 * @param args input parameters
+	 */
 	public static void main(String[] args) {
 		
 		Server s1 = null;
