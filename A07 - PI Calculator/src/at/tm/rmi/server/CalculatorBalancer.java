@@ -48,7 +48,7 @@ public class CalculatorBalancer implements Calculator {
 		// } catch (NotBoundException e) {
 		//
 		// }
-
+		System.out.println(count);
 		return currImplementation.pi(anzahl_nachkommastellen);
 	}
 
