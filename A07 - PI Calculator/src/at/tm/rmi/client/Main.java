@@ -12,6 +12,11 @@ import at.tm.rmi.server.Server;
 public class Main {
 	public static void main(String[] args) {
 		
+		Server s1 = null;
+		Server s2 = null;
+		Server s3 = null;
+		
+		
 		if (System.getSecurityManager() == null) {
         	try{
         	System.setProperty("java.security.policy", System.class.getResource("/java.policy").toString());
@@ -24,9 +29,13 @@ public class Main {
 		CalculatorBalancer bal = new CalculatorBalancer(5052);
 			
 		try {
-			Server s = new Server(5053, new URI("//192.168.0.22:5052"), "Server 1", new CalculatorImpl());
-			Server s2 = new Server(5054, new URI("//192.168.0.22:5052"), "Server 2", new CalculatorImpl());
-			Server s3 = new Server(5055, new URI("//192.168.0.22:5052"), "Server 3", new CalculatorImpl());
+			s1 = new Server(5053, "Server 1");
+			s2 = new Server(5054, "Server 2");
+			s3 = new Server(5055, "Server 3");
+			
+			s1.connect(new CalculatorImpl(), new URI("//localhost:5052"));
+			s2.connect(new CalculatorImpl(), new URI("//localhost:5052"));
+			s3.connect(new CalculatorImpl(), new URI("//localhost:5052"));
 			
 			Thread.sleep(1000);
 		} catch (Exception e) {
@@ -35,11 +44,14 @@ public class Main {
 		}
 		
 		
-		Client c = new Client("192.168.0.22", 5052, 0);
-		Client c2 = new Client("192.168.0.22", 5052, 5000);
-		Client c3 = new Client("192.168.0.22", 5052, -2);
-		c.connect();
-		c2.connect();
-		c3.connect();
+		for (int i = 0; i < 10; i++)	{
+			Client c = new Client("localhost", 5052, i*1000);
+			c.connect();
+		}
+		
+		
+		s1.disconnect();
+		s2.disconnect();
+		s3.disconnect();
 	}
 }

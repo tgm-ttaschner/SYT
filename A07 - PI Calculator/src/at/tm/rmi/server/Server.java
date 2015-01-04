@@ -18,15 +18,35 @@ public class Server {
 	
 	private Registry registry;
 
-	public Server(int port, URI balancer, String name, Calculator calcimpl) throws RemoteException, NotBoundException {
+	public Server(int port, String name) {
 		this.port = port;
 		this.name = name;
 		
-		registry = LocateRegistry.getRegistry(balancer.getHost(), balancer.getPort());
-		CalculatorBalancer bal = (CalculatorBalancer) registry.lookup("Balancer");
-		bal.addImplementation(this.name, calcimpl);
-		registry.rebind("Balancer", bal);
-		registry.rebind("Calculator", bal);
+		
+	}
+	
+	public void connect(Calculator calcimpl, URI balancer)	{
+		try {
+			registry = LocateRegistry.getRegistry(balancer.getHost(), balancer.getPort());
+			CalculatorBalancer bal = (CalculatorBalancer) registry.lookup("Balancer");
+			bal.addImplementation(this.name, calcimpl);
+			registry.rebind("Balancer", bal);
+			registry.rebind("Calculator", bal);
+		} catch (Exception e) {
+			System.out.println("An error occurred while " + this.getName() + " tried to connect.");
+		}
+		
+	}
+	
+	public void disconnect()	{
+		try {
+			CalculatorBalancer bal = (CalculatorBalancer) registry.lookup("Balancer");
+			bal.removeImplementation(this.name);
+			registry.rebind("Balancer", bal);
+			registry.rebind("Calculator", bal);
+		} catch (Exception e) {
+			System.out.println("An error occurred while " + this.getName() + " tried to disconnect.");
+		}
 	}
 
 	// public void bindToRegistry(Calculator calcimpl) throws RemoteException {

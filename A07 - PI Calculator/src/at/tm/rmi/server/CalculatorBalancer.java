@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class CalculatorBalancer implements Calculator,Serializable {
 
 	private ConcurrentHashMap<String, Calculator> implementations;
-	private int count;
+	private static int count;
 	private int port;
 
 	public CalculatorBalancer(int port) {
@@ -44,11 +44,13 @@ public class CalculatorBalancer implements Calculator,Serializable {
 	@Override
 	public BigDecimal pi(int anzahl_nachkommastellen) throws RemoteException {
 
-		String[] keys = {};
+		String[] keys = new String[implementations.size()];
 		
 		implementations.keySet().toArray(keys);
 		
 		Calculator currImplementation = implementations.get(keys[count % implementations.size()]);
+		
+		System.out.println(keys[count % implementations.size()]);
 		
 		count++;
 
@@ -58,12 +60,20 @@ public class CalculatorBalancer implements Calculator,Serializable {
 		// } catch (NotBoundException e) {
 		//
 		// }
+		
+		
+		
 		System.out.println(count);
+		
 		return currImplementation.pi(anzahl_nachkommastellen);
 	}
 
 	public void addImplementation(String key, Calculator implementation) {
 		this.getImplementations().put(key, implementation);
+	}
+	
+	public void removeImplementation(String key)	{
+		this.getImplementations().remove(key);
 	}
 
 	public ConcurrentHashMap<String, Calculator> getImplementations() {
