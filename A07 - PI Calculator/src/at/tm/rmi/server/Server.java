@@ -12,16 +12,16 @@ public class Server {
 
 	public Server(int port) {
 		this.port = port;
-		calc = null;
 	}
 
 	public void bindToRegistry(Calculator calcimpl) throws RemoteException {
 
 		Calculator stub = (Calculator) UnicastRemoteObject.exportObject(calcimpl, this.port);
-
+		
 		Registry registry = LocateRegistry.createRegistry(this.port);
 		registry.rebind("Calculator", stub);
-		this.calc = stub;
+		calc = stub;
+		
 		System.err.println("Server ready");
 	}
 }
