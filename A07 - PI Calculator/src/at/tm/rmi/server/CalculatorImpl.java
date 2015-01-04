@@ -1,31 +1,42 @@
 package at.tm.rmi.server;
-
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
+import java.math.RoundingMode;
+
 /**
- * Remote Class for the "Hello, world!" example.
+ * @author Thomas Taschner
+ * 
+ * Geklaut von http://stackoverflow.com/questions/8370290/generating-pi-to-nth-digit-java
  */
-public class CalculatorImpl extends UnicastRemoteObject implements Calculator {
+public class CalculatorImpl implements Calculator, Serializable{
 
-	private int decimalplaces;
-	
-	public CalculatorImpl() throws RemoteException {
-		decimalplaces = 0;
-	}
-	
-	@Override
-	public BigDecimal pi(int anzahl_nachkommastellen) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	private static final BigDecimal TWO = new BigDecimal("2");
+	private static final BigDecimal FOUR = new BigDecimal("4");
+	private static final BigDecimal FIVE = new BigDecimal("5");
+	private static final BigDecimal TWO_THIRTY_NINE = new BigDecimal("239");
 
-	public int getDecimalplaces() {
-		return decimalplaces;
+
+	public BigDecimal pi(int numDigits) {
+		int calcDigits = numDigits + 10;
+		return FOUR.multiply((FOUR.multiply(arccot(FIVE, calcDigits))).subtract(arccot(TWO_THIRTY_NINE, calcDigits))).setScale(numDigits, RoundingMode.DOWN);
 	}
 
-	public void setDecimalplaces(int decimalplaces) {
-		this.decimalplaces = decimalplaces;
+	private static BigDecimal arccot(BigDecimal x, int numDigits) {
+
+		BigDecimal unity = BigDecimal.ONE.setScale(numDigits, RoundingMode.DOWN);
+		BigDecimal sum = unity.divide(x, RoundingMode.DOWN);
+		BigDecimal xpower = new BigDecimal(sum.toString());
+		BigDecimal term = null;
+		
+		boolean add = false;
+		
+		for (BigDecimal n = new BigDecimal("3"); term == null || term.compareTo(BigDecimal.ZERO) != 0; n = n.add(TWO)) {
+			xpower = xpower.divide(x.pow(2), RoundingMode.DOWN);
+			term = xpower.divide(n, RoundingMode.DOWN);
+			sum = add ? sum.add(term) : sum.subtract(term);
+			add = ! add;
+		}
+		return sum;
 	}
-	
+
 }

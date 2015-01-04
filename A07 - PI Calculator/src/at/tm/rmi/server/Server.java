@@ -1,31 +1,27 @@
 package at.tm.rmi.server;
 
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-        
-public class Server implements HelloInterface {
-        
-    public Server() {}
 
-    public String sayHello() {
-        return "Hello, world!";
-    }
-        
-    public static void main(String args[]) {
-        
-        try {
-            Server obj = new Server();
-            HelloInterface stub = (HelloInterface) UnicastRemoteObject.exportObject(obj, 0);
+public class Server {
 
-            // Bind the remote object's stub in the registry
-            Registry registry = LocateRegistry.createRegistry(5052);
-            registry.bind("Hello", stub);
+	private Calculator calc;
+	private int port;
 
-            System.err.println("Server ready");
-        } catch (Exception e) {
-            System.err.println("Server exception: " + e.toString());
-            e.printStackTrace();
-        }
-    }
+	public Server(int port) {
+		this.port = port;
+		calc = null;
+	}
+
+	public void bindToRegistry(Calculator calcimpl) throws RemoteException {
+
+		Calculator stub = (Calculator) UnicastRemoteObject.exportObject(calcimpl, this.port);
+
+		Registry registry = LocateRegistry.createRegistry(this.port);
+		registry.rebind("Calculator", stub);
+		this.calc = stub;
+		System.err.println("Server ready");
+	}
 }
