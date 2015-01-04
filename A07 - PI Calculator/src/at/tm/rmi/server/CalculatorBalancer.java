@@ -9,10 +9,11 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CalculatorBalancer implements Calculator,Serializable {
 
-	private List<Calculator> implementations;
+	private ConcurrentHashMap<String, Calculator> implementations;
 	private int count;
 	private int port;
 
@@ -20,7 +21,7 @@ public class CalculatorBalancer implements Calculator,Serializable {
 		this.port = port;
 		count = 1;
 
-		implementations = new ArrayList<Calculator>();
+		implementations = new ConcurrentHashMap<String, Calculator>();
 		
 		// example //www.facebook.com:5052
 		Registry registry = null;
@@ -43,7 +44,12 @@ public class CalculatorBalancer implements Calculator,Serializable {
 	@Override
 	public BigDecimal pi(int anzahl_nachkommastellen) throws RemoteException {
 
-		Calculator currImplementation = implementations.get(count % implementations.size());
+		String[] keys = {};
+		
+		implementations.keySet().toArray(keys);
+		
+		Calculator currImplementation = implementations.get(keys[count % implementations.size()]);
+		
 		count++;
 
 		// Calculator stub = ;
@@ -56,15 +62,15 @@ public class CalculatorBalancer implements Calculator,Serializable {
 		return currImplementation.pi(anzahl_nachkommastellen);
 	}
 
-	public void addImplementation(Calculator implementation) {
-		this.getImplementations().add(implementation);
+	public void addImplementation(String key, Calculator implementation) {
+		this.getImplementations().put(key, implementation);
 	}
 
-	public List<Calculator> getImplementations() {
+	public ConcurrentHashMap<String, Calculator> getImplementations() {
 		return implementations;
 	}
 
-	public void setImplementations(List<Calculator> implementations) {
+	public void setImplementations(ConcurrentHashMap<String, Calculator> implementations) {
 		this.implementations = implementations;
 	}
 

@@ -24,9 +24,9 @@ public class Main {
 		CalculatorBalancer bal = new CalculatorBalancer(5052);
 			
 		try {
-			Server s = new Server(5053, new URI("//192.168.0.22:5052"), new CalculatorImpl());
-			Server s2 = new Server(5054, new URI("//192.168.0.22:5052"), new CalculatorImpl());
-			Server s3 = new Server(5055, new URI("//192.168.0.22:5052"), new CalculatorImpl());
+			Server s = new Server(5053, new URI("//192.168.0.22:5052"), "Server 1", new CalculatorImpl());
+			Server s2 = new Server(5054, new URI("//192.168.0.22:5052"), "Server 2", new CalculatorImpl());
+			Server s3 = new Server(5055, new URI("//192.168.0.22:5052"), "Server 3", new CalculatorImpl());
 			
 			Thread.sleep(1000);
 		} catch (Exception e) {

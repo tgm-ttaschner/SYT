@@ -13,13 +13,18 @@ public class Server {
 
 	private Calculator calc;
 	private int port;
+	
+	private String name;
+	
+	private Registry registry;
 
-	public Server(int port, URI balancer, Calculator calcimpl) throws RemoteException, NotBoundException {
+	public Server(int port, URI balancer, String name, Calculator calcimpl) throws RemoteException, NotBoundException {
 		this.port = port;
+		this.name = name;
 		
-		Registry registry = LocateRegistry.getRegistry(balancer.getHost(), balancer.getPort());
+		registry = LocateRegistry.getRegistry(balancer.getHost(), balancer.getPort());
 		CalculatorBalancer bal = (CalculatorBalancer) registry.lookup("Balancer");
-		bal.addImplementation(calcimpl);
+		bal.addImplementation(this.name, calcimpl);
 		registry.rebind("Balancer", bal);
 		registry.rebind("Calculator", bal);
 	}
@@ -41,6 +46,18 @@ public class Server {
 
 	public void setCalc(Calculator calc) {
 		this.calc = calc;
+		
+		CalculatorBalancer bal;
+		try {
+			bal = (CalculatorBalancer) registry.lookup("Balancer");
+			bal.addImplementation(this.name, this.calc);
+			registry.rebind("Balancer", bal);
+			registry.rebind("Calculator", bal);
+		} catch (RemoteException | NotBoundException e) {
+			System.out.println("An Error occured");
+			System.exit(314159);
+		}
+		
 	}
 
 	public int getPort() {
@@ -49,5 +66,21 @@ public class Server {
 
 	public void setPort(int port) {
 		this.port = port;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Registry getRegistry() {
+		return registry;
+	}
+
+	public void setRegistry(Registry registry) {
+		this.registry = registry;
 	}
 }
