@@ -1,14 +1,16 @@
 package at.tm.rmi.server;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.List;
 
-public class CalculatorBalancer implements Calculator {
+public class CalculatorBalancer implements Calculator,Serializable {
 
 	private List<Calculator> implementations;
 	private int count;
@@ -18,6 +20,8 @@ public class CalculatorBalancer implements Calculator {
 		this.port = port;
 		count = 1;
 
+		implementations = new ArrayList<Calculator>();
+		
 		// example //www.facebook.com:5052
 		Registry registry = null;
 		try {
