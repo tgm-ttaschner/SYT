@@ -38,9 +38,9 @@ public class Run  {
 			s2 = new Server(5054, "Server 2");
 			s3 = new Server(5055, "Server 3");
 			
-			s1.connect(new CalculatorImpl(), new URI("//localhost:5052"));
-			s2.connect(new CalculatorImpl(), new URI("//localhost:5052"));
-			s3.connect(new CalculatorImpl(), new URI("//localhost:5052"));
+			s1.connect(new URI("//localhost:5052"), new CalculatorImpl());
+			s2.connect(new URI("//localhost:5052"), new CalculatorImpl());
+			s3.connect(new URI("//localhost:5052"), new CalculatorImpl());
 			
 			Thread.sleep(1000);
 		} catch (Exception e) {
