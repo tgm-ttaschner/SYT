@@ -1,5 +1,6 @@
 package at.tm.rmi.client;
 
+import java.net.URI;
 import java.rmi.registry.*;
 
 import at.tm.rmi.server.Calculator;
@@ -14,19 +15,16 @@ import at.tm.rmi.server.Calculator;
  */
 public class Client {
 	
-	private String ip;
-	private int port;
-	
 	private int decimal_places;
+	private URI address;
 	
 	/**
 	 * @param ip the server's ip address
 	 * @param port the server's port number
 	 * @param decimal_places the amount of pi's decimal places you want the server to calculate
 	 */
-	public Client(String ip, int port, int decimal_places)	{
-		this.ip = ip;
-		this.port = port;
+	public Client(URI address, int decimal_places)	{
+		this.address = address;
 		this.decimal_places = decimal_places;
 	}
 	
@@ -36,12 +34,11 @@ public class Client {
 	 */
 	public void connect()	{
 		try {
-			Registry registry = LocateRegistry.getRegistry(this.ip, this.port);
+			Registry registry = LocateRegistry.getRegistry(this.address.getHost(), this.address.getPort());
 			Calculator stub = (Calculator) registry.lookup("Calculator");
 			System.out.println("response: " + stub.pi(this.decimal_places));
 		} catch (Exception e) {
 			System.err.println("Client exception: " + e.toString());
-			e.printStackTrace();
 		}
 	}
 }
