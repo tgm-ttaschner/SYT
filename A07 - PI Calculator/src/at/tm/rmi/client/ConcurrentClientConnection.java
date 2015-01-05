@@ -1,5 +1,7 @@
 package at.tm.rmi.client;
 
+import java.net.*;
+
 /**
  * @author Thomas Taschner
  * @version 04.01.2015
@@ -11,12 +13,18 @@ public class ConcurrentClientConnection implements Runnable	{
 	@Override
 	public void run()	{
 		for (int i = 0; i < 10; i++)	{
-			Client c = new Client("localhost", 5052, i*2);
-			c.connect();
+			Client c;
+			try {
+				c = new Client(new URI("//localhost:5052"), i*2);
+				c.connect();
+			} catch (URISyntaxException e1) {
+				System.out.println("The client couldn't connect to the server (make sure you entered the correct address and the sever is up and running)");
+			}
+			
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				System.out.println("An error occurred while the thread tried to sleep");
 			}
 		}
 	}
