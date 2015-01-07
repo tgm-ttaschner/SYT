@@ -2,6 +2,7 @@ package at.tm.rmi.client;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.rmi.RemoteException;
 
 import at.tm.rmi.server.CalculatorBalancer;
 import at.tm.rmi.server.CalculatorImpl;
@@ -39,7 +40,12 @@ public class Run {
 		PIArgs piargs = ArgumentParser.parseArguments(args);
 
 		if (piargs.getType() == 'b') {
-			new CalculatorBalancer(piargs.getPort());
+			try {
+				new CalculatorBalancer(piargs.getPort());
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else if (piargs.getType() == 'c') {
 			// Client[] clients = new Client[piargs.getClientcount()];
 
@@ -54,10 +60,11 @@ public class Run {
 			}
 		} else if (piargs.getType() == 's') {
 			for (int i = 0; i < piargs.getServercount(); i++) {
-				Server s = new Server(piargs.getServer_name() + i,5055+i,new CalculatorImpl());
+				Server s = null;
 				try {
+					s = new Server(piargs.getServer_name() + i,piargs.getServerport()+i,new CalculatorImpl());
 					s.connect(new URI("//" + piargs.getHostname() + ":" + piargs.getPort()));
-				} catch (URISyntaxException e) {
+				} catch (URISyntaxException | RemoteException e) {
 					System.err.println("A problem occurred while creating a server");
 				}
 			}

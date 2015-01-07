@@ -25,7 +25,8 @@ public class ArgumentParser {
 		Option client_count = OptionBuilder.hasArg().withType(Number.class).withDescription("The number of clients you want to create. Argument for client.").withArgName("clientcount").create("C");
 		Option decimal_places = OptionBuilder.hasArg().isRequired().withType(Number.class).withDescription("Amount of decimal places of PI. Argument for client.").withArgName("decimal").create("d");
 		Option server_name = OptionBuilder.hasArg().isRequired().withDescription("The name of the server you want to create. Argument for server.").withArgName("servername").create("n");
-
+		Option serverport = OptionBuilder.hasArg().withType(Number.class).isRequired().withDescription("The port the servers works with, if you start more than one server, the number gets incremented").withArgName("serverport").create("P");
+		
 		Option client_arg = OptionBuilder.isRequired().withDescription("Selects the client to start").withArgName("client").create("c");
 		Option server_arg = OptionBuilder.isRequired().withDescription("Selects the server to start").withArgName("server").create("s");
 		Option balancer_arg = OptionBuilder.isRequired().withDescription("Selects the balancer to start").withArgName("balancer").create("b");
@@ -43,6 +44,7 @@ public class ArgumentParser {
 			options.addOption(server_arg);
 			options.addOption(hostname);
 			options.addOption(port);
+			options.addOption(serverport);
 			options.addOption(server_name);
 			options.addOption(server_count);
 
@@ -71,6 +73,7 @@ public class ArgumentParser {
 			piargs.setPort(Integer.parseInt(line.getOptionValue("p")));
 			piargs.setServer_name(line.getOptionValue("n"));
 			piargs.setServercount(Integer.parseInt(line.getOptionValue("S")));
+			piargs.setServerport(Integer.parseInt(line.getOptionValue("P")));
 		}else if(piargs.getType()=='b'){
 			piargs.setPort(Integer.parseInt(line.getOptionValue("p")));
 		}

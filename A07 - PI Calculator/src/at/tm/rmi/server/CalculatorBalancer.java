@@ -31,9 +31,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * 
  */
 @SuppressWarnings("serial")
-public class CalculatorBalancer implements Calculator, Serializable {
+public class CalculatorBalancer implements BalancerInterface {
 
-	private ConcurrentHashMap<String, Server> servers;
+	private ConcurrentHashMap<String, ServerInterface> servers;
 	private static int count;
 	private int port;
 
@@ -46,13 +46,14 @@ public class CalculatorBalancer implements Calculator, Serializable {
 	 *            balancer and calculator to it. An exception is thrown and the
 	 *            program terminates itself if an error occurrs.
 	 */
-	public CalculatorBalancer(int port) {
+	public CalculatorBalancer(int port) throws RemoteException {
+
 		this.port = port;
 		count = 1;
 
 		System.out.println("Starting Balancer");
 
-		servers = new ConcurrentHashMap<String, Server>();
+		servers = new ConcurrentHashMap<String, ServerInterface>();
 
 		Registry registry = null;
 
@@ -63,19 +64,19 @@ public class CalculatorBalancer implements Calculator, Serializable {
 			System.exit(314);
 		}
 		try {
-			registry.rebind("Balancer", (CalculatorBalancer) UnicastRemoteObject.exportObject(this, this.getPort()));
-			registry.rebind("Calculator", (Calculator) UnicastRemoteObject.exportObject(this, this.getPort()));
+			registry.rebind("Calculator", UnicastRemoteObject.exportObject(this, this.getPort()));
 		} catch (RemoteException e) {
 			System.out.println("A problem occured while binding to its registry.");
+			e.printStackTrace();
 			System.exit(3141);
 		}
 
-		try {
-			Thread.sleep(120000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// try {
+		// Thread.sleep(120000);
+		// } catch (InterruptedException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 
 	}
 
@@ -101,7 +102,7 @@ public class CalculatorBalancer implements Calculator, Serializable {
 
 		servers.keySet().toArray(keys);
 
-		Server currServer = servers.get(keys[count % servers.size()]);
+		ServerInterface currServer = servers.get(keys[count % servers.size()]);
 
 		// System.out.println(keys[count % implementations.size()]);
 
@@ -126,7 +127,7 @@ public class CalculatorBalancer implements Calculator, Serializable {
 	 * 
 	 *            Adds a calculator object together with its name.
 	 */
-	public void addServer(String key, Server server) {
+	public void addServer(String key, ServerInterface server) {
 		this.getServers().put(key, server);
 	}
 
@@ -145,7 +146,7 @@ public class CalculatorBalancer implements Calculator, Serializable {
 	 * 
 	 *         Getter for the ConcurrentHashMap.
 	 */
-	public ConcurrentHashMap<String, Server> getServers() {
+	public ConcurrentHashMap<String, ServerInterface> getServers() {
 		return servers;
 	}
 
@@ -155,7 +156,7 @@ public class CalculatorBalancer implements Calculator, Serializable {
 	 * 
 	 *            Setter for the ConcurrentHashMap.
 	 */
-	public void setServers(ConcurrentHashMap<String, Server> servers) {
+	public void setServers(ConcurrentHashMap<String, ServerInterface> servers) {
 		this.servers = servers;
 	}
 

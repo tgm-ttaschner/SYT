@@ -25,13 +25,14 @@ import java.rmi.*;
  *          This class also provides getter and setter methods for its
  *          attributes.
  */
-public class Server implements Remote, Serializable{
+public class Server implements ServerInterface{
 
 	private Calculator calc;
 
 	private String name;
 	private int port;
 	private Registry registry;
+	private BalancerInterface bal;
 
 	/**
 	 * @param port
@@ -41,7 +42,7 @@ public class Server implements Remote, Serializable{
 	 * 
 	 *            Creates a server on a given port with a given name.
 	 */
-	public Server(String name, int port, Calculator calcimpl) {
+	public Server(String name, int port, Calculator calcimpl) throws RemoteException{
 		this.port = port;
 		this.name = name;
 		this.calc = calcimpl;
@@ -81,16 +82,16 @@ public class Server implements Remote, Serializable{
 	 *            to the balancers list and rebinds the balancer. Prints out the
 	 *            error if one should occur.
 	 */
-	public void connect(URI balancer) {
+	public void connect(URI balancer) throws RemoteException{
 		try {
 			Registry regis = null;
 			regis = LocateRegistry.getRegistry(balancer.getHost(), balancer.getPort());
 			System.out.println("Getting Balancer Registry");
 			
-			CalculatorBalancer bal = (CalculatorBalancer) regis.lookup("Balancer");
+			bal = (BalancerInterface) regis.lookup("Calculator");
 			System.out.println("Registry Lookup");
 			
-			bal.addServer(this.name, (Server) UnicastRemoteObject.exportObject(this, this.getPort()));
+			bal.addServer(this.name, (ServerInterface) UnicastRemoteObject.exportObject(this, this.getPort()));
 			System.out.println("Add Server");
 //			Shouldn't be necessary to do
 //			regis.rebind("Balancer", bal);
@@ -99,6 +100,7 @@ public class Server implements Remote, Serializable{
 //			System.out.println("Registry Rebind");
 			System.out.println("Server");
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("An error occurred while " + this.getName() + " tried to connect.");
 		}
 
@@ -109,23 +111,21 @@ public class Server implements Remote, Serializable{
 	 * looked up, the current server is removed and the balancer is rebound.
 	 * Prints out the error if one should occur.
 	 */
-//	public void disconnect() {
-//		try {
-//			CalculatorBalancer bal = (CalculatorBalancer) registry.lookup("Balancer");
-//			bal.removeImplementation(this.name);
-//			registry.rebind("Balancer", bal);
-//			registry.rebind("Calculator", bal);
-//		} catch (Exception e) {
-//			System.out.println("An error occurred while " + this.getName() + " tried to disconnect.");
-//		}
-//	}
+	public void disconnect() {
+		try {
+			registry.unbind(this.name);
+			bal.removeServer(this.name);
+		} catch (Exception e) {
+			System.out.println("An error occurred while " + this.name + " tried to disconnect.");
+		}
+	}
 
 	/**
 	 * @return the calculator object
 	 * 
 	 *         Getter for calculator.
 	 */
-	public Calculator getCalc() {
+	public Calculator getCalc() throws RemoteException{
 		return calc;
 	}
 
@@ -160,7 +160,7 @@ public class Server implements Remote, Serializable{
 	 * 
 	 *         Getter for name.
 	 */
-	public String getName() {
+	public String getName() throws RemoteException{
 		return name;
 	}
 
@@ -170,7 +170,7 @@ public class Server implements Remote, Serializable{
 	 * 
 	 *            Setter for name.
 	 */
-	public void setName(String name) {
+	public void setName(String name) throws RemoteException{
 		this.name = name;
 	}
 
@@ -179,7 +179,7 @@ public class Server implements Remote, Serializable{
 	 * 
 	 *         Getter for registry.
 	 */
-	public Registry getRegistry() {
+	public Registry getRegistry() throws RemoteException{
 		return registry;
 	}
 
@@ -189,15 +189,15 @@ public class Server implements Remote, Serializable{
 	 * 
 	 *            Setter for registry.
 	 */
-	public void setRegistry(Registry registry) {
+	public void setRegistry(Registry registry) throws RemoteException{
 		this.registry = registry;
 	}
 
-	public int getPort() {
+	public int getPort() throws RemoteException{
 		return port;
 	}
 
-	public void setPort(int port) {
+	public void setPort(int port) throws RemoteException{
 		this.port = port;
 	}
 
