@@ -54,9 +54,9 @@ public class Run {
 			}
 		} else if (piargs.getType() == 's') {
 			for (int i = 0; i < piargs.getServercount(); i++) {
-				Server s = new Server(piargs.getServer_name() + i);
+				Server s = new Server(piargs.getServer_name() + i,5055+i,new CalculatorImpl());
 				try {
-					s.connect(new URI("//" + piargs.getHostname() + ":" + piargs.getPort()), new CalculatorImpl());
+					s.connect(new URI("//" + piargs.getHostname() + ":" + piargs.getPort()));
 				} catch (URISyntaxException e) {
 					System.err.println("A problem occurred while creating a server");
 				}
