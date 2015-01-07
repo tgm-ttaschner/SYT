@@ -12,6 +12,7 @@ import at.tm.rmi.server.Calculator;
  * 
  * The client connects to the server to get the specified amount of digits of pi using an ip address, a port number and the amount of digits that should be calculated.
  * The class also provides a connect method which loads a local registry, looks up a calculator and returns the servers response.
+ * An appropriate will be printed out if something goes wrong.
  */
 public class Client {
 
