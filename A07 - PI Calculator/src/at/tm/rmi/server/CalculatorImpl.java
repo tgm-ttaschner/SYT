@@ -25,6 +25,9 @@ public class CalculatorImpl implements Calculator, Serializable	{
 	 * Takes the amount of decimal places as an input and returns the desired amount of decimal places of PI.
 	 */
 	public BigDecimal pi(int numDigits) {
+		if (numDigits < 0)	{
+			throw new IllegalArgumentException("Enter a value bigger than -1");
+		}
 		int calcDigits = numDigits + 10;
 		return FOUR.multiply((FOUR.multiply(arccot(FIVE, calcDigits))).subtract(arccot(TWO_THIRTY_NINE, calcDigits))).setScale(numDigits, RoundingMode.DOWN);
 	}
