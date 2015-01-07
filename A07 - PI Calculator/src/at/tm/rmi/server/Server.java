@@ -20,7 +20,6 @@ import java.rmi.registry.*;
 public class Server {
 
 	private Calculator calc;
-	private int port;
 	
 	private String name;
 	
@@ -32,8 +31,7 @@ public class Server {
 	 * 
 	 * Creates a server on a given port with a given name.
 	 */
-	public Server(int port, String name) {
-		this.port = port;
+	public Server(String name) {
 		this.name = name;
 	}
 	
@@ -103,24 +101,6 @@ public class Server {
 			System.out.println("An Error occured");
 			System.exit(314159);
 		}
-	}
-
-	/**
-	 * @return the port the server will run on
-	 * 
-	 * Getter for port.
-	 */
-	public int getPort() {
-		return port;
-	}
-
-	/**
-	 * @param port the port the server will run on
-	 * 
-	 * Setter for port.
-	 */
-	public void setPort(int port) {
-		this.port = port;
 	}
 
 	/**
