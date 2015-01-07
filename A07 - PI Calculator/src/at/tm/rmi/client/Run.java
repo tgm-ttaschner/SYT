@@ -1,76 +1,66 @@
 package at.tm.rmi.client;
 
 import java.net.URI;
-import java.util.concurrent.*;
+import java.net.URISyntaxException;
 
-import at.tm.rmi.server.*;
-import at.tm.rmi.utils.*;
+import at.tm.rmi.server.CalculatorBalancer;
+import at.tm.rmi.server.CalculatorImpl;
+import at.tm.rmi.server.Server;
+import at.tm.rmi.utils.ArgumentParser;
+import at.tm.rmi.utils.PIArgs;
 
 /**
  * @author Patrick Malik
  * @author Thomas Taschner
  * @version 05.01.2015
  * 
- * Sets the security manager, starts (and connects) 3 servers, runs 3 concurrent clients (for testing purposes) and closes the server connections
+ *          Sets the security manager, starts (and connects) 3 servers, runs 3
+ *          concurrent clients (for testing purposes) and closes the server
+ *          connections
  */
-public class Run  {
-	
+public class Run {
+
 	/**
-	 * @param args input parameters
+	 * @param args
+	 *            input parameters
 	 */
 	public static void main(String[] args) {
-		
-		PIArgs piargs = ArgumentParser.parseArguments(args);
-		
-		Server s1 = null;
-		Server s2 = null;
-		Server s3 = null;
-		
-		new CalculatorBalancer(piargs.getPort());
-		
-		
+
 		if (System.getSecurityManager() == null) {
-        	try{
-        	System.setProperty("java.security.policy", System.class.getResource("/java.policy").toString());
-        	}catch(Exception e){
-        		System.err.println("policy file: java.policy was not found or could not be set as property");
-        	}
-            System.setSecurityManager(new SecurityManager());
-        }
-			
-		try {
-			
-			s1 = new Server("Server 1");
-			s2 = new Server("Server 2");
-			s3 = new Server("Server 3");
-			
-			s1.connect(new URI("//localhost:5052"), new CalculatorImpl());
-			s2.connect(new URI("//localhost:5052"), new CalculatorImpl());
-			s3.connect(new URI("//localhost:5052"), new CalculatorImpl());
-			
-			Thread.sleep(1000);
-		} catch (Exception e) {
-			System.out.println("Couldn't start the servers");
+			// try{
+			// System.setProperty("java.security.policy",
+			// System.class.getResource("/java.policy").toString());
+			// }catch(Exception e){
+			// System.err.println("policy file: java.policy was not found or could not be set as property");
+			// }
+			System.setSecurityManager(new SecurityManager());
 		}
-		
-		
-		int numWorkers = 3;
-		int threadPoolSize = 3;
 
-		ExecutorService tpes = Executors.newFixedThreadPool(threadPoolSize);
+		PIArgs piargs = ArgumentParser.parseArguments(args);
 
-		ConcurrentClientConnection[] workers = new ConcurrentClientConnection[numWorkers];
-		
-		for (int i = 0; i < numWorkers; i++) {
-			workers[i] = new ConcurrentClientConnection();
-			tpes.execute(workers[i]);
+		if (piargs.getType() == 'b') {
+			new CalculatorBalancer(piargs.getPort());
+		} else if (piargs.getType() == 'c') {
+			// Client[] clients = new Client[piargs.getClientcount()];
+
+			for (int i = 0; i < piargs.getClientcount(); i++) {
+				Client c = null;
+				try {
+					c = new Client(new URI("//" + piargs.getHostname() + ":" + piargs.getPort()), piargs.getDecimal_places());
+				} catch (URISyntaxException e) {
+					System.err.println("A problem occurred while creating a client");
+				}
+				System.out.println(c.connect());
+			}
+		} else if (piargs.getType() == 's') {
+			for (int i = 0; i < piargs.getServercount(); i++) {
+				Server s = new Server(piargs.getServer_name());
+				try {
+					s.connect(new URI("//" + piargs.getHostname() + ":" + piargs.getPort()), new CalculatorImpl());
+				} catch (URISyntaxException e) {
+					System.err.println("A problem occurred while creating a server");
+				}
+			}
 		}
-		
-		tpes.shutdown();
-		
-		
-		s1.disconnect();
-		s2.disconnect();
-		s3.disconnect();
 	}
 }
