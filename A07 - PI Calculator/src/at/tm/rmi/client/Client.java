@@ -1,6 +1,8 @@
 package at.tm.rmi.client;
 
 import java.net.URI;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.*;
 
 import at.tm.rmi.server.Calculator;
@@ -20,8 +22,13 @@ public class Client {
 	private URI address;
 
 	/**
+	 * Checks if a valid number was entered (>= 0) and then tries to set the address and the amount of decimal places of PI which should be calculated.
+	 * If an invalid number for the decimal places is entered (< 0) then an InvalidArgumentException is thrown.
+	 * Also catches a NumberFormatException in case something else than a number is entered.
+	 * 
 	 * @param address the server's ip address and port number (e.g. '//localhost:5052')
 	 * @param decimal_places the amount of decimal places of PI the server will calculate
+	 * @throws IllegalArgumentException thrown when an invalid number (< 0) for decimal_places was entered. Try entering a valid one (>= 0).
 	 */
 	public Client(URI address, int decimal_places) throws IllegalArgumentException {
 		if (decimal_places < 0)	{
@@ -39,6 +46,8 @@ public class Client {
 	/**
 	 * Locates the registry, looks up a remote reference's name and returns the response.
 	 * If no connection can be established then an exception is thrown.
+	 * A RemoteException is caught when no connection to the target could be established.
+	 * A NotBoundException is caught when the registry basically cannot be used for whatever reason.
 	 * 
 	 * @return the servers response, the calculated decimal places of PI up to a certain point
 	 */
@@ -48,8 +57,10 @@ public class Client {
 			Calculator stub = (Calculator) registry.lookup("Calculator");
 			//System.out.println("Client");
 			return "response: " + stub.pi(this.decimal_places);
-		} catch (Exception e) {
-			System.err.println("Client exception: " + e.toString());
+		} catch (RemoteException e) {
+			System.out.println("The client couldn't connect with " + this.address.getHost() + "on port" + this.address.getPort());
+		} catch (NotBoundException ex) {
+			System.out.println("The client couldn't bind to the registry or look it up");
 		}
 		return null;
 	}
