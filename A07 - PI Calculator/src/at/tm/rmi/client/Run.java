@@ -23,6 +23,9 @@ public class Run  {
 		Server s2 = null;
 		Server s3 = null;
 		
+		new CalculatorBalancer(5052);
+		
+		
 		if (System.getSecurityManager() == null) {
         	try{
         	System.setProperty("java.security.policy", System.class.getResource("/java.policy").toString());
@@ -46,7 +49,8 @@ public class Run  {
 		} catch (Exception e) {
 			System.out.println("Couldn't start the servers");
 		}
-
+		
+		
 		int numWorkers = 3;
 		int threadPoolSize = 3;
 
@@ -60,6 +64,7 @@ public class Run  {
 		}
 		
 		tpes.shutdown();
+		
 		
 		s1.disconnect();
 		s2.disconnect();
