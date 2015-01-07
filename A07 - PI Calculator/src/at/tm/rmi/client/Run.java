@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.concurrent.*;
 
 import at.tm.rmi.server.*;
+import at.tm.rmi.utils.*;
 
 /**
  * @author Patrick Malik
@@ -19,11 +20,13 @@ public class Run  {
 	 */
 	public static void main(String[] args) {
 		
+		PIArgs piargs = ArgumentParser.parseArguments(args);
+		
 		Server s1 = null;
 		Server s2 = null;
 		Server s3 = null;
 		
-		new CalculatorBalancer(5052);
+		new CalculatorBalancer(piargs.getPort());
 		
 		
 		if (System.getSecurityManager() == null) {
@@ -37,9 +40,9 @@ public class Run  {
 			
 		try {
 			
-			s1 = new Server(5053, "Server 1");
-			s2 = new Server(5054, "Server 2");
-			s3 = new Server(5055, "Server 3");
+			s1 = new Server("Server 1");
+			s2 = new Server("Server 2");
+			s3 = new Server("Server 3");
 			
 			s1.connect(new URI("//localhost:5052"), new CalculatorImpl());
 			s2.connect(new URI("//localhost:5052"), new CalculatorImpl());
