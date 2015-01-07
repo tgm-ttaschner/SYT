@@ -41,6 +41,8 @@ public class CalculatorBalancer implements Calculator, Serializable {
 	public CalculatorBalancer(int port) {
 		this.port = port;
 		count = 1;
+		
+		System.out.println("Starting Balancer");
 
 		implementations = new ConcurrentHashMap<String, Calculator>();
 		
@@ -58,6 +60,13 @@ public class CalculatorBalancer implements Calculator, Serializable {
 		} catch (RemoteException e) {
 			System.out.println("A problem occured while binding to its registry.");
 			System.exit(3141);
+		}
+		
+		try {
+			Thread.sleep(120000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}

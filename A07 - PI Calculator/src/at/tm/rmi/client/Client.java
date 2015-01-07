@@ -44,6 +44,7 @@ public class Client {
 		try {
 			Registry registry = LocateRegistry.getRegistry(this.address.getHost(), this.address.getPort());
 			Calculator stub = (Calculator) registry.lookup("Calculator");
+			System.out.println("Client");
 			return "response: " + stub.pi(this.decimal_places);
 		} catch (Exception e) {
 			System.err.println("Client exception: " + e.toString());

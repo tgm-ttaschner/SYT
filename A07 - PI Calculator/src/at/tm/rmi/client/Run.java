@@ -54,7 +54,7 @@ public class Run {
 			}
 		} else if (piargs.getType() == 's') {
 			for (int i = 0; i < piargs.getServercount(); i++) {
-				Server s = new Server(piargs.getServer_name());
+				Server s = new Server(piargs.getServer_name() + i);
 				try {
 					s.connect(new URI("//" + piargs.getHostname() + ":" + piargs.getPort()), new CalculatorImpl());
 				} catch (URISyntaxException e) {

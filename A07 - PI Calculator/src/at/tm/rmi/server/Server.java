@@ -45,10 +45,15 @@ public class Server {
 	public void connect(URI balancer, Calculator calcimpl)	{
 		try {
 			registry = LocateRegistry.getRegistry(balancer.getHost(), balancer.getPort());
+			System.out.println("Getting Registry");
 			CalculatorBalancer bal = (CalculatorBalancer) registry.lookup("Balancer");
+			System.out.println("Registry Lookup");
 			bal.addImplementation(this.name, calcimpl);
+			System.out.println("Add Impl");
 			registry.rebind("Balancer", bal);
 			registry.rebind("Calculator", bal);
+			System.out.println("Registry Rebind");
+			System.out.println("Server");
 		} catch (Exception e) {
 			System.out.println("An error occurred while " + this.getName() + " tried to connect.");
 		}
