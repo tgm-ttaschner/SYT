@@ -39,7 +39,7 @@ public class Client {
 	public Client(URI address, int decimal_places) throws IllegalArgumentException {
 		if (decimal_places < 0)	{
 			if(address.getPort()<=0){
-				throw new IllegalArgumentException("Please enter a valid portnumber (>0)");
+				throw new IllegalArgumentException("Please enter a valid portnumber ( > 0)");
 			}else{
 				throw new IllegalArgumentException("Please enter a valid number (>= 0) for the calculation of the decimal places of PI");
 			}
@@ -68,7 +68,7 @@ public class Client {
 			//System.out.println("Client");
 			return "response: " + stub.pi(this.decimal_places);
 		} catch (RemoteException e) {
-			LOGGER.error("The client couldn't connect with " + this.address.getHost() + "on port" + this.address.getPort());
+			LOGGER.error("The client couldn't connect with " + this.address.getHost() + " on port " + this.address.getPort());
 		} catch (NotBoundException ex) {
 			LOGGER.error("The client couldn't bind to the registry or look it up");
 		}

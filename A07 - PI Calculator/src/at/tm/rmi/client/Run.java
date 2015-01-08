@@ -3,10 +3,7 @@ package at.tm.rmi.client;
 import java.net.*;
 import java.rmi.RemoteException;
 
-import javax.sound.midi.SysexMessage;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import at.tm.rmi.server.*;
 import at.tm.rmi.utils.*;
@@ -45,7 +42,7 @@ public class Run {
 		try{
 			piargs = ArgumentParser.parseArguments(args);
 		}catch(IllegalArgumentException e){
-			LOGGER.error("An error occurred while parsing the arguments: "+e.getMessage());
+			LOGGER.error("An error occurred while parsing the arguments: " + e.getMessage());
 			System.exit(1);
 		}
 		/* 
@@ -72,7 +69,7 @@ public class Run {
 				try {
 					c = new Client(new URI("//" + piargs.getHostname() + ":" + piargs.getPort()), piargs.getDecimal_places());
 				} catch (URISyntaxException e) {
-					LOGGER.error("A problem occurred while creating a client."
+					LOGGER.error("A problem occurred while creating a client. "
 							+ "Please make sure that the server is up and running and check your input for eventual typos.");
 					System.exit(3);
 				}
@@ -94,7 +91,7 @@ public class Run {
 					s = new Server(piargs.getServer_name() + i,piargs.getServerport()+i,new CalculatorImpl());
 					s.connect(new URI("//" + piargs.getHostname() + ":" + piargs.getPort()));
 				} catch (URISyntaxException | RemoteException e) {
-					LOGGER.error("A problem occurred while creating a server"
+					LOGGER.error("A problem occurred while creating a server "
 							+ "Please make sure that the server is up and running and check your input for eventual typos.");
 					System.exit(4);
 				}
