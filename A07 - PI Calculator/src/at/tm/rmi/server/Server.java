@@ -193,10 +193,4 @@ public class Server implements ServerInterface	{
 		return port;
 	}
 
-	/* (non-Javadoc)
-	 * @see at.tm.rmi.server.ServerInterface#setPort(int)
-	 */
-	public void setPort(int port) throws RemoteException{
-		this.port = port;
-	}
 }

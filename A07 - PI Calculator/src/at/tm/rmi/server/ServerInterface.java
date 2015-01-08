@@ -72,11 +72,4 @@ public interface ServerInterface extends Remote, Serializable	{
 	 */
 	public int getPort() throws RemoteException;
 	
-	/**
-	 * Setter for port.
-	 * 
-	 * @param port the port the server will run on
-	 * @throws RemoteException is thrown when a remote error occurrs (e.g. no connection to the server)
-	 */
-	public void setPort(int port) throws RemoteException;
 }
