@@ -8,13 +8,13 @@ import java.rmi.registry.*;
 import at.tm.rmi.server.Calculator;
 
 /**
- * @author Patrik Malik
+ * @author Patrick Malik
  * @author Thomas Taschner
  * @version 07.01.2015
  * 
- * The client connects to the server to get the specified amount of digits of pi using an ip address, a port number and the amount of digits that should be calculated.
- * The class also provides a connect method which loads a local registry, looks up a calculator and returns the servers response.
- * An appropriate error message will be printed out if something goes wrong.
+ * The client connects to the server to ask for pi (with a specified amount of digits) using an ip address, a port number and the amount of decimalplaces that should be calculated.
+ * The class also provides a connect method which loads the registry of the balancer, looks up a calculator and returns the servers response.
+ * An appropriate error message will be printed if something goes wrong.
  */
 public class Client {
 

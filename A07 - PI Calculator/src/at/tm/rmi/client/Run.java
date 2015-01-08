@@ -19,7 +19,7 @@ import at.tm.rmi.utils.*;
 public class Run {
 
 	/**
-	 * @param args arguments which are checked and then used to start the program
+	 * @param args arguments which will be checked and then used to start the program
 	 */
 	public static void main(String[] args) {
 

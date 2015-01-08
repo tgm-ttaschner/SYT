@@ -13,7 +13,8 @@ import java.rmi.server.UnicastRemoteObject;
  * Starts a server on a given port with a given name.
  * It connects with a balancer via the balancers URL and transmits him a calculator object.
  * To achieve that the server gets the balancers registry and looks a balancer object up.
- * Then the server adds itself to the list (map) of available balancers and rebinds the balancer as a balancer and a calculator to the registry.
+ * Then the server adds itself to the list (map) of available servers and rebinds the balancer as a calculator to the registry 
+ * (The classes that need the balancer as Balancer can cast them to a BalancerInterface, thats why we don't cast the exported Object.
  * The disconnect procedure works the same way.
  * The only thing that is different is that the server doesn't need to get the balancers registry, also it gets removed instead of added.
  * An error is printed if anything should go wrong.
@@ -23,7 +24,6 @@ import java.rmi.server.UnicastRemoteObject;
 public class Server implements ServerInterface	{
 
 	private Calculator calc;
-
 	private String name;
 	private int port;
 	private Registry registry;
@@ -31,11 +31,11 @@ public class Server implements ServerInterface	{
 
 	/**
 	 * @param port the port the server starts
-	 * @param name the name the server has
-	 * @param calcimpl the PI calculation object, basically the server's task
-	 * @throws RemoteException is thrown when a remote error occurrs (e.g. no connection to the server)
+	 * @param name the name the server gets
+	 * @param calcimpl the PI calculation object (the implementation of a picalculator), basically the server's task
+	 * @throws RemoteException is thrown when a remote error occurs (e.g. no connection to the server)
 	 * 
-	 * Creates a server on a given port with a given name wih a given task.
+	 * Creates a server on a given port with a given name with a given task.
 	 * A local registry gets created on the given port.
 	 * Then the object gets exported in form of an UnicastRemoteObject (locally) and finally gets bound to its own registry.
 	 * 
@@ -84,7 +84,8 @@ public class Server implements ServerInterface	{
 			regis = LocateRegistry.getRegistry(balancer.getHost(), balancer.getPort());
 			System.out.println("Getting Balancer Registry");
 
-			/* The balancer looks up a calculator object */
+			/* The looksup the Balancer and casts it to the Interface 
+			 * (the Balancer is named Calculato, because you cant export the same Object with two names) */
 			bal = (BalancerInterface) regis.lookup("Calculator");
 			System.out.println("Registry Lookup");
 
@@ -104,12 +105,12 @@ public class Server implements ServerInterface	{
 	/**
 	 * @throws RemoteException is thrown when a remote error occurrs (e.g. no connection to the server)
 	 * 
-	 * Disconnects by unbinding itself from its own registry.
+	 * Disconnects by unbinding its Calculator from its own registry.
 	 * It also tells the balancer that the server is no longer available by removing it from the balancers server list.
 	 */
 	public void disconnect() throws RemoteException {
 		try {
-			registry.unbind(this.name);
+			registry.unbind("Calculator");
 			bal.removeServer(this.name);
 		} catch (RemoteException e) {
 			System.out.println(this.getName() + " couldn't connect to the specified ressource");
@@ -125,7 +126,7 @@ public class Server implements ServerInterface	{
 		return calc;
 	}
 
-	/**
+	/*
 	 * @param calc the calculator object
 	 * 
 	 * Setter for calculator.

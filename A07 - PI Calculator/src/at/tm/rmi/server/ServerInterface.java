@@ -11,14 +11,15 @@ import java.rmi.registry.Registry;
  * 
  * Interface of the Server class.
  * This Interface extends the Interfaces Serializable and Remote.
+ * The extending of those two Interfaces in more precisely described in {@link BalancerInterface}
  * It provides all essential methods for connection, PI calculation, name, registry and port management.
  */
 public interface ServerInterface extends Remote, Serializable	{
 	
 	/**
-	 * Starts a server on a given address with a given port.
+	 * Connects a server to the a balancer which necessary connectionarguments are given as parameters.
 	 * 
-	 * @param balancer the URI the server runs on
+	 * @param balancer the URI the balancer runs on
 	 * @throws RemoteException is thrown when a remote error occurrs (e.g. no connection to the server)
 	 */
 	public void connect(URI balancer) throws RemoteException;

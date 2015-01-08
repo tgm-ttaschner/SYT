@@ -11,15 +11,16 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Thomas Taschner
  * @version 05.01.2015
  * 
- * A Balancer which also can calculate the decimal places of PI.
- * Upon initialization it binds itself in form of an exported UnicastRemoteObject to the registry in two ways, as a balancer and a calculator.
+ * A Balancer which forwards the calculation of PI.
+ * Upon initialization it binds itself in form of an exported UnicastRemoteObject to the registry in two ways, as a calculator
+ * (but only with the name Calculator, not castet to provide also casting to a BalancerInterface object).
  * An exception is thrown if an error should occur.
  * 
  * The round robin principle is used to balance the workload by using a counter.
  * The server for calculating the workload gets chosen by taking the remainder of dividing count through the amount of available servers.
  * This way the workload gets distributed evenly.
  * 
- * A ConcurrentHashMap (thread safe) is used to store the object together with its name.
+ * A ConcurrentHashMap (thread safe) is used to store the {@link Server}s together with its name.
  * An additional String array only consisting of the keys is used for navigation (a navigable concurrent HashMap would be a big help).
  * This class also provides getter and setter methods for all its attributes.
  * 
@@ -34,7 +35,7 @@ public class CalculatorBalancer implements BalancerInterface {
 
 	/**
 	 * Sets up a balancer on a specified port.
-	 * The constructor creates a registry on the given port and binds itself in form of an exported UnicastRemoteObject as a balancer and calculator to it.
+	 * The constructor creates a registry on the given port and binds itself in form of an exported UnicastRemoteObject as a {@link Calculator} to it.
 	 * A RemoteException is caught if the registry cannot be accessed for any reason.
 	 * 
 	 * @param port the port the balancer operates on
@@ -73,10 +74,12 @@ public class CalculatorBalancer implements BalancerInterface {
 	 * 
 	 * Input: the amount of decimal places of PI Output: the calculated decimal places of PI
 	 * 
-	 * The calculator objects and their names are stored in a ConcurrentHashMap (thread safe HashMap). 
+	 * The Server objects (so also their implementations of the CalculatorInterface and their 
+	 * names are stored in a ConcurrentHashMap (thread safe HashMap). 
 	 * For better navigation the objects names are additionally stored in an String array.
-	 * Then the calculator object gets assigned to a PI Server and count gets incremented.
-	 * Finally the desired decimal places for the calculator object get returned.
+	 * Than the server gets saved in an object, the Calculatorimplementation gets extracted and 
+	 * finally the desired decimal places for the calculator object get forwarded to the Server providing this implementation,
+	 * so the whole calculation is putsourced.
 	 * 
 	 * A NotBoundException is caught if the registry cannot be loaded and/or looked up.
 	 */
