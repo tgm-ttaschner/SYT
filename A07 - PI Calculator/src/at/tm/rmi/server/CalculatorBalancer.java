@@ -6,6 +6,11 @@ import java.rmi.registry.*;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import at.tm.rmi.client.Client;
+
 /**
  * @author Patrick Malik
  * @author Thomas Taschner
@@ -29,6 +34,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @SuppressWarnings("serial")
 public class CalculatorBalancer implements BalancerInterface {
 
+	private static final Logger LOGGER = LogManager.getLogger(CalculatorBalancer.class);
+	
 	private ConcurrentHashMap<String, ServerInterface> servers;
 	private static int count;
 	private int port;
@@ -46,7 +53,7 @@ public class CalculatorBalancer implements BalancerInterface {
 		this.port = port;
 		count = 1;
 
-		System.out.println("Starting Balancer");
+		LOGGER.info("Starting Balancer");
 
 		servers = new ConcurrentHashMap<String, ServerInterface>();
 
@@ -55,13 +62,13 @@ public class CalculatorBalancer implements BalancerInterface {
 		try {
 			registry = LocateRegistry.createRegistry(this.getPort());
 		} catch (RemoteException e) {
-			System.out.println("A problem occured while creating a registry");
+			LOGGER.error("A problem occured while creating a registry");
 			System.exit(314);
 		}
 		try {
 			registry.rebind("Calculator", UnicastRemoteObject.exportObject(this, this.getPort()));
 		} catch (RemoteException e) {
-			System.out.println("A problem occured while binding to its registry.");
+			LOGGER.error("A problem occured while binding to its registry.");
 			System.exit(3141);
 		}
 
@@ -98,7 +105,7 @@ public class CalculatorBalancer implements BalancerInterface {
 		try {
 			cal = (Calculator) currServer.getRegistry().lookup("Calculator");
 		} catch (NotBoundException e) {
-			System.out.println("An error occurred while trying to load or lookup the registry");
+			LOGGER.error("An error occurred while trying to load or lookup the registry");
 		}
 		return cal.pi(anzahl_nachkommastellen);
 	}

@@ -6,6 +6,11 @@ import java.rmi.RemoteException;
 import java.rmi.registry.*;
 import java.rmi.server.UnicastRemoteObject;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import at.tm.rmi.client.Client;
+
 /**
  * @author Patrick Malik
  * @author Thomas Taschner
@@ -23,6 +28,8 @@ import java.rmi.server.UnicastRemoteObject;
 @SuppressWarnings("serial")
 public class Server implements ServerInterface	{
 
+	private static final Logger LOGGER = LogManager.getLogger(Server.class);
+	
 	private Calculator calc;
 	private String name;
 	private int port;
@@ -52,8 +59,10 @@ public class Server implements ServerInterface	{
 		try {
 			this.registry = LocateRegistry.createRegistry(this.getPort());
 		} catch (RemoteException e) {
-			System.out.println(this.getName() + " encountered a problem while creating a registry");
+			LOGGER.error(this.getName() + " encountered a problem while creating a registry");
 			System.exit(314);
+		} catch (IllegalArgumentException e){
+			LOGGER.error("Please enter a valid portnumber (>=1)");
 		}
 
 		Calculator stub = null;
@@ -61,14 +70,14 @@ public class Server implements ServerInterface	{
 		try {
 			stub = (Calculator) UnicastRemoteObject.exportObject(this.getCalc(), this.getPort());
 		} catch (RemoteException e) {
-			System.err.println(this.getName() + "encountered a problem while creating a stub object");
+			LOGGER.error(this.getName() + "encountered a problem while creating a stub object");
 		}
 
 		/* Tries to rebind itself to its local registry */
 		try {
 			this.registry.rebind("Calculator", stub);
 		} catch (Exception e) {
-			System.err.println(this.getName() + " encountered a problem while rebinding the Calculator");
+			LOGGER.error(this.getName() + " encountered a problem while rebinding the Calculator");
 		}
 
 
@@ -82,22 +91,22 @@ public class Server implements ServerInterface	{
 			Registry regis = null;
 			/* Loads the balancers registry */
 			regis = LocateRegistry.getRegistry(balancer.getHost(), balancer.getPort());
-			System.out.println("Getting Balancer Registry");
+			LOGGER.info("Getting Balancer Registry");
 
 			/* The looksup the Balancer and casts it to the Interface 
 			 * (the Balancer is named Calculato, because you cant export the same Object with two names) */
 			bal = (BalancerInterface) regis.lookup("Calculator");
-			System.out.println("Registry Lookup");
+			LOGGER.info("Registry Lookup");
 
 			/*
 			 * The balancer add the servers name and the server in form of a UnicastRemoteObject.
 			 * A NotBoundException is caught if the lookup cannot be done.
 			 */
 			bal.addServer(this.name, (ServerInterface) UnicastRemoteObject.exportObject(this, this.getPort()));
-			System.out.println("Add Server");
-			System.out.println("Server");
+			LOGGER.info("Add Server");
+			LOGGER.info("Server");
 		} catch (NotBoundException e) {
-			System.out.println(this.getName() + " cannot lookup an object which hasn't been bound");
+			LOGGER.error(this.getName() + " cannot lookup an object which hasn't been bound");
 		}
 
 	}
@@ -113,9 +122,9 @@ public class Server implements ServerInterface	{
 			registry.unbind("Calculator");
 			bal.removeServer(this.name);
 		} catch (RemoteException e) {
-			System.out.println(this.getName() + " couldn't connect to the specified ressource");
+			LOGGER.error(this.getName() + " couldn't connect to the specified ressource");
 		} catch (NotBoundException e) {
-			System.out.println(this.getName() + " cannot unbind a ressource which hasn't been bound");
+			LOGGER.error(this.getName() + " cannot unbind a ressource which hasn't been bound");
 		}
 	}
 
