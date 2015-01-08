@@ -1,15 +1,18 @@
 package at.tm.rmi.utils;
 
-import org.apache.commons.cli.BasicParser;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.OptionBuilder;
-import org.apache.commons.cli.OptionGroup;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.*;
 
+/**
+ * @author Patrick Malik
+ * @author Thomas Taschner
+ * @version 08.01.2015
+ * 
+ * This class parses arguments and prints a help message on the console if needed.
+ * The Apache Commons CLI is used for easy parsing of the arguments.
+ * Various arguments are parsed.
+ * The fist entered argument decides which kind of connection should be established.
+ * If something goes wrong during parsing, an error message and the help screen is displayed.
+ */
 public class ArgumentParser {
 
 	public static Options options = new Options();
@@ -19,6 +22,7 @@ public class ArgumentParser {
 
 		PIArgs piargs = new PIArgs();
 		
+		/* Creating the options (-> arguments) */
 		Option hostname = OptionBuilder.hasArg().isRequired().withDescription("The hostname of the Balancer you want to connect with. Argument for client and server.").withArgName("hostname").create("h");
 		Option port = OptionBuilder.hasArg().withType(Number.class).isRequired().withDescription("The port of the Balancer you want to connect with. Argument for client, server and balancer.").withArgName("port").create("p");
 		Option server_count = OptionBuilder.hasArg().withType(Number.class).withDescription("The number of servers you want to create. Argument for server.").withArgName("servercount").create("S");
@@ -27,11 +31,19 @@ public class ArgumentParser {
 		Option server_name = OptionBuilder.hasArg().isRequired().withDescription("The name of the server you want to create. Argument for server.").withArgName("servername").create("n");
 		Option serverport = OptionBuilder.hasArg().withType(Number.class).isRequired().withDescription("The port the servers works with, if you start more than one server, the number gets incremented").withArgName("serverport").create("P");
 		
+		/* Creating the dummy options (-> dummy arguments) */
 		Option client_arg = OptionBuilder.isRequired().withDescription("Selects the client to start").withArgName("client").create("c");
 		Option server_arg = OptionBuilder.isRequired().withDescription("Selects the server to start").withArgName("server").create("s");
 		Option balancer_arg = OptionBuilder.isRequired().withDescription("Selects the balancer to start").withArgName("balancer").create("b");
 
-		
+		/*
+		 * Depending on the value of the dummy argument some specific arguments are used.
+		 * Each value checks for different (meaningful) arguments.
+		 * E.g. a server doesn't need an argument used for the client count.
+		 * '-c' checks for client arguments.
+		 * '-s' checks for server arguments.
+		 * '-b' checks for balancer arguments.
+		 */
 		if (args[0].equals("-c"))	{
 			piargs.setType('c');
 			options.addOption(client_arg);
@@ -47,13 +59,13 @@ public class ArgumentParser {
 			options.addOption(serverport);
 			options.addOption(server_name);
 			options.addOption(server_count);
-
 		} else if (args[0].equals("-b")) {
 			piargs.setType('b');
 			options.addOption(balancer_arg);
 			options.addOption(port);
 		}
-
+		
+		/* Runs the CLI Parser and tries to parse the arguments. An error message and the help screen is displayed if something goes wrong. */
 		CommandLineParser clip = new BasicParser();
 		CommandLine line = null;
 		try {
@@ -62,26 +74,29 @@ public class ArgumentParser {
 			System.err.println("A problem occurred while parsing the arguments, check if your arguments are valid.");
 			printHelp();
 		}
-
-		if(piargs.getType()=='c'){
+		
+		/* Sets the arguments for each connection type. */
+		if(piargs.getType()=='c')	{
 			piargs.setClientcount(Integer.parseInt(line.getOptionValue("C")));
 			piargs.setHostname(line.getOptionValue("h"));
 			piargs.setPort(Integer.parseInt(line.getOptionValue("p")));
 			piargs.setDecimal_places(Integer.parseInt(line.getOptionValue("d")));
-		}else if(piargs.getType()=='s'){
+		}else if(piargs.getType()=='s')	{
 			piargs.setHostname(line.getOptionValue("h"));
 			piargs.setPort(Integer.parseInt(line.getOptionValue("p")));
 			piargs.setServer_name(line.getOptionValue("n"));
 			piargs.setServercount(Integer.parseInt(line.getOptionValue("S")));
 			piargs.setServerport(Integer.parseInt(line.getOptionValue("P")));
-		}else if(piargs.getType()=='b'){
+		}else if(piargs.getType()=='b')	{
 			piargs.setPort(Integer.parseInt(line.getOptionValue("p")));
 		}
 		
 		return piargs;
-
 	}
 
+	/**
+	 * Static method which prints out a help message onto the console.
+	 */
 	public static void printHelp() {
 		HelpFormatter formatter = new HelpFormatter();
 		formatter.printHelp("RMI", ArgumentParser.options);
