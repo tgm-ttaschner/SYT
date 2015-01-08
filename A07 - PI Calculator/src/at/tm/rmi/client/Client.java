@@ -5,6 +5,9 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.*;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import at.tm.rmi.server.Calculator;
 
 /**
@@ -18,6 +21,9 @@ import at.tm.rmi.server.Calculator;
  */
 public class Client {
 
+	private static final Logger LOGGER = LogManager.getLogger(Client.class);
+
+	
 	private int decimal_places;
 	private URI address;
 
@@ -32,13 +38,17 @@ public class Client {
 	 */
 	public Client(URI address, int decimal_places) throws IllegalArgumentException {
 		if (decimal_places < 0)	{
-			throw new IllegalArgumentException("Please enter a valid number (>= 0) for the calculation of the decimal places of PI");
+			if(address.getPort()<=0){
+				throw new IllegalArgumentException("Please enter a valid portnumber (>0)");
+			}else{
+				throw new IllegalArgumentException("Please enter a valid number (>= 0) for the calculation of the decimal places of PI");
+			}
 		} else {
 			try {
 				this.address = address;
 				this.decimal_places = decimal_places;
 			} catch (NumberFormatException e) {
-				System.out.println("Please enter a number for the calculation of the decimal places of PI");
+				LOGGER.error("Please enter a number for the calculation of the decimal places of PI");
 			}
 		}
 	}
@@ -58,9 +68,9 @@ public class Client {
 			//System.out.println("Client");
 			return "response: " + stub.pi(this.decimal_places);
 		} catch (RemoteException e) {
-			System.out.println("The client couldn't connect with " + this.address.getHost() + "on port" + this.address.getPort());
+			LOGGER.error("The client couldn't connect with " + this.address.getHost() + "on port" + this.address.getPort());
 		} catch (NotBoundException ex) {
-			System.out.println("The client couldn't bind to the registry or look it up");
+			LOGGER.error("The client couldn't bind to the registry or look it up");
 		}
 		return null;
 	}
