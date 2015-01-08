@@ -33,7 +33,7 @@ public class Run {
 			// }catch(Exception e){
 			// System.err.println("policy file: java.policy was not found or could not be set as property");
 			// }
-			System.setSecurityManager(new SecurityManager());
+			System.setSecurityManager(new MySecurityManager());
 		}
 
 		PIArgs piargs = null;
