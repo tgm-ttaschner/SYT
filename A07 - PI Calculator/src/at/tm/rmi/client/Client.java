@@ -23,7 +23,7 @@ public class Client {
 
 	private static final Logger LOGGER = LogManager.getLogger(Client.class);
 
-	
+
 	private int decimal_places;
 	private URI address;
 
@@ -37,12 +37,10 @@ public class Client {
 	 * @throws IllegalArgumentException thrown when an invalid number (< 0) for decimal_places was entered. Try entering a valid one (>= 0).
 	 */
 	public Client(URI address, int decimal_places) throws IllegalArgumentException {
-		if (decimal_places < 0)	{
-			if(address.getPort()<=0){
-				throw new IllegalArgumentException("Please enter a valid portnumber ( > 0)");
-			}else{
-				throw new IllegalArgumentException("Please enter a valid number (>= 0) for the calculation of the decimal places of PI");
-			}
+		if(address.getPort() <= 0){
+			throw new IllegalArgumentException("Please enter a valid portnumber ( > 0)");
+		} else if (decimal_places < 0)	{
+			throw new IllegalArgumentException("Please enter a valid number (>= 0) for the calculation of the decimal places of PI");
 		} else {
 			try {
 				this.address = address;
