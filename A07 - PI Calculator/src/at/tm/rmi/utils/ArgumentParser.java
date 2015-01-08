@@ -27,7 +27,7 @@ public class ArgumentParser {
 	public static PIArgs parseArguments(String... args) throws IllegalArgumentException {
 
 		PIArgs piargs = new PIArgs();
-		
+
 		/* Creating the options (-> arguments) */
 		Option hostname = OptionBuilder.hasArg().isRequired().withDescription("The hostname of the Balancer you want to connect with. Argument for client and server.").withArgName("hostname").create("h");
 		Option port = OptionBuilder.hasArg().withType(Number.class).isRequired().withDescription("The port of the Balancer you want to connect with. Argument for client, server and balancer.").withArgName("port").create("p");
@@ -36,7 +36,7 @@ public class ArgumentParser {
 		Option decimal_places = OptionBuilder.hasArg().isRequired().withType(Number.class).withDescription("Amount of decimal places of PI. Argument for client.").withArgName("decimal").create("d");
 		Option server_name = OptionBuilder.hasArg().isRequired().withDescription("The name of the server you want to create. Argument for server.").withArgName("servername").create("n");
 		Option serverport = OptionBuilder.hasArg().withType(Number.class).isRequired().withDescription("The port the servers works with, if you start more than one server, the number gets incremented").withArgName("serverport").create("P");
-		
+
 		/* Creating the dummy options (-> dummy arguments) */
 		Option client_arg = OptionBuilder.isRequired().withDescription("Selects the client to start").withArgName("client").create("c");
 		Option server_arg = OptionBuilder.isRequired().withDescription("Selects the server to start").withArgName("server").create("s");
@@ -53,17 +53,18 @@ public class ArgumentParser {
 		int valid = 0;
 		int position = 0;
 		
+		/* Performs a quick check if more than one connection deciding argument was entered */
 		for(int i = 0; i<args.length;i++){
 			if(args[i].equals("-c")||args[i].equals("-b")||args[i].equals("-s")){
 				position = i;
 				valid++;
 			}
 		}
-		
+
 		if(valid!=1){
 			throw new IllegalArgumentException("cannot use more or less than one of the three parameters (-s,-b,-c)");
 		}
-		
+
 		if (args[position].equals("-c"))	{
 			piargs.setType('c');
 			options.addOption(client_arg);
@@ -84,7 +85,7 @@ public class ArgumentParser {
 			options.addOption(balancer_arg);
 			options.addOption(port);
 		}
-		
+
 		/* Runs the CLI Parser and tries to parse the arguments. An error message and the help screen is displayed if something goes wrong. */
 		CommandLineParser clip = new BasicParser();
 		CommandLine line = null;
@@ -94,23 +95,27 @@ public class ArgumentParser {
 			LOGGER.error("A problem occurred while parsing the arguments, check if your arguments are valid.");
 			printHelp();
 		}
-		
+
 		/* Sets the arguments for each connection type. */
-		if(piargs.getType()=='c')	{
-			piargs.setClientcount(Integer.parseInt(line.getOptionValue("C")));
-			piargs.setHostname(line.getOptionValue("h"));
-			piargs.setPort(Integer.parseInt(line.getOptionValue("p")));
-			piargs.setDecimal_places(Integer.parseInt(line.getOptionValue("d")));
-		}else if(piargs.getType()=='s')	{
-			piargs.setHostname(line.getOptionValue("h"));
-			piargs.setPort(Integer.parseInt(line.getOptionValue("p")));
-			piargs.setServer_name(line.getOptionValue("n"));
-			piargs.setServercount(Integer.parseInt(line.getOptionValue("S")));
-			piargs.setServerport(Integer.parseInt(line.getOptionValue("P")));
-		}else if(piargs.getType()=='b')	{
-			piargs.setPort(Integer.parseInt(line.getOptionValue("p")));
+		try {
+			if (piargs.getType()=='c')	{
+				piargs.setClientcount(Integer.parseInt(line.getOptionValue("C")));
+				piargs.setHostname(line.getOptionValue("h"));
+				piargs.setPort(Integer.parseInt(line.getOptionValue("p")));
+				piargs.setDecimal_places(Integer.parseInt(line.getOptionValue("d")));
+			} else if (piargs.getType()=='s')	{
+				piargs.setHostname(line.getOptionValue("h"));
+				piargs.setPort(Integer.parseInt(line.getOptionValue("p")));
+				piargs.setServer_name(line.getOptionValue("n"));
+				piargs.setServercount(Integer.parseInt(line.getOptionValue("S")));
+				piargs.setServerport(Integer.parseInt(line.getOptionValue("P")));
+			} else if (piargs.getType()=='b')	{
+				piargs.setPort(Integer.parseInt(line.getOptionValue("p")));
+			}
+		} catch (NullPointerException e)	{
+			System.exit(1);
 		}
-		
+
 		return piargs;
 	}
 
