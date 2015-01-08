@@ -1,31 +1,26 @@
 package at.tm.rmi.server;
 
-import java.io.Serializable;
 import java.net.URI;
-import java.rmi.AccessException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.*;
 import java.rmi.server.UnicastRemoteObject;
-import java.rmi.*;
 
 /**
  * @author Patrick Malik
  * @author Thomas Taschner
  * @version 05.01.2015
- * 
- *          Starts a server on a given port with a given name. It connects with
- *          a balancer via the balancers URL and transmits him a calculator
- *          object. To achieve that the server gets the balancers registry and
- *          looks a balancer object up. Then the server adds itself to the list
- *          (map) of available balancers and rebinds the balancer as a balancer
- *          and a calculator to the registry. The disconnect procedure works the
- *          same way. The only thing that is different is that the server
- *          doesn't need to get the balancers registry, also it gets removed
- *          instead of added. An error is printed if anything should go wrong.
- *          This class also provides getter and setter methods for its
- *          attributes.
+ * Starts a server on a given port with a given name.
+ * It connects with a balancer via the balancers URL and transmits him a calculator object.
+ * To achieve that the server gets the balancers registry and looks a balancer object up.
+ * Then the server adds itself to the list (map) of available balancers and rebinds the balancer as a balancer and a calculator to the registry.
+ * The disconnect procedure works the same way.
+ * The only thing that is different is that the server doesn't need to get the balancers registry, also it gets removed instead of added.
+ * An error is printed if anything should go wrong.
+ * This class also provides getter and setter methods for its attributes.
  */
-public class Server implements ServerInterface{
+@SuppressWarnings("serial")
+public class Server implements ServerInterface	{
 
 	private Calculator calc;
 
@@ -35,12 +30,16 @@ public class Server implements ServerInterface{
 	private BalancerInterface bal;
 
 	/**
-	 * @param port
-	 *            the port the server will start on
-	 * @param name
-	 *            the name the server will have
+	 * @param port the port the server starts
+	 * @param name the name the server has
+	 * @param calcimpl the PI calculation object, basically the server's task
+	 * @throws RemoteException is thrown when a remote error occurrs (e.g. no connection to the server)
 	 * 
-	 *            Creates a server on a given port with a given name.
+	 * Creates a server on a given port with a given name wih a given task.
+	 * A local registry gets created on the given port.
+	 * Then the object gets exported in form of an UnicastRemoteObject (locally) and finally gets bound to its own registry.
+	 * 
+	 * A RemoteException is caught when a remote error occurs.
 	 */
 	public Server(String name, int port, Calculator calcimpl) throws RemoteException{
 		this.port = port;
@@ -49,156 +48,145 @@ public class Server implements ServerInterface{
 
 		this.registry = null;
 
+		/* Tries to create a local registry */
 		try {
 			this.registry = LocateRegistry.createRegistry(this.getPort());
 		} catch (RemoteException e) {
-			System.out.println("A problem occured while creating a registry");
+			System.out.println(this.getName() + " encountered a problem while creating a registry");
 			System.exit(314);
 		}
 
 		Calculator stub = null;
+		/* Tries to export itself */
 		try {
 			stub = (Calculator) UnicastRemoteObject.exportObject(this.getCalc(), this.getPort());
 		} catch (RemoteException e) {
-			System.err.println("A Problem occured while creating a stub object");
+			System.err.println(this.getName() + "encountered a problem while creating a stub object");
 		}
 
+		/* Tries to rebind itself to its local registry */
 		try {
 			this.registry.rebind("Calculator", stub);
 		} catch (Exception e) {
-			System.err.println("A Problem occurred while rebinding the Calculator");
+			System.err.println(this.getName() + " encountered a problem while rebinding the Calculator");
 		}
-			
+
 
 	}
 
-	/**
-	 * @param balancer
-	 *            the balancers URI (\\ IP or URL:port)
-	 * @param calcimpl
-	 *            the calculator object that will be added to the balancer
-	 * 
-	 *            Gets the given balancers registry, adds the calculator object
-	 *            to the balancers list and rebinds the balancer. Prints out the
-	 *            error if one should occur.
+	/* (non-Javadoc)
+	 * @see at.tm.rmi.server.ServerInterface#connect(java.net.URI)
 	 */
 	public void connect(URI balancer) throws RemoteException{
 		try {
 			Registry regis = null;
+			/* Loads the balancers registry */
 			regis = LocateRegistry.getRegistry(balancer.getHost(), balancer.getPort());
 			System.out.println("Getting Balancer Registry");
-			
+
+			/* The balancer looks up a calculator object */
 			bal = (BalancerInterface) regis.lookup("Calculator");
 			System.out.println("Registry Lookup");
-			
+
+			/*
+			 * The balancer add the servers name and the server in form of a UnicastRemoteObject.
+			 * A NotBoundException is caught if the lookup cannot be done.
+			 */
 			bal.addServer(this.name, (ServerInterface) UnicastRemoteObject.exportObject(this, this.getPort()));
 			System.out.println("Add Server");
-//			Shouldn't be necessary to do
-//			regis.rebind("Balancer", bal);
-//			regis.rebind("Calculator", bal);
-			
-//			System.out.println("Registry Rebind");
 			System.out.println("Server");
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("An error occurred while " + this.getName() + " tried to connect.");
+		} catch (NotBoundException e) {
+			System.out.println(this.getName() + " cannot lookup an object which hasn't been bound");
 		}
 
 	}
 
 	/**
-	 * Disconnects a calculator from the balancer. The balancers registry is
-	 * looked up, the current server is removed and the balancer is rebound.
-	 * Prints out the error if one should occur.
+	 * @throws RemoteException is thrown when a remote error occurrs (e.g. no connection to the server)
+	 * 
+	 * Disconnects by unbinding itself from its own registry.
+	 * It also tells the balancer that the server is no longer available by removing it from the balancers server list.
 	 */
-	public void disconnect() {
+	public void disconnect() throws RemoteException {
 		try {
 			registry.unbind(this.name);
 			bal.removeServer(this.name);
-		} catch (Exception e) {
-			System.out.println("An error occurred while " + this.name + " tried to disconnect.");
+		} catch (RemoteException e) {
+			System.out.println(this.getName() + " couldn't connect to the specified ressource");
+		} catch (NotBoundException e) {
+			System.out.println(this.getName() + " cannot unbind a ressource which hasn't been bound");
 		}
 	}
 
-	/**
-	 * @return the calculator object
-	 * 
-	 *         Getter for calculator.
+	/* (non-Javadoc)
+	 * @see at.tm.rmi.server.ServerInterface#getCalc()
 	 */
 	public Calculator getCalc() throws RemoteException{
 		return calc;
 	}
 
 	/**
-	 * @param calc
-	 *            the calculator object
+	 * @param calc the calculator object
 	 * 
-	 *            Setter for calculator.
+	 * Setter for calculator.
 	 * 
-	 *            The balancers registry is looked up, the calculator object
-	 *            added to the balancers list and the balancer gets rebound to
-	 *            the registry. Prints out the error if one should occur and
-	 *            terminates the program.
+	 * The balancers registry is looked up, the calculator object added to the balancers list and the balancer gets rebound to the registry.
+	 * Prints out the error if one should occur and terminates the program.
 	 */
-//	public void setCalc(Calculator calc) {
-//		this.calc = calc;
-//
-//		CalculatorBalancer bal;
-//		try {
-//			bal = (CalculatorBalancer) registry.lookup("Balancer");
-//			bal.addImplementation(this.name, this.calc);
-//			registry.rebind("Balancer", bal);
-//			registry.rebind("Calculator", bal);
-//		} catch (Exception e) {
-//			System.out.println("An Error occured");
-//			System.exit(314159);
-//		}
-//	}
+	//	public void setCalc(Calculator calc) {
+	//		this.calc = calc;
+	//
+	//		CalculatorBalancer bal;
+	//		try {
+	//			bal = (CalculatorBalancer) registry.lookup("Balancer");
+	//			bal.addImplementation(this.name, this.calc);
+	//			registry.rebind("Balancer", bal);
+	//			registry.rebind("Calculator", bal);
+	//		} catch (Exception e) {
+	//			System.out.println("An Error occured");
+	//			System.exit(314159);
+	//		}
+	//	}
 
-	/**
-	 * @return the servers name
-	 * 
-	 *         Getter for name.
+	/* (non-Javadoc)
+	 * @see at.tm.rmi.server.ServerInterface#getName()
 	 */
 	public String getName() throws RemoteException{
 		return name;
 	}
 
-	/**
-	 * @param name
-	 *            the servers name
-	 * 
-	 *            Setter for name.
+	/* (non-Javadoc)
+	 * @see at.tm.rmi.server.ServerInterface#setName(java.lang.String)
 	 */
 	public void setName(String name) throws RemoteException{
 		this.name = name;
 	}
 
-	/**
-	 * @return the balancers registry
-	 * 
-	 *         Getter for registry.
+	/* (non-Javadoc)
+	 * @see at.tm.rmi.server.ServerInterface#getRegistry()
 	 */
 	public Registry getRegistry() throws RemoteException{
 		return registry;
 	}
 
-	/**
-	 * @param registry
-	 *            the balancers registry
-	 * 
-	 *            Setter for registry.
+	/* (non-Javadoc)
+	 * @see at.tm.rmi.server.ServerInterface#setRegistry(java.rmi.registry.Registry)
 	 */
 	public void setRegistry(Registry registry) throws RemoteException{
 		this.registry = registry;
 	}
 
+	/* (non-Javadoc)
+	 * @see at.tm.rmi.server.ServerInterface#getPort()
+	 */
 	public int getPort() throws RemoteException{
 		return port;
 	}
 
+	/* (non-Javadoc)
+	 * @see at.tm.rmi.server.ServerInterface#setPort(int)
+	 */
 	public void setPort(int port) throws RemoteException{
 		this.port = port;
 	}
-
 }
