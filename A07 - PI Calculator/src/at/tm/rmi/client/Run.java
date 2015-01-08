@@ -5,6 +5,9 @@ import java.rmi.RemoteException;
 
 import javax.sound.midi.SysexMessage;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import at.tm.rmi.server.*;
 import at.tm.rmi.utils.*;
 
@@ -20,6 +23,8 @@ import at.tm.rmi.utils.*;
  */
 public class Run {
 
+	private static final Logger LOGGER = LogManager.getLogger(Run.class);
+	
 	/**
 	 * @param args arguments which will be checked and then used to start the program
 	 */
@@ -40,7 +45,7 @@ public class Run {
 		try{
 			piargs = ArgumentParser.parseArguments(args);
 		}catch(IllegalArgumentException e){
-			System.err.println("An error occurred while parsing the arguments: "+e.getMessage());
+			LOGGER.error("An error occurred while parsing the arguments: "+e.getMessage());
 			System.exit(1);
 		}
 		/* 
@@ -51,8 +56,8 @@ public class Run {
 			try {
 				new CalculatorBalancer(piargs.getPort());
 			} catch (RemoteException e) {
-				System.out.println("A remote connection error occurred");
-				System.out.println("Maybe the balancer couldn't start?");
+				LOGGER.error("A remote connection error occurred");
+				LOGGER.error("Maybe the balancer couldn't start?");
 				System.exit(2);
 			}
 		} else if (piargs.getType() == 'c') {
@@ -67,13 +72,13 @@ public class Run {
 				try {
 					c = new Client(new URI("//" + piargs.getHostname() + ":" + piargs.getPort()), piargs.getDecimal_places());
 				} catch (URISyntaxException e) {
-					System.err.println("A problem occurred while creating a client."
+					LOGGER.error("A problem occurred while creating a client."
 							+ "Please make sure that the server is up and running and check your input for eventual typos.");
 					System.exit(3);
 				}
 				String out;
 				out = ((out = c.connect())!=null) ? out : "";
-				System.out.println(out);
+				LOGGER.info(out);
 			}
 
 			/*
@@ -89,7 +94,7 @@ public class Run {
 					s = new Server(piargs.getServer_name() + i,piargs.getServerport()+i,new CalculatorImpl());
 					s.connect(new URI("//" + piargs.getHostname() + ":" + piargs.getPort()));
 				} catch (URISyntaxException | RemoteException e) {
-					System.err.println("A problem occurred while creating a server"
+					LOGGER.error("A problem occurred while creating a server"
 							+ "Please make sure that the server is up and running and check your input for eventual typos.");
 					System.exit(4);
 				}

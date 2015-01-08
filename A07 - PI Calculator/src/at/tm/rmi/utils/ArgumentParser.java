@@ -1,6 +1,10 @@
 package at.tm.rmi.utils;
 
 import org.apache.commons.cli.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import at.tm.rmi.client.Run;
 
 /**
  * @author Patrick Malik
@@ -15,6 +19,8 @@ import org.apache.commons.cli.*;
  */
 public class ArgumentParser {
 
+	private static final Logger LOGGER = LogManager.getLogger(ArgumentParser.class);
+	
 	public static Options options = new Options();
 
 	@SuppressWarnings("static-access")
@@ -85,7 +91,7 @@ public class ArgumentParser {
 		try {
 			line = clip.parse(options, args);
 		} catch (ParseException e) {
-			System.err.println("A problem occurred while parsing the arguments, check if your arguments are valid.");
+			LOGGER.error("A problem occurred while parsing the arguments, check if your arguments are valid.");
 			printHelp();
 		}
 		
