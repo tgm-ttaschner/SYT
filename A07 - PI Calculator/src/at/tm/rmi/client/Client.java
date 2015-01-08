@@ -1,8 +1,7 @@
 package at.tm.rmi.client;
 
 import java.net.URI;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
+import java.rmi.*;
 import java.rmi.registry.*;
 
 import org.apache.logging.log4j.LogManager;
@@ -42,12 +41,8 @@ public class Client {
 		} else if (decimal_places < 0)	{
 			throw new IllegalArgumentException("Please enter a valid number (>= 0) for the calculation of the decimal places of PI");
 		} else {
-			try {
-				this.address = address;
-				this.decimal_places = decimal_places;
-			} catch (NumberFormatException e) {
-				LOGGER.error("Please enter a number for the calculation of the decimal places of PI");
-			}
+			this.address = address;
+			this.decimal_places = decimal_places;
 		}
 	}
 
