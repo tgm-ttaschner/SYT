@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 import java.rmi.*;
 
 /**
- * @author Patrik Malik
+ * @author Patrick Malik
  * @author Thomas Taschner
  * @version 08.01.2015
  * 
- * Interface which inherits from Remote. It's only method calciulates PI.
+ * Interface which inherits from Remote. It's only method calculates PI.
  * To achieve that it takes the amount of decimal places (of PI) as an input parameter and returns PI up to a certain decimal place as a BigInteger. 
  *
  */
