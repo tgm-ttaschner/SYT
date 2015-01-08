@@ -3,6 +3,8 @@ package at.tm.rmi.client;
 import java.net.*;
 import java.rmi.RemoteException;
 
+import javax.sound.midi.SysexMessage;
+
 import at.tm.rmi.server.*;
 import at.tm.rmi.utils.*;
 
@@ -34,8 +36,13 @@ public class Run {
 			System.setSecurityManager(new SecurityManager());
 		}
 
-		PIArgs piargs = ArgumentParser.parseArguments(args);
-
+		PIArgs piargs = null;
+		try{
+			piargs = ArgumentParser.parseArguments(args);
+		}catch(IllegalArgumentException e){
+			System.err.println("An error occurred while parsing the arguments: "+e.getMessage());
+			System.exit(1);
+		}
 		/* 
 		 * Check which dummy argument was entered and try to proceed.
 		 * 'b' creates a new (Calculator)Balancer, 'c' a new Client and 's' a new Server.
@@ -46,6 +53,7 @@ public class Run {
 			} catch (RemoteException e) {
 				System.out.println("A remote connection error occurred");
 				System.out.println("Maybe the balancer couldn't start?");
+				System.exit(2);
 			}
 		} else if (piargs.getType() == 'c') {
 
@@ -61,8 +69,11 @@ public class Run {
 				} catch (URISyntaxException e) {
 					System.err.println("A problem occurred while creating a client."
 							+ "Please make sure that the server is up and running and check your input for eventual typos.");
+					System.exit(3);
 				}
-				System.out.println(c.connect());
+				String out;
+				out = ((out = c.connect())!=null) ? out : "";
+				System.out.println(out);
 			}
 
 			/*
@@ -80,6 +91,7 @@ public class Run {
 				} catch (URISyntaxException | RemoteException e) {
 					System.err.println("A problem occurred while creating a server"
 							+ "Please make sure that the server is up and running and check your input for eventual typos.");
+					System.exit(4);
 				}
 			}
 		}

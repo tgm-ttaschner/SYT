@@ -18,7 +18,7 @@ public class ArgumentParser {
 	public static Options options = new Options();
 
 	@SuppressWarnings("static-access")
-	public static PIArgs parseArguments(String... args) {
+	public static PIArgs parseArguments(String... args) throws IllegalArgumentException {
 
 		PIArgs piargs = new PIArgs();
 		
@@ -44,14 +44,28 @@ public class ArgumentParser {
 		 * '-s' checks for server arguments.
 		 * '-b' checks for balancer arguments.
 		 */
-		if (args[0].equals("-c"))	{
+		int valid = 0;
+		int position = 0;
+		
+		for(int i = 0; i<args.length;i++){
+			if(args[i].equals("-c")||args[i].equals("-b")||args[i].equals("-s")){
+				position = i;
+				valid++;
+			}
+		}
+		
+		if(valid!=1){
+			throw new IllegalArgumentException("cannot use more or less than one of the three parameters (-s,-b,-c)");
+		}
+		
+		if (args[position].equals("-c"))	{
 			piargs.setType('c');
 			options.addOption(client_arg);
 			options.addOption(hostname);
 			options.addOption(port);
 			options.addOption(decimal_places);
 			options.addOption(client_count);
-		} else if (args[0].equals("-s")) {
+		} else if (args[position].equals("-s")) {
 			piargs.setType('s');
 			options.addOption(server_arg);
 			options.addOption(hostname);
@@ -59,7 +73,7 @@ public class ArgumentParser {
 			options.addOption(serverport);
 			options.addOption(server_name);
 			options.addOption(server_count);
-		} else if (args[0].equals("-b")) {
+		} else if (args[position].equals("-b")) {
 			piargs.setType('b');
 			options.addOption(balancer_arg);
 			options.addOption(port);
