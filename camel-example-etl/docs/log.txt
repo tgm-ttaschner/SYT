@@ -1,0 +1,104 @@
+commit a8a59c40f1b11506c519998109db7f9fa23442b6
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Mar 3 16:26:35 2015 +0100
+
+    Fixed project setup
+    Added some test cases
+    Added JavaDoc
+
+commit 85e0b82ee72e497efb45928f8f70cc1eab048ab1
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Mar 3 15:16:31 2015 +0100
+
+    kleine Änderungen
+
+commit 230dce3e1f3aac241e274e6b497c150d676c3ca2
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Mar 3 14:59:23 2015 +0100
+
+    Code eingefügt, Code kommentiert
+
+commit 1b44c50e47dd42e1106f8c125f46033dbf32cebd
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Feb 24 14:21:32 2015 +0100
+
+    ETL Example eingefügt, Dokumentation erweitert.
+
+commit 337357d06ab1aa0d2fdbb18d0470956cfb3b7a35
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Feb 24 14:00:45 2015 +0100
+
+    Zusammenführung der Dokumente, erste PDF erstellt.
+
+commit 3047e8c1ccbed3bf4f46405874975605f3c5d21a
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Feb 24 13:53:36 2015 +0100
+
+    Added both descriptions again...
+
+commit fc891710c6097e6d90e61b6d28533175d6fe8292
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Feb 24 13:51:31 2015 +0100
+
+    ~
+
+commit d968579a2ee54a9f2f708541011f14ab6f7264ae
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Tue Feb 24 13:35:58 2015 +0100
+
+    Added pattern description
+    Added camel product description
+
+commit 701b1f9a7e1476309a507d34741488e177da0ba1
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Tue Feb 24 12:54:29 2015 +0100
+
+    neuer Fortschritt
+
+commit 6c608d62dff52fd33be86a34d344ed36fdfdb31a
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Mon Feb 23 23:55:00 2015 +0100
+
+    Installationsschritte finalisiert, bessere Dokumentation
+
+commit 71136c37f228242bcecf5fbacd18ab69316ff114
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Mon Feb 23 11:28:16 2015 +0100
+
+    Schritt: Kompilieren
+
+commit cef2337067ed76f621eb3283d18440af4e9e8ad6
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Mon Feb 23 11:23:35 2015 +0100
+
+    Schritte erweitert
+
+commit a52e66b472b1a9f15643141aafb157758cbbb0b2
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Mon Feb 23 11:12:19 2015 +0100
+
+    Erste Schritte eingefügt
+
+commit 3a49b81e0216b5d4bfb12e883e4af48bb191b26c
+Author: tgm-ttaschner <thomas.taschner@student.tgm.ac.at>
+Date:   Mon Feb 23 10:46:59 2015 +0100
+
+    Eclipse projekt init
+
+commit e0a5323b12299032aff8066d14a057424d2107c7
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Mon Feb 23 10:45:08 2015 +0100
+
+    Test-Push
+
+commit 513d9c611ef8876092669aecdd8e92f7943baa04
+Author: mweinberger-tgm <mweinberger@student.tgm.ac.at>
+Date:   Mon Feb 23 10:44:14 2015 +0100
+
+    Erste Version des Dokuments, nur Aufbau enthalten
+
+commit d8cb332e14c6f3ce23bb572ec94193c3ec306e40
+Author: tgm-ttaschner <tgm-ttaschner@users.noreply.github.com>
+Date:   Fri Oct 17 12:53:39 2014 +0200
+
+    Initial commit
